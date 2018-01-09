@@ -1,0 +1,44 @@
+//
+//  PrefixHeader.pch
+//  SweetyFit
+//
+//  Created by Dora Zhao on 11/12/2017.
+//  Copyright © 2017 Duo Zhao. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Documents
+
+#import "UILabel+TextUI.h"
+
+// Screen information
+
+#define DoraScreenWidth [UIScreen mainScreen].bounds.size.width
+#define DoraScreenHeight [UIScreen mainScreen].bounds.size.height
+
+
+// Colors
+
+#define AppDefaultColor [UIColor colorWithRed:255.0/255.0 green:113.0/255.0 blue:5.0/255.0 alpha:1]
+
+#define AppDefaultBackgroundColor [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1]
+
+#define AppDefaultBorderColor [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1]
+
+#define AppDefaultFontColor [UIColor colorWithRed:90/255.0 green:90/255.0 blue:90/255.0 alpha:1]
+
+#define AppDefaultSubViewBackgroundColor [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1]
+
+#define AppDefaultBarTintColor [UIColor colorWithRed:60.0/255.0 green:60.0/255.0 blue:60.0/255.0 alpha:1]
+
+#define AppLoginTextColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1]
+
+#define AppLoginBorderColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1].CGColor
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
