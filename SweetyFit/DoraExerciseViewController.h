@@ -1,13 +1,13 @@
 //
-//  DoraExerciseViewController.h
+//  DoraExerciseViewControllerTableViewController.h
 //  SweetyFit
 //
-//  Created by Dora Zhao on 12/12/2017.
-//  Copyright © 2017 Duo Zhao. All rights reserved.
+//  Created by Dora Zhao on 17/1/2018.
+//  Copyright © 2018 Duo Zhao. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface DoraExerciseViewController : UIViewController
+@interface DoraExerciseViewController : UITableViewController
 
 @end

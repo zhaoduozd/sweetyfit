@@ -12,6 +12,10 @@
 // Documents
 
 #import "UILabel+TextUI.h"
+#import "UIImageView+ImageViewUI.h"
+#import "UIScrollView+DoraScrollUI.h"
+#import "UIView+DoraViewUI.h"
+#import "UIButton+DoraButtonUI.h"
 
 // Screen information
 
@@ -27,7 +31,7 @@
 
 #define AppDefaultBorderColor [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1]
 
-#define AppDefaultFontColor [UIColor colorWithRed:90/255.0 green:90/255.0 blue:90/255.0 alpha:1]
+#define AppDefaultFontColor [UIColor colorWithRed:28/255.0 green:28/255.0 blue:28/255.0 alpha:1]
 
 #define AppDefaultSubViewBackgroundColor [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1]
 

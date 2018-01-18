@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoraExercisePointView.h"
 
 @interface DoraUIRecomExercise : UIView
--(void) DoraSetUIElements;
+@property(nonatomic, strong) UIScrollView *exerciseList;
+@property(nonatomic, strong) UIImageView *playerView;
+@property(nonatomic, strong) DoraExercisePointView *exercisePoints;
+
 @end

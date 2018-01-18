@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UILabel (TextUI)
-+(UILabel *)DoraCreateTextTitleName:(NSString *) titlename;
++(UILabel *) DoraCreateTextBoldTitleName:(NSString *)titlename;
++(UILabel *) DoraCreateTextTitleName:(NSString *) titlename;
++(UILabel *) DoraCreateTextSmallRightTitleName:(NSString *)titlename;
++(UILabel *) DoraCreateTextSmallLeftTitleName:(NSString *)titlename;
++(UILabel *) DoraCreateTextSmallCenterTitleName:(NSString *)titlename;
 @end

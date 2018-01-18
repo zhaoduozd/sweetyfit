@@ -9,9 +9,9 @@
 #import "UIImageView+ImageViewUI.h"
 
 @implementation UIImageView (ImageViewUI)
--(void) DoraSetExerciseShowImageViewPositionY:(float) y {
-    self.frame = CGRectMake(0, y, DoraScreenWidth, DoraScreenWidth * 0.618);
-    
-    
++(UIImageView *) DoraCreateExerciseShowImageViewPositionY:(float) y {
+    UIImageView *imageView = [[UIImageView alloc] init];
+   imageView.frame = CGRectMake(0, y, DoraScreenWidth, DoraScreenWidth * 0.618);
+    return imageView;
 }
 @end

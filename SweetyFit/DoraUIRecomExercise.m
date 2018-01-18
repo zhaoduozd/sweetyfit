@@ -7,25 +7,34 @@
 //
 
 #import "DoraUIRecomExercise.h"
-#import "UIImageView+imageViewUI.h"
 
 @implementation DoraUIRecomExercise
 
--(void) DoraSetUIElements {
-    UILabel *modeltitle = [UILabel DoraCreateTextTitleName:@"今日运动推荐"];
-    UIImageView *gifwrapper = [[UIImageView alloc] init];
-    [gifwrapper DoraSetExerciseShowImageViewPositionY:28];
+-(instancetype) init {
+    self = [super init];
+    
+    float titleY = 0;
+    float titleH = 36;
+    float playerViewY = titleY + titleH;
+    float playerViewH = DoraScreenWidth * 0.618;
+    float exerciseListY = playerViewY + playerViewH;
+    float exerciseListH = 70;
+    float exercisePointsY = exerciseListY + exerciseListH;
+    float exercisePointsH = 186;
+        
+    UILabel *modeltitle = [UILabel DoraCreateTextBoldTitleName:@"推荐de运动"];
+    
+    _playerView = [UIImageView DoraCreateExerciseShowImageViewPositionY:playerViewY];
+    _exerciseList = [UIScrollView DoraCreateScrollWithHeight:exerciseListH Width:DoraScreenWidth contentWidth:DoraScreenWidth contentHeight:exerciseListH viewPositionX:0 viewPositionY:exerciseListY];
+    _exercisePoints = [[DoraExercisePointView alloc] init];
+    _exercisePoints.frame = CGRectMake(0, exercisePointsY, DoraScreenWidth, exercisePointsH);
     
     [self addSubview:modeltitle];
+    [self addSubview:_playerView];
+    [self addSubview:_exerciseList];
+    [self addSubview:_exercisePoints];
     
-    self.frame = CGRectMake(0, 0, DoraScreenWidth, 28 + DoraScreenWidth * 0.618 + 50 + 200);
+    return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraUIRecomBonus : UIView
--(void)DoraSetUIElements;
+
 @end

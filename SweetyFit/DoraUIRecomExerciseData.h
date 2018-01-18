@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraUIRecomExerciseData : UIView
--(void) DoraSetUIElements;
+@property(nonatomic, strong) UILabel *totalCalorieData;
+@property(nonatomic, strong) UILabel *totalCalorieUnit;
+@property(nonatomic, strong) UILabel *walkingRunningCalorieData;
+@property(nonatomic, strong) UILabel *sportCalorieData;
 @end

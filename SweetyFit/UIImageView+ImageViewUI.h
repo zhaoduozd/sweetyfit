@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (ImageViewUI)
--(void) DoraSetExerciseShowImageViewPositionY:(float) y;
++(UIImageView *) DoraCreateExerciseShowImageViewPositionY:(float) y;
 @end

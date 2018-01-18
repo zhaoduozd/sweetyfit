@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoraRecomFoodContentWrapperView.h"
 
 @interface DoraUIRecomFood : UIView
--(void) DoraSetUIElements;
+@property(nonatomic, strong) UIView *foodContentWrapper;
+@property(nonatomic, strong) UILabel *mealName;
 @end

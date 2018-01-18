@@ -1,0 +1,41 @@
+//
+//  DoraExercisePointView.m
+//  SweetyFit
+//
+//  Created by Dora Zhao on 15/1/2018.
+//  Copyright © 2018 Duo Zhao. All rights reserved.
+//
+
+#import "DoraExercisePointView.h"
+
+@implementation DoraExercisePointView
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        _title = [UILabel DoraCreateTextTitleName:@"动作要领"];
+        _title.textColor = [UIColor whiteColor];
+        
+        _seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth - 10 Height:1 PositionX:5 PositionY:36];
+        _seperateLine.backgroundColor = AppDefaultBorderColor;
+        
+        _exercisePointTextWrapper = [UIScrollView DoraCreateScrollWithHeight:150 Width:DoraScreenWidth contentWidth:DoraScreenWidth contentHeight:150 viewPositionX:0 viewPositionY:31];
+        
+        _speechSwitch = [UIButton DoraCreateOrangeLineButtonWithWidth:140 Height:26 borderRadius:4 Text:@"开启音频讲解"];
+        CGRect tempframe = _speechSwitch.frame;
+        tempframe.origin = CGPointMake(DoraScreenWidth - 145, 5);
+        _speechSwitch.frame = tempframe;
+        
+        self.backgroundColor = AppDefaultBarTintColor;
+        
+        [self addSubview:_title];
+        [self addSubview:_seperateLine];
+        [self addSubview:_exercisePointTextWrapper];
+        [self addSubview:_speechSwitch];
+    }
+    return self;
+}
+
+@end
