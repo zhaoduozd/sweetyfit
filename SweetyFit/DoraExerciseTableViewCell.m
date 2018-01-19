@@ -20,11 +20,14 @@
     tempframe.size = CGSizeMake(DoraScreenWidth, btnH + 10);
     self.frame = tempframe;
     
-//    _leftExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:@"" detailTextTime:@"" detailTextCalorie:@"" imageBackground:[UIImage imageNamed:@"placeholde.jpg"]];
-//    _leftExercise.frame = CGRectMake(15, 5, btnW, btnH);
-//
-//    _rightExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:@"" detailTextTime:@"" detailTextCalorie:@"" imageBackground:[UIImage imageNamed:@"placeholde.jpg"]];
-//    _rightExercise.frame = CGRectMake(25 + btnW, 5, btnW, btnH);
+    _leftExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:@"" detailTextTime:@"" detailTextCalorie:@"" imageBackground:[UIImage imageNamed:@"placeholde.jpg"]];
+    _leftExercise.frame = CGRectMake(15, 5, btnW, btnH);
+
+    _rightExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:@"" detailTextTime:@"" detailTextCalorie:@"" imageBackground:[UIImage imageNamed:@"placeholde.jpg"]];
+    _rightExercise.frame = CGRectMake(25 + btnW, 5, btnW, btnH);
+    
+    [self.contentView addSubview:_leftExercise];
+    [self.contentView addSubview:_rightExercise];
     
     return self;
 }

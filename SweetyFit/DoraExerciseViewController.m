@@ -92,12 +92,12 @@
     NSLog(@"start to set section cell");
 
     DoraExerciseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
-    DoraExerciseTableCellData *tempData = _DoraExerciseTableData[indexPath.section].sectionData[indexPath.row];
     
     if (cell == nil) {
-        DoraExerciseTableViewCell *cell = [[DoraExerciseTableViewCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
+        cell = [[DoraExerciseTableViewCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
     }
     
+    DoraExerciseTableCellData *tempData = _DoraExerciseTableData[indexPath.section].sectionData[indexPath.row];
     DoraExerciseTableCellButtonData *leftButton = tempData.leftButton;
     DoraExerciseTableCellButtonData *rightButton = tempData.rightButton;
     
@@ -106,7 +106,7 @@
     
     cell.rightExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:rightButton.exerciseName detailTextTime:rightButton.exerciseTime detailTextCalorie:rightButton.exerciseCalorie imageBackground:rightButton.exerciseImage];
     cell.rightExercise.frame = CGRectMake(25 + btnW, 5, btnW, btnH);
-    
+        
     NSLog(@"complete set section cell");
 
     return cell;
