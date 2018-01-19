@@ -9,7 +9,7 @@
 #import "DoraFoodTableCellData.h"
 
 @implementation DoraFoodTableCellData
-+(instancetype) createFoodCellData {
++(instancetype) createCellData {
     return [[self alloc] init];
 }
 @end

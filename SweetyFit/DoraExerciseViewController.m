@@ -22,14 +22,17 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self createData];
     
-    self.listItems = [[NSArray alloc] initWithArray:[self.DoraExerciseTableData copy]];
+    //self.listItems = [[NSArray alloc] initWithArray:[self.DoraExerciseTableData copy]];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchController.searchResultsUpdater = self;
-    //self.searchController.dimsBackgroundDuringPresentation = FALSE;
+
+    self.searchController.dimsBackgroundDuringPresentation = FALSE;
     
     self.searchController.searchBar.delegate = self;
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
     self.searchController.searchBar.showsCancelButton = YES;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+
     
     [self.searchController.searchBar sizeToFit];
     
@@ -58,13 +61,13 @@
             cellData.rightButton = [DoraExerciseTableCellButtonData createButtonData];
             
             cellData.leftButton.exerciseImage = [UIImage imageNamed:@"placeholder.JPG"];
-            cellData.leftButton.exerciseName = @"西西里卷腹";
-            cellData.leftButton.exerciseTime = @"10'";
+            cellData.leftButton.exerciseName = @"西西里卷腹1";
+            cellData.leftButton.exerciseTime = @"12'";
             cellData.leftButton.exerciseLevel = @"S2";
             cellData.leftButton.exerciseCalorie = @"76Kcal";
             
             cellData.rightButton.exerciseImage = [UIImage imageNamed:@"placeholder.JPG"];
-            cellData.rightButton.exerciseName = @"西西里卷腹";
+            cellData.rightButton.exerciseName = @"西西里卷腹2";
             cellData.rightButton.exerciseTime = @"10'";
             cellData.rightButton.exerciseLevel = @"S2";
             cellData.rightButton.exerciseCalorie = @"76Kcal";
@@ -148,7 +151,8 @@
 #pragma mark -- UISearchBarDelegate Function
 
 -(void)searchBar:(UISearchBar *) searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope{
-    [self updateSearchResultsForSearchController:self.searchController];
+    //[self updateSearchResultsForSearchController:self.searchController];
+    
 }
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar{

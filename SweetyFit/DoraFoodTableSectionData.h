@@ -10,6 +10,7 @@
 #import "DoraFoodTableCellData.h"
 
 @interface DoraFoodTableSectionData : NSObject
+
 @property(nonatomic, copy) NSString *sectionName;
 @property(nonatomic, strong) NSMutableArray <DoraFoodTableCellData *> *sectionData;
 +(instancetype) createSectionData;

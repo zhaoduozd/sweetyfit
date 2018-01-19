@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DoraFoodTableCellButtonData.h"
 
 @interface DoraFoodTableCellData : NSObject
-@property(nonatomic, copy) NSString *foodName;
-@property(nonatomic, copy) NSString *foodCalorie;
-@property(nonatomic, copy) NSString *foodDetail;
-@property(nonatomic, strong) UIImage *foodImage;
-+(instancetype) createFoodCellData;
+@property(nonatomic, strong) DoraFoodTableCellButtonData *leftButton;
+@property(nonatomic, strong) DoraFoodTableCellButtonData *rightButton;
+
++(instancetype) createCellData;
 @end
+
