@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoraExericiseTableViewCellButton.h"
 
 @interface DoraExerciseTableViewCell : UITableViewCell
-@property(strong, nonatomic) UIButton *leftExercise;
-@property(strong, nonatomic) UIButton *rightExercise;
+@property(strong, nonatomic) DoraExericiseTableViewCellButton *leftExercise;
+@property(strong, nonatomic) DoraExericiseTableViewCellButton *rightExercise;
 @end

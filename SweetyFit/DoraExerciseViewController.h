@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoraExerciseTableSectionData.h"
+#import "DoraExerciseTableViewCell.h"
 
-@interface DoraExerciseViewController : UITableViewController
-//<UISearchBarDelegate, UISearchResultsUpdating>
+@interface DoraExerciseViewController : UITableViewController <UISearchBarDelegate, UISearchResultsUpdating>
+
 @property(strong, nonatomic) UISearchController *searchController;
+@property(strong, nonatomic) NSArray <DoraExerciseTableSectionData *> *listItems;
+@property(strong, nonatomic) NSMutableArray <DoraExerciseTableSectionData *> *listFilterItems;
 
-// all of data for search
-@property(strong, nonatomic) NSArray *listExercise;
-// data after filtering
-@property(strong, nonatomic) NSMutableArray *listFilterExercise;
+- (void)filterContentForSearchText:(NSString *) searchText scope:(NSUInteger) scope;
 
 @end

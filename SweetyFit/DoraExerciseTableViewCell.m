@@ -13,18 +13,11 @@
 -(instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
-    float btnW = (DoraScreenWidth - 45) / 2 *0.6;
+    float btnW = (DoraScreenWidth - 45) / 2;
     float btnH = btnW * 0.6;
     
-    CGRect tempframe = self.frame;
-    tempframe.size = CGSizeMake(DoraScreenWidth, btnH + 10);
-    self.frame = tempframe;
-    
-    _leftExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:@"" detailTextTime:@"" detailTextCalorie:@"" imageBackground:[UIImage imageNamed:@"placeholde.jpg"]];
-    _leftExercise.frame = CGRectMake(15, 5, btnW, btnH);
-
-    _rightExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:@"" detailTextTime:@"" detailTextCalorie:@"" imageBackground:[UIImage imageNamed:@"placeholde.jpg"]];
-    _rightExercise.frame = CGRectMake(25 + btnW, 5, btnW, btnH);
+    _leftExercise = [[DoraExericiseTableViewCellButton alloc] initWithFrame:CGRectMake(15, 5, btnW, btnH)];
+    _rightExercise = [[DoraExericiseTableViewCellButton alloc] initWithFrame:CGRectMake(25 + btnW, 5, btnW, btnH)];
     
     [self.contentView addSubview:_leftExercise];
     [self.contentView addSubview:_rightExercise];
