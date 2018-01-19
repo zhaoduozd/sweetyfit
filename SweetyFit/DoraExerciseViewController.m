@@ -7,64 +7,74 @@
 //
 
 #import "DoraExerciseViewController.h"
-#import "ExerciseUnitDataModel.h"
-#import "ExerciseTableDataModel.h"
+#import "DoraExerciseTableSectionData.h"
+#import "DoraExerciseTableViewCell.h"
 
 @interface DoraExerciseViewController ()
-@property(nonatomic, strong) NSMutableArray *simulationData;
+@property(nonatomic, strong) NSMutableArray<DoraExerciseTableSectionData*> *DoraExerciseTableData;
 @end
 
-@implementation DoraExerciseViewController
+@implementation DoraExerciseViewController  {
+    float btnW;
+    float btnH;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createData];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    btnW = (DoraScreenWidth - 45) / 2 *0.6;
+    btnH = btnW * 0.6;
 }
 
 #pragma mark - Dora Functions
 
 -(void) createData {
+    self.DoraExerciseTableData = [[NSMutableArray alloc] init];
+    
     NSArray *bodyResionNames = @[@"腹部塑形", @"腰部力量", @"腿部塑形", @"手臂塑形", @"全身舒展"];
+    NSLog(@"bodyResionNames count %lu", bodyResionNames.count);
+    
+    // create five sections' data
     for (int i = 0; i < 5; ++i) {
-        ExerciseTableDataModel *dataModel = [ExerciseTableDataModel section];
-        ExerciseUnitDataModel *unitDataModel = [ExerciseUnitDataModel unitData];
-        unitDataModel.exerciseName = @"西西里卷腹";
-        unitDataModel.exerciseTime = @"10分钟";
-        unitDataModel.exerciseLevel = @"S2";
-        unitDataModel.exerciseCalorie = @"76Kcal";
+        DoraExerciseTableSectionData *sectionData = [DoraExerciseTableSectionData createSectionData];
+        sectionData.sectionName = bodyResionNames[i];
+        sectionData.sectionData = [[NSMutableArray alloc] init];
         
-        dataModel.exerciseBodyRegion = bodyResionNames[i];
+        // create 12 cells' data
         for (int j = 0; j < 12; ++j) {
-            [dataModel.exerciseBodyRegionData addObject:unitDataModel];
+            DoraExerciseTableCellData *cellData = [DoraExerciseTableCellData createCellData];
+            
+            cellData.leftButton.exerciseImage = [UIImage imageNamed:@"placeholder.jpg"];
+            cellData.leftButton.exerciseName = @"西西里卷腹";
+            cellData.leftButton.exerciseTime = @"10'";
+            cellData.leftButton.exerciseLevel = @"S2";
+            cellData.leftButton.exerciseCalorie = @"76Kcal";
+            
+            cellData.rightButton.exerciseImage = [UIImage imageNamed:@"placeholder.jpg"];
+            cellData.rightButton.exerciseName = @"西西里卷腹";
+            cellData.rightButton.exerciseTime = @"10'";
+            cellData.rightButton.exerciseLevel = @"S2";
+            cellData.rightButton.exerciseCalorie = @"76Kcal";
+            
+            [sectionData.sectionData addObject:cellData];
+
         }
         
-        [_simulationData addObject:dataModel];
+        [_DoraExerciseTableData addObject:sectionData];
     }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _simulationData.count;
+    NSLog(@"complete set section number %lu", _DoraExerciseTableData.count);
+    return _DoraExerciseTableData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    ExerciseTableDataModel *tempData = [_simulationData objectAtIndex:section];
-    return tempData.exerciseBodyRegionData.count/2;
+    NSLog(@"complete set row number %lu", _DoraExerciseTableData[section].sectionData.count);
+    return _DoraExerciseTableData[section].sectionData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -72,17 +82,33 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    ExerciseTableDataModel *tempData = [_simulationData objectAtIndex:section];
-    NSLog(@"123");
-    return tempData.exerciseBodyRegion;
+    NSLog(@"complete set section name %@", _DoraExerciseTableData[section].sectionName);
+    return _DoraExerciseTableData[section].sectionName;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"exerciseItem" forIndexPath:indexPath];
- 
+    NSString *identifer = @"exerciseCell";
+    NSLog(@"start to set section cell");
+
+    DoraExerciseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
+    DoraExerciseTableCellData *tempData = _DoraExerciseTableData[indexPath.section].sectionData[indexPath.row];
     
- 
+    if (cell == nil) {
+        DoraExerciseTableViewCell *cell = [[DoraExerciseTableViewCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
+    }
+    
+    DoraExerciseTableCellButtonData *leftButton = tempData.leftButton;
+    DoraExerciseTableCellButtonData *rightButton = tempData.rightButton;
+    
+    cell.leftExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:leftButton.exerciseName detailTextTime:leftButton.exerciseTime detailTextCalorie:leftButton.exerciseCalorie imageBackground:leftButton.exerciseImage];
+    cell.leftExercise.frame = CGRectMake(15, 5, btnW, btnH);
+    
+    cell.rightExercise = [UIButton DoraCreateBlackMaskBigButtonWithWidth:btnW Height:btnH borderRaduis:4 titleText:rightButton.exerciseName detailTextTime:rightButton.exerciseTime detailTextCalorie:rightButton.exerciseCalorie imageBackground:rightButton.exerciseImage];
+    cell.rightExercise.frame = CGRectMake(25 + btnW, 5, btnW, btnH);
+    
+    NSLog(@"complete set section cell");
+
     return cell;
 }
 

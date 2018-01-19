@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraExerciseViewController : UITableViewController
+//<UISearchBarDelegate, UISearchResultsUpdating>
+@property(strong, nonatomic) UISearchController *searchController;
+
+// all of data for search
+@property(strong, nonatomic) NSArray *listExercise;
+// data after filtering
+@property(strong, nonatomic) NSMutableArray *listFilterExercise;
 
 @end
