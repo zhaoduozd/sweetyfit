@@ -1048,11 +1048,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XU79TY472J;
-<<<<<<< HEAD
-				GCC_PREFIX_HEADER = /Users/duozhao/Documents/Github/sweetyfit/SweetyFit/PrefixHeader.pch;
-=======
 				GCC_PREFIX_HEADER = "";
->>>>>>> 9a3d8b9aecdee4b044702fd9a6b61932dec2ce9d
 				INFOPLIST_FILE = SweetyFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dora.SweetyFit;
@@ -1065,11 +1061,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XU79TY472J;
-<<<<<<< HEAD
-				GCC_PREFIX_HEADER = /Users/duozhao/Documents/Github/sweetyfit/SweetyFit/PrefixHeader.pch;
-=======
 				GCC_PREFIX_HEADER = "";
->>>>>>> 9a3d8b9aecdee4b044702fd9a6b61932dec2ce9d
 				INFOPLIST_FILE = SweetyFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dora.SweetyFit;
