@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DoraExerciseTableCellData.h"
-
+#import "DoraCommonHeader.h"
 @interface DoraExerciseTableSectionData : NSObject
 @property(nonatomic, copy) NSString *sectionName;
 @property(nonatomic, strong) NSMutableArray <DoraExerciseTableCellData *> *sectionData;

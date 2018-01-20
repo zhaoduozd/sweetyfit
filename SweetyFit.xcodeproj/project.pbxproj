@@ -101,6 +101,7 @@
 		93015BFA20124C0F0001FDD5 /* DoraFoodTableViewCellButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodTableViewCellButton.h; sourceTree = "<group>"; };
 		93015BFB20124EF70001FDD5 /* DoraFoodTableCellButtonData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodTableCellButtonData.m; sourceTree = "<group>"; };
 		93015BFE20124F2E0001FDD5 /* DoraFoodTableCellButtonData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodTableCellButtonData.h; sourceTree = "<group>"; };
+		93F10F1D2013039C0012E14B /* DoraCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraCommonHeader.h; sourceTree = "<group>"; };
 		C601E2102011C50A001147DF /* DoraExericiseTableViewCellButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraExericiseTableViewCellButton.h; sourceTree = "<group>"; };
 		C601E2112011C50A001147DF /* DoraExericiseTableViewCellButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraExericiseTableViewCellButton.m; sourceTree = "<group>"; };
 		C601E21320121C24001147DF /* DoraFoodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodViewController.h; sourceTree = "<group>"; };
@@ -320,6 +321,7 @@
 				C6BE9DC71FD9173B00569EC9 /* LaunchScreen.storyboard */,
 				C6BE9DCA1FD9173B00569EC9 /* Info.plist */,
 				C6BE9DB91FD9173B00569EC9 /* Supporting Files */,
+				93F10F1D2013039C0012E14B /* DoraCommonHeader.h */,
 			);
 			path = SweetyFit;
 			sourceTree = "<group>";
@@ -1040,7 +1042,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XU79TY472J;
-				GCC_PREFIX_HEADER = /Users/zhongqishi/Documents/GitHub/sweetyfit/SweetyFit/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = SweetyFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dora.SweetyFit;
@@ -1053,7 +1055,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XU79TY472J;
-				GCC_PREFIX_HEADER = /Users/zhongqishi/Documents/GitHub/sweetyfit/SweetyFit/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = SweetyFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dora.SweetyFit;

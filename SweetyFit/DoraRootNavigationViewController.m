@@ -5,7 +5,7 @@
 //  Created by Dora Zhao on 9/12/2017.
 //  Copyright © 2017 Duo Zhao. All rights reserved.
 //
-
+#import "DoraCommonHeader.h"
 #import "DoraRootNavigationViewController.h"
 #import "DoraRecomViewController.h"
 #import "DoraExerciseViewController.h"

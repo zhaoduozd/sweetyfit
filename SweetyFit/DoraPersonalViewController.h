@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface DoraPersonalViewController : UIViewController
 
 @end

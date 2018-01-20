@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "DoraCommonHeader.h"
 @interface DoraExerciseTableCellButtonData : NSObject
 @property(nonatomic, strong) UIImage *exerciseImage;
 @property(nonatomic, copy) NSString *exerciseName;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface UIView (DoraViewUI)
 +(UIView *) DoraCreateSeperateLineWithWidth:(float) width Height:(float) height PositionX:(float) x PositionY:(float) y;
 @end

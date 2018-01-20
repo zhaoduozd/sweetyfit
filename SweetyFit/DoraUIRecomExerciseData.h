@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoraCommonHeader.h"
 
 @interface DoraUIRecomExerciseData : UIView
 @property(nonatomic, strong) UILabel *totalCalorieData;

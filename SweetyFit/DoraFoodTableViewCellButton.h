@@ -10,6 +10,7 @@
 #define DoraFoodTableViewCellButton_h
 
 #import <UIKit/UIKit.h>
+#import "DoraCommonHeader.h"
 
 @interface DoraFoodTableViewCellButton : UIButton
 @property(nonatomic, strong) UIImage *foodImage;

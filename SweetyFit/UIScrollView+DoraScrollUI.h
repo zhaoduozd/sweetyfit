@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface UIScrollView (DoraScrollUI)
 +(UIScrollView *) DoraCreateScrollWithHeight:(float) scrollHeight  Width:(float) scrollWidht contentWidth:(float) contentWidth contentHeight:(float) contentHeight viewPositionX:(float) x viewPositionY:(float) y;
 @end

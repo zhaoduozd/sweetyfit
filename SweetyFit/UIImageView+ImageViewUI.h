@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface UIImageView (ImageViewUI)
 +(UIImageView *) DoraCreateExerciseShowImageViewPositionY:(float) y;
 @end

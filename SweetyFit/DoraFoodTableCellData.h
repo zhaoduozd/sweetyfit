@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DoraFoodTableCellButtonData.h"
+#import "DoraCommonHeader.h"
 
 @interface DoraFoodTableCellData : NSObject
 @property(nonatomic, strong) DoraFoodTableCellButtonData *leftButton;
