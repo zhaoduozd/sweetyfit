@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface DoraUIScrollViewRecomWrapper : UIScrollView
 -(void) setScrollBasicUI:(float) contentSizeHeight;
 @end

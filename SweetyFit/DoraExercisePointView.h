@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface DoraExercisePointView : UIView
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UIScrollView *exercisePointTextWrapper;

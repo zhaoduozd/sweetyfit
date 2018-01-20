@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DoraFoodTableCellData.h"
+#import "DoraCommonHeader.h"
 
 @interface DoraFoodTableSectionData : NSObject
 

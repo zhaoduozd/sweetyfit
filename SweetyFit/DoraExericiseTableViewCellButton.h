@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface DoraExericiseTableViewCellButton : UIButton
 @property(nonatomic, strong) UIImage *exerciseImage;
 @property(nonatomic, strong) UILabel *exerciseName;

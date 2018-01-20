@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoraCommonHeader.h"
 
 @interface DoraRecomFoodUnitView : UIView
 @property(nonatomic, strong) UIImageView *foodImage;

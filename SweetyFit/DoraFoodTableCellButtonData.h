@@ -8,6 +8,8 @@
 
 #ifndef DoraFoodTableCellButtonData_h
 #define DoraFoodTableCellButtonData_h
+#import <Foundation/Foundation.h>
+#import "DoraCommonHeader.h"
 @interface DoraFoodTableCellButtonData : NSObject
 @property(nonatomic, copy) NSString *foodName;
 @property(nonatomic, copy) NSString *foodCalorie;

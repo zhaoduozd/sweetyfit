@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DoraExerciseTableSectionData.h"
 #import "DoraExerciseTableViewCell.h"
+#import "DoraCommonHeader.h"
 
 @interface DoraExerciseViewController : UITableViewController <UISearchBarDelegate, UISearchResultsUpdating>
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoraCommonHeader.h"
 @interface UILabel (TextUI)
 +(UILabel *) DoraCreateTextBoldTitleName:(NSString *)titlename;
 +(UILabel *) DoraCreateTextTitleName:(NSString *) titlename;

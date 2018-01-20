@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DoraFoodTableSectionData.h"
 #import "DoraFoodTableViewCell.h"
+#import "DoraCommonHeader.h"
 
 @interface DoraFoodViewController : UITableViewController
 @property(nonatomic, strong) NSMutableArray <DoraFoodTableSectionData *> *DoraFoodTableData;

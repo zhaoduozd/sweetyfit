@@ -10,6 +10,7 @@
 #define DoraFoodTableViewCell_h
 #import <UIKit/UIKit.h>
 #import "DoraFoodTableViewCellButton.h"
+#import "DoraCommonHeader.h"
 
 @interface DoraFoodTableViewCell : UITableViewCell
 @property(strong, nonatomic) DoraFoodTableViewCellButton *leftFood;

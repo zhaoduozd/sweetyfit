@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoraCommonHeader.h"
 #import "DoraExericiseTableViewCellButton.h"
 
 @interface DoraExerciseTableViewCell : UITableViewCell
