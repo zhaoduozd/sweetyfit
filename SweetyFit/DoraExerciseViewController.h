@@ -11,12 +11,8 @@
 #import "DoraExerciseTableViewCell.h"
 #import "DoraCommonHeader.h"
 
-@interface DoraExerciseViewController : UITableViewController <UISearchBarDelegate, UISearchResultsUpdating>
-
+@interface DoraExerciseViewController : UITableViewController
 @property(strong, nonatomic) UISearchController *searchController;
 @property(strong, nonatomic) NSArray <DoraExerciseTableSectionData *> *listItems;
 @property(strong, nonatomic) NSMutableArray <DoraExerciseTableSectionData *> *listFilterItems;
-
-- (void)filterContentForSearchText:(NSString *) searchText scope:(NSUInteger) scope;
-
 @end

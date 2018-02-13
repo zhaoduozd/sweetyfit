@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		93015BF720124BBB0001FDD5 /* DoraFoodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93015BF620124BBB0001FDD5 /* DoraFoodTableViewCell.m */; };
-		93015BF920124BFD0001FDD5 /* DoraFoodTableViewCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 93015BF820124BFD0001FDD5 /* DoraFoodTableViewCellButton.m */; };
-		93015BFC20124EF70001FDD5 /* DoraFoodTableCellButtonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93015BFB20124EF70001FDD5 /* DoraFoodTableCellButtonData.m */; };
 		93F10F23201309470012E14B /* DoraPersonalTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F10F22201309470012E14B /* DoraPersonalTableCell.m */; };
 		C601E2122011C50A001147DF /* DoraExericiseTableViewCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E2112011C50A001147DF /* DoraExericiseTableViewCellButton.m */; };
 		C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E21420121C24001147DF /* DoraFoodViewController.m */; };
@@ -98,10 +96,6 @@
 /* Begin PBXFileReference section */
 		93015BF520124B8E0001FDD5 /* DoraFoodTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodTableViewCell.h; sourceTree = "<group>"; };
 		93015BF620124BBB0001FDD5 /* DoraFoodTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodTableViewCell.m; sourceTree = "<group>"; };
-		93015BF820124BFD0001FDD5 /* DoraFoodTableViewCellButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodTableViewCellButton.m; sourceTree = "<group>"; };
-		93015BFA20124C0F0001FDD5 /* DoraFoodTableViewCellButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodTableViewCellButton.h; sourceTree = "<group>"; };
-		93015BFB20124EF70001FDD5 /* DoraFoodTableCellButtonData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodTableCellButtonData.m; sourceTree = "<group>"; };
-		93015BFE20124F2E0001FDD5 /* DoraFoodTableCellButtonData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodTableCellButtonData.h; sourceTree = "<group>"; };
 		93F10F1D2013039C0012E14B /* DoraCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraCommonHeader.h; sourceTree = "<group>"; };
 		93F10F22201309470012E14B /* DoraPersonalTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalTableCell.m; sourceTree = "<group>"; };
 		93F10F242013095A0012E14B /* DoraPersonalTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraPersonalTableCell.h; sourceTree = "<group>"; };
@@ -274,6 +268,13 @@
 			name = ViewClass;
 			sourceTree = "<group>";
 		};
+		C62BC406202F22B000FD630C /* DoraSearch */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DoraSearch;
+			sourceTree = "<group>";
+		};
 		C63D62612003606800A2D118 /* elementsModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +285,7 @@
 		C6BA1B4E2000C65300F163B8 /* elementsController */ = {
 			isa = PBXGroup;
 			children = (
+				C62BC406202F22B000FD630C /* DoraSearch */,
 			);
 			name = elementsController;
 			sourceTree = "<group>";
@@ -468,8 +470,6 @@
 				C601E21720121FAB001147DF /* DoraFoodTableSectionData.m */,
 				C601E21920121FC1001147DF /* DoraFoodTableCellData.h */,
 				C601E21A20121FC1001147DF /* DoraFoodTableCellData.m */,
-				93015BFB20124EF70001FDD5 /* DoraFoodTableCellButtonData.m */,
-				93015BFE20124F2E0001FDD5 /* DoraFoodTableCellButtonData.h */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -479,8 +479,6 @@
 			children = (
 				93015BF520124B8E0001FDD5 /* DoraFoodTableViewCell.h */,
 				93015BF620124BBB0001FDD5 /* DoraFoodTableViewCell.m */,
-				93015BF820124BFD0001FDD5 /* DoraFoodTableViewCellButton.m */,
-				93015BFA20124C0F0001FDD5 /* DoraFoodTableViewCellButton.h */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -834,10 +832,8 @@
 				C6E478EE2004BEEA00B2C624 /* FLAnimatedImageView.m in Sources */,
 				C6E478D32004BD2C00B2C624 /* UIImage+ForceDecode.m in Sources */,
 				C601E21B20121FC1001147DF /* DoraFoodTableCellData.m in Sources */,
-				93015BF920124BFD0001FDD5 /* DoraFoodTableViewCellButton.m in Sources */,
 				C65D0C7D200C7F5E007BF294 /* DoraExercisePointView.m in Sources */,
 				C6E478ED2004BEEA00B2C624 /* FLAnimatedImage.m in Sources */,
-				93015BFC20124EF70001FDD5 /* DoraFoodTableCellButtonData.m in Sources */,
 				93015BF720124BBB0001FDD5 /* DoraFoodTableViewCell.m in Sources */,
 				C6E478E12004BD2C00B2C624 /* NSImage+WebCache.m in Sources */,
 				C6E478D02004BD2C00B2C624 /* SDWebImageManager.m in Sources */,
@@ -966,6 +962,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
+				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = default;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1022,6 +1020,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

@@ -9,12 +9,12 @@
 #ifndef DoraFoodTableViewCell_h
 #define DoraFoodTableViewCell_h
 #import <UIKit/UIKit.h>
-#import "DoraFoodTableViewCellButton.h"
 #import "DoraCommonHeader.h"
 
 @interface DoraFoodTableViewCell : UITableViewCell
-@property(strong, nonatomic) DoraFoodTableViewCellButton *leftFood;
-@property(strong, nonatomic) DoraFoodTableViewCellButton *rightFood;
+@property(strong, nonatomic) UIImageView *foodImage;
+@property(copy, nonatomic) UILabel *foodName;
+@property(copy, nonatomic) UILabel *foodDetail;
 @end
 
 

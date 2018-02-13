@@ -13,6 +13,7 @@
 +(UIView *) DoraCreateSeperateLineWithWidth:(float) width Height:(float) height PositionX:(float) x PositionY:(float) y {
     UIView *seperateLine = [[UIView alloc] init];
     seperateLine.frame = CGRectMake(x, y, width, height);
+    seperateLine.backgroundColor = AppDefaultBorderColor;
     return seperateLine;
 }
 

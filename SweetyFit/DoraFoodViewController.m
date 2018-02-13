@@ -37,18 +37,9 @@
         for (int j = 0; j < 8; ++j) {
             DoraFoodTableCellData *cellData = [DoraFoodTableCellData createCellData];
             
-            cellData.leftButton = [DoraFoodTableCellButtonData createButtonData];
-            cellData.rightButton = [DoraFoodTableCellButtonData createButtonData];
-            
-            cellData.leftButton.foodName = @"橙子2";
-            cellData.leftButton.foodImage = [UIImage imageNamed:@"fruit.jpg"];
-            cellData.leftButton.foodCalorie = @"50Kcal/100g";
-            cellData.leftButton.foodDetail = @"富含维生素C";
-            
-            cellData.rightButton.foodName = @"橙子1";
-            cellData.rightButton.foodImage = [UIImage imageNamed:@"fruit.jpg"];
-            cellData.rightButton.foodCalorie = @"50Kcal/100g";
-            cellData.rightButton.foodDetail = @"富含维生素C";
+            cellData.foodName = @"橙子";
+            cellData.foodDetail = @"卡路里：10, 维生素：20, 纤维素：30";
+            cellData.foodImage = [UIImage imageNamed:@"orange.jpg"];
             
             [sectionData.sectionData addObject:cellData];
         }
@@ -81,7 +72,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"123" forIndexPath:indexPath];
+//  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"123" forIndexPath:indexPath];
     
     NSString *identifer = @"foodCell";
     
@@ -90,21 +81,12 @@
     if (cell == nil) {
         cell = [[DoraFoodTableViewCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
     }
-
-    DoraFoodTableCellData *tempData = _DoraFoodTableData[indexPath.section].sectionData[indexPath.row];
-    DoraFoodTableCellButtonData *leftButton = tempData.leftButton;
-    DoraFoodTableCellButtonData *rightButton = tempData.rightButton;
-
-    cell.leftFood.foodCalorie.text = leftButton.foodCalorie;
-    cell.leftFood.foodName.text = leftButton.foodName;
-    cell.leftFood.foodDetail.text = leftButton.foodDetail;
-    [cell.leftFood setBackgroundImage:leftButton.foodImage forState:UIControlStateNormal];
-
-    cell.rightFood.foodCalorie.text = rightButton.foodCalorie;
-    cell.rightFood.foodName.text = rightButton.foodName;
-    cell.rightFood.foodDetail.text = rightButton.foodDetail;
-    [cell.rightFood setBackgroundImage:rightButton.foodImage forState:UIControlStateNormal];
-
+    
+    DoraFoodTableCellData *data = _DoraFoodTableData[indexPath.section].sectionData[indexPath.row];
+    
+    [cell.foodImage setImage:data.foodImage];
+    cell.foodName.text = data.foodName;
+    cell.foodDetail.text = data.foodDetail;
     
     return cell;
 }

@@ -118,6 +118,7 @@
 -(void) setFoodView {
     NSArray *foodWrapperTitles = @[@"主食（碳水化合物）", @"肉蛋类（蛋白质）", @"果蔬类（纤维素&维生素）", @"油脂类"];
     NSMutableArray *foodWrappers;
+    int foodnum = 1;
     
     for (int i = 0; i < 4; ++i) {
         DoraRecomFoodContentWrapperView *contentView = [[DoraRecomFoodContentWrapperView alloc] init];
@@ -126,11 +127,13 @@
         contentView.foodList.contentSize = CGSizeMake(420, 190);
         
         for (int j = 0; j < 3; ++j) {
+            NSString *foodname = [NSString stringWithFormat:@"food%d.jpeg", foodnum];
+            foodnum++;
             DoraRecomFoodUnitView *test = [[DoraRecomFoodUnitView alloc] init];
             CGRect tempframe = test.frame;
             tempframe.origin = CGPointMake(5 + j * (130 + 8), 0);
             test.frame = tempframe;
-            [test.foodImage setImage:[UIImage imageNamed:@"veg.jpg"]];
+            [test.foodImage setImage:[UIImage imageNamed:foodname]];
             test.foodName.text = @"有机花菜";
             test.foodType.text = @"蔬菜";
             test.foodAmount.text = @"如图为100g";

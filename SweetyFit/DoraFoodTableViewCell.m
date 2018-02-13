@@ -14,14 +14,23 @@
 -(instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
-    float btnW = (DoraScreenWidth - 45) / 2;
-    float btnH = btnW * 0.6;
+    _foodImage = [[UIImageView alloc] init];
+    _foodName = [[UILabel alloc] init];
+    _foodDetail = [[UILabel alloc] init];
     
-    _leftFood = [[DoraFoodTableViewCellButton alloc] initWithFrame:CGRectMake(15, 5, btnW, btnH)];
-    _rightFood = [[DoraFoodTableViewCellButton alloc] initWithFrame:CGRectMake(25 + btnW, 5, btnW, btnH)];
+    _foodImage.frame = CGRectMake(10, 10, 70, 70);
+    _foodName.frame = CGRectMake(90, 10, DoraScreenWidth - 100, 30);
+    _foodDetail.frame = CGRectMake(90, 40, DoraScreenWidth - 100, 30);
     
-    [self.contentView addSubview:_leftFood];
-    [self.contentView addSubview:_rightFood];
+    _foodDetail.textColor = [UIColor colorWithRed:230/255 green:230/255 blue:230/255 alpha:.7];
+    _foodDetail.font = [UIFont systemFontOfSize:13];
+    
+    UIView *seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth Height:1 PositionX:0 PositionY:79];
+    
+    [self addSubview:_foodImage];
+    [self addSubview:_foodName];
+    [self addSubview:_foodDetail];
+    [self addSubview:seperateLine];
     
     return self;
 }

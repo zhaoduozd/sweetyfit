@@ -42,6 +42,7 @@
         vc.title = _Titles[i];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
+    
         nav.tabBarItem.title = _Titles[i];
         nav.tabBarItem.image = [UIImage imageNamed:_Icons[i]];
         

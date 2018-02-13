@@ -7,6 +7,7 @@
 //
 
 #import "DoraExerciseViewController.h"
+//#import "DoraSearchController.h"
 
 @interface DoraExerciseViewController ()
 @property(nonatomic, strong) NSMutableArray<DoraExerciseTableSectionData*> *DoraExerciseTableData;
@@ -19,25 +20,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self createData];
-    
-    //self.listItems = [[NSArray alloc] initWithArray:[self.DoraExerciseTableData copy]];
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-
-    self.searchController.dimsBackgroundDuringPresentation = FALSE;
-    
-    self.searchController.searchBar.delegate = self;
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
-    self.searchController.searchBar.showsCancelButton = YES;
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-
-    
-    [self.searchController.searchBar sizeToFit];
     
     btnW = (DoraScreenWidth - 45) / 2;
     btnH = btnW * 0.6;
+
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self createData];
+    
+    UIView *searchViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, 50)];
+    UIButton *goToSearch = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, DoraScreenWidth-10, 40)];
+    [searchViewContainer addSubview:goToSearch];
+    
+    self.tableView.tableHeaderView = searchViewContainer;
 }
 
 #pragma mark - Dora Functions
@@ -77,20 +71,6 @@
         
         [_DoraExerciseTableData addObject:sectionData];
     }
-}
-
--(void) filterContentForSearchText:(NSString *)searchText scope:(NSUInteger)scope {
-    if ([searchText length] == 0) {
-        self.listFilterItems = [NSMutableArray arrayWithArray:self.listItems];
-        return;
-    }
-    
-    NSPredicate *scopePredicate;
-    NSArray *tempArray;
-    
-    scopePredicate = [NSPredicate predicateWithFormat:@"SELF.exerciseName contains[c] %@", searchText];
-    tempArray = [self.listItems filteredArrayUsingPredicate:scopePredicate];
-    self.listFilterItems = [NSMutableArray arrayWithArray:tempArray];
 }
 
 #pragma mark - Table view data source
@@ -147,26 +127,6 @@
 
     return cell;
 }
-
-#pragma mark -- UISearchBarDelegate Function
-
--(void)searchBar:(UISearchBar *) searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope{
-    //[self updateSearchResultsForSearchController:self.searchController];
-    
-}
-
-- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    
-}
-
-#pragma mark -- UISearchResultsForSearchController Function
-
--(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSString *searchString = searchController.searchBar.text;
-    [self filterContentForSearchText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
-    [self.tableView reloadData];
-}
-
 @end
 
 

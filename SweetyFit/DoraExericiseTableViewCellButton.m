@@ -18,7 +18,7 @@
     self.exerciseName = [[UILabel alloc] initWithFrame:CGRectMake(10, height/2 - 30, width, 26)];
     self.exerciseTime = [[UILabel alloc] initWithFrame:CGRectMake(width/2, height-40, width/2, 26)];
     self.exerciseCalorie = [[UILabel alloc] initWithFrame:CGRectMake(10, height-40, width/2, 26)];
-    self.exerciseLevel = [[UILabel alloc] initWithFrame:CGRectMake(width-20, 0, 20, 20)];
+    self.exerciseLevel = [[UILabel alloc] initWithFrame:CGRectMake(width-25, 5, 20, 20)];
     
     UIColor *fontColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
     CALayer *maskLayer = [[CALayer alloc] init];

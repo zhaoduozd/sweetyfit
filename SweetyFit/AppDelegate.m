@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DoraRootNavigationViewController.h"
+#import "DoraExerciseViewController.h"
 
 @interface AppDelegate ()
 
