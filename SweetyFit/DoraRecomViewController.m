@@ -9,6 +9,7 @@
 #import "DoraRecomViewController.h"
 #import "DoraRecomFoodUnitView.h"
 #import "DoraRecomFoodContentWrapperView.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface DoraRecomViewController ()
 @property (nonatomic, strong) UILabel *texttest;
@@ -39,6 +40,19 @@
     [_recomRootView addSubview:_recomBonusView];
         
     [self.view addSubview:_recomRootView];
+    
+    // simulate
+    // NSString *urlString = @"http://itunes.apple.com/search?term=metallica";
+    NSString *urlString = @"127.0.0.1:3000";
+    NSURL *url = [NSURL URLWithString:urlString];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"results: %@", responseObject);
+
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"results: %@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

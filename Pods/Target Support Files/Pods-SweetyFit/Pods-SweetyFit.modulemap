@@ -1,0 +1,6 @@
+framework module Pods_SweetyFit {
+  umbrella header "Pods-SweetyFit-umbrella.h"
+
+  export *
+  module * { export * }
+}

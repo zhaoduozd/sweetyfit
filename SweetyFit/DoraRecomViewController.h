@@ -13,8 +13,6 @@
 #import "DoraUIRecomFood.h"
 #import "DoraUIRecomBonus.h"
 
-#import "SDWebImage/UIImageView+WebCache.h"
-
 @interface DoraRecomViewController : UIViewController
 @property(nonatomic, strong) DoraUIScrollViewRecomWrapper *recomRootView;
 @property(nonatomic, strong) DoraUIRecomExercise *recomExerciseView;

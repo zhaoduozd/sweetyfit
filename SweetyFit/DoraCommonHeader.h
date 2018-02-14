@@ -21,6 +21,10 @@
 #define DoraScreenWidth [UIScreen mainScreen].bounds.size.width
 #define DoraScreenHeight [UIScreen mainScreen].bounds.size.height
 
+// Networking information
+
+#define DoraTimeOutIntervel 30
+
 
 // Colors
 
