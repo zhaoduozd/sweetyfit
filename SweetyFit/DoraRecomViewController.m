@@ -43,14 +43,15 @@
     
     // simulate
     // NSString *urlString = @"http://itunes.apple.com/search?term=metallica";
-    NSString *urlString = @"127.0.0.1:3000";
+    NSString *urlString = @"http://sweetyfit.com:3000";
     NSURL *url = [NSURL URLWithString:urlString];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer= [AFHTTPRequestSerializer new];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"results: %@", responseObject);
+        NSLog(@"succeed results: %@", responseObject);
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"results: %@", error);
+        NSLog(@"fail results: %@", error);
         
     }];
 }
