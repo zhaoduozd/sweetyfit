@@ -7,9 +7,10 @@
 //
 
 #import "DoraLoginSubViewController.h"
-#import "UITextField+DoraLoginInput.h"
-#import "DoraCommonHeader.h"
-#import "UIButton+DoraLoginButtonView.h"
+#import "DoraLoginHeader.h"
+#import "DoraColorDefineHeader.h"
+#import "DoraScreenInforHeader.h"
+
 
 @interface DoraLoginSubViewController ()
 
@@ -26,34 +27,47 @@
 
 - (void) addFunctionElements {
     float topdis = 150;
-    UITextField *usernameField = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"用户名（手机号/邮箱）" TopDis:topdis];
+    _usernameField = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"账户名（手机号/邮箱）" TopDis:topdis];
 
-    UITextField *passwordField = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"密码" TopDis:topdis + 60];
-    [passwordField setSecureTextEntry:YES];
+    _passwordField = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"密码" TopDis:topdis + 60];
+    [_passwordField setSecureTextEntry:YES];
     
     UIButton *loginButton = [UIButton DoraCreateLoginOrangeColorButtonWithWidth:DoraScreenWidth/2 Height:50 borderRadius:3 Text:@"登录"];
     CGRect tempframe = loginButton.frame;
     tempframe.origin = CGPointMake(DoraScreenWidth/4, topdis + 120 + 60);
     loginButton.frame = tempframe;
+    
+    [loginButton addTarget:self action:@selector(Login:) forControlEvents:UIControlEventTouchUpInside];
 
-    [self.view addSubview:usernameField];
-    [self.view addSubview:passwordField];
+    [self.view addSubview:_usernameField];
+    [self.view addSubview:_passwordField];
     [self.view addSubview:loginButton];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) Login:(id) sender {
+    NSString *usernametext = _usernameField.text;
+    NSString *passwordtext = _passwordField.text;
+    NSString *passwordMD5 = [passwordtext MD5];
+    
+    NSString *urlString = @"http://120.77.42.160:3000/account/login?username=";
+    urlString = [urlString stringByAppendingString:usernametext];
+    urlString = [urlString stringByAppendingString:@"&pwd="];
+    urlString = [urlString stringByAppendingString:passwordMD5];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer= [AFHTTPRequestSerializer new];
+    [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"succeed results: %@", responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"yes");
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"fail results: %@", error);
+        
+    }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

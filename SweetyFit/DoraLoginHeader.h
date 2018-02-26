@@ -12,5 +12,7 @@
 // UI Category Headers
 #import "UIButton+DoraLoginButtonView.h"
 #import "UITextField+DoraLoginInput.h"
+#import "NSString+MD5.h"
+#import <AFNetworking/AFNetworking.h>
 
 #endif /* DoraLoginHeader_h */

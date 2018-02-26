@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraSignInViewController : UIViewController
-
+@property(nonatomic, strong) UITextField *accountName;
+@property(nonatomic, strong) UITextField *nickName;
+@property(nonatomic, strong) UITextField *selfIntro;
+@property(nonatomic, strong) UIDatePicker *birthday;
+@property(nonatomic, strong) UITextField *password;
 @end

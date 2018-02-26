@@ -25,4 +25,27 @@
     
     return button;
 }
+
++(UIButton *) DoraCreateGetInfoPureColorButtonWithX:(float) x Y:(float) y Text:(NSString *) textContent {
+    UIButton *button = [[UIButton alloc] init];
+    
+    float btnh = 26;
+    float btnw = 80;
+    
+    button.frame = CGRectMake(x, y, btnw, btnh);
+    button.titleLabel.text = textContent;
+    [button.layer setBorderWidth:1];
+    [button.layer setBorderColor:AppDefaultColor.CGColor];
+    [button.layer setCornerRadius:2];
+    [button.titleLabel setTextColor:AppDefaultColor];
+    
+    return button;
+}
 @end
+
+
+
+
+
+
+

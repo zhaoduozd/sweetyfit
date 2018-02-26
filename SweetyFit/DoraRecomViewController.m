@@ -43,21 +43,6 @@
     
     // simulate
     // NSString *urlString = @"http://itunes.apple.com/search?term=metallica";
-    NSString *urlString = @"http://120.77.42.160:3000";
-    NSURL *url = [NSURL URLWithString:urlString];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer= [AFHTTPRequestSerializer new];
-    [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSLog(@"succeed results: %@", responseObject);
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSLog(@"yes");
-        }
-
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"fail results: %@", error);
-        
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

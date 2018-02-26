@@ -20,8 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
-    _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
-    //_window.rootViewController = [[DoraLoginViewController alloc] init];
+    // _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
+    _window.rootViewController = [[DoraLoginViewController alloc] init];
     return YES;
 }
 
