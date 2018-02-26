@@ -10,6 +10,7 @@
 #import "DoraLoginHeader.h"
 #import "DoraColorDefineHeader.h"
 #import "DoraScreenInforHeader.h"
+#import "DoraRootNavigationViewController.h"
 
 
 @interface DoraLoginSubViewController ()
@@ -68,6 +69,9 @@
         NSLog(@"fail results: %@", error);
         
     }];
+    
+    DoraRootNavigationViewController *mainpage = [[DoraRootNavigationViewController alloc] init];
+    [self presentViewController:mainpage animated:YES completion:^ (void){}];
 }
 
 @end
