@@ -126,7 +126,7 @@
 
 }
 
-- (void) addQuestionWithQuestion:(NSString *) question Options:(NSArray *) options Tag:(NSString *) tag{
+- (void) addQuestionWithQuestion:(NSString *) question Options:(NSArray *) options Tag:(NSString *) tagtext{
     
     NSInteger len = options.count;
     NSInteger rown = len / buttounNum;
@@ -140,7 +140,7 @@
     
     for (int i = 0; i < len; ++i) {
         UIButton *btn = [UIButton DoraCreateGetInfoPureColorButtonWithX:10 + (seperatew + 86)*(i%buttounNum) Y:40 + (i/buttounNum)*(36) Text:options[i]];
-        btn.tag = tag;
+        btn.tag = tagtext;
         [view addSubview:btn];
     }
     
