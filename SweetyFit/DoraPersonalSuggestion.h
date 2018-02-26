@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-@interface DoraPersonalSuggestion : NSObject
+@interface DoraPersonalSuggestion : UIView
 
 @end
 

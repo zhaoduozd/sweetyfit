@@ -10,7 +10,7 @@
 #define DoraPersonalHistory_h
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-@interface DoraPersonalHistory : NSObject
+@interface DoraPersonalHistory : UIView
 
 @end
 

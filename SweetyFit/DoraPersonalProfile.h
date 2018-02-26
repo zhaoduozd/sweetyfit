@@ -10,13 +10,13 @@
 #define DoraPersonalProfile_h
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-@interface DoraPersonalProfile : NSObject
+@interface DoraPersonalProfile : UIView
 
 @property(nonatomic,strong) UIImageView *profileImage;
-@property(nonatomic,strong) UIText *userName;
-@property(nonatomic,strong) UIText *userAccount;
-@property(nonatomic,strong) UIText *exerciseLevelName;
-@property(nonatomic,strong) UIText *exerciseLevelMark;
+@property(nonatomic,strong) UITextView *userName;
+@property(nonatomic,strong) UITextView *userAccount;
+@property(nonatomic,strong) UITextView *exerciseLevelName;
+@property(nonatomic,strong) UITextView *exerciseLevelMark;
 
 @end
 
