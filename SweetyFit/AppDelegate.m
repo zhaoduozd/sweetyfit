@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DoraRootNavigationViewController.h"
-#import "DoraExerciseViewController.h"
+#import "DoraLoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +21,7 @@
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
     _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
+    //_window.rootViewController = [[DoraLoginViewController alloc] init];
     return YES;
 }
 

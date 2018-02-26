@@ -1,30 +1,13 @@
 //
-//  DoraCommonHeader.h
+//  DoraColorDefineHeader.h
 //  SweetyFit
 //
-//  Created by Zhongqi SHI on 2018/1/20.
-//  Copyright © 2018年 Duo Zhao. All rights reserved.
+//  Created by Dora Zhao on 26/2/2018.
+//  Copyright © 2018 Duo Zhao. All rights reserved.
 //
 
-#ifndef DoraCommonHeader_h
-#define DoraCommonHeader_h
-// Documents
-
-#import "UILabel+TextUI.h"
-#import "UIImageView+ImageViewUI.h"
-#import "UIScrollView+DoraScrollUI.h"
-#import "UIView+DoraViewUI.h"
-#import "UIButton+DoraButtonUI.h"
-
-// Screen information
-
-#define DoraScreenWidth [UIScreen mainScreen].bounds.size.width
-#define DoraScreenHeight [UIScreen mainScreen].bounds.size.height
-
-// Networking information
-
-#define DoraTimeOutIntervel 30
-#define DoraRequestUrl @"http://dorasweetyfit.com:3000"
+#ifndef DoraColorDefineHeader_h
+#define DoraColorDefineHeader_h
 
 // Colors
 
@@ -44,4 +27,4 @@
 
 #define AppLoginBorderColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1].CGColor
 
-#endif /* DoraCommonHeader_h */
+#endif /* DoraColorDefineHeader_h */

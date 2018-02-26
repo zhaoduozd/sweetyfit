@@ -19,6 +19,11 @@
 		C6265B902010E5AA006F5D55 /* DoraExerciseTableSectionData.m in Sources */ = {isa = PBXBuildFile; fileRef = C6265B8F2010E5AA006F5D55 /* DoraExerciseTableSectionData.m */; };
 		C6265B932010E65E006F5D55 /* DoraExerciseTableCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = C6265B922010E65E006F5D55 /* DoraExerciseTableCellData.m */; };
 		C6265B992010E6DA006F5D55 /* DoraExerciseTableCellButtonData.m in Sources */ = {isa = PBXBuildFile; fileRef = C6265B982010E6DA006F5D55 /* DoraExerciseTableCellButtonData.m */; };
+		C62E41BC204398CB00275D0A /* UITextField+DoraLoginInput.m in Sources */ = {isa = PBXBuildFile; fileRef = C62E41BB204398CB00275D0A /* UITextField+DoraLoginInput.m */; };
+		C63EC77620427E7D00C70D24 /* DoraLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63EC77520427E7D00C70D24 /* DoraLoginViewController.m */; };
+		C63EC77920428A2900C70D24 /* UIButton+DoraLoginButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C63EC77820428A2900C70D24 /* UIButton+DoraLoginButtonView.m */; };
+		C63EC77C20428F4C00C70D24 /* DoraLoginSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63EC77B20428F4C00C70D24 /* DoraLoginSubViewController.m */; };
+		C63EC782204292D900C70D24 /* DoraSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63EC781204292D900C70D24 /* DoraSignInViewController.m */; };
 		C65D0C742008DD74007BF294 /* UIScrollView+DoraScrollUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C65D0C732008DD74007BF294 /* UIScrollView+DoraScrollUI.m */; };
 		C65D0C7A200C7889007BF294 /* UIView+DoraViewUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C65D0C79200C7889007BF294 /* UIView+DoraViewUI.m */; };
 		C65D0C7D200C7F5E007BF294 /* DoraExercisePointView.m in Sources */ = {isa = PBXBuildFile; fileRef = C65D0C7C200C7F5E007BF294 /* DoraExercisePointView.m */; };
@@ -92,6 +97,19 @@
 		C6265B922010E65E006F5D55 /* DoraExerciseTableCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraExerciseTableCellData.m; sourceTree = "<group>"; };
 		C6265B972010E6DA006F5D55 /* DoraExerciseTableCellButtonData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraExerciseTableCellButtonData.h; sourceTree = "<group>"; };
 		C6265B982010E6DA006F5D55 /* DoraExerciseTableCellButtonData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraExerciseTableCellButtonData.m; sourceTree = "<group>"; };
+		C62E41BA204398CB00275D0A /* UITextField+DoraLoginInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+DoraLoginInput.h"; sourceTree = "<group>"; };
+		C62E41BB204398CB00275D0A /* UITextField+DoraLoginInput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DoraLoginInput.m"; sourceTree = "<group>"; };
+		C62E41BD20439FD200275D0A /* DoraLoginHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraLoginHeader.h; sourceTree = "<group>"; };
+		C62E41BE2043A0E200275D0A /* DoraScreenInforHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraScreenInforHeader.h; sourceTree = "<group>"; };
+		C62E41BF2043A13600275D0A /* DoraColorDefineHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraColorDefineHeader.h; sourceTree = "<group>"; };
+		C63EC77420427E7D00C70D24 /* DoraLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraLoginViewController.h; sourceTree = "<group>"; };
+		C63EC77520427E7D00C70D24 /* DoraLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraLoginViewController.m; sourceTree = "<group>"; };
+		C63EC77720428A2900C70D24 /* UIButton+DoraLoginButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+DoraLoginButtonView.h"; sourceTree = "<group>"; };
+		C63EC77820428A2900C70D24 /* UIButton+DoraLoginButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+DoraLoginButtonView.m"; sourceTree = "<group>"; };
+		C63EC77A20428F4C00C70D24 /* DoraLoginSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraLoginSubViewController.h; sourceTree = "<group>"; };
+		C63EC77B20428F4C00C70D24 /* DoraLoginSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraLoginSubViewController.m; sourceTree = "<group>"; };
+		C63EC780204292D900C70D24 /* DoraSignInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraSignInViewController.h; sourceTree = "<group>"; };
+		C63EC781204292D900C70D24 /* DoraSignInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraSignInViewController.m; sourceTree = "<group>"; };
 		C65D0C722008DD74007BF294 /* UIScrollView+DoraScrollUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DoraScrollUI.h"; sourceTree = "<group>"; };
 		C65D0C732008DD74007BF294 /* UIScrollView+DoraScrollUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DoraScrollUI.m"; sourceTree = "<group>"; };
 		C65D0C78200C7889007BF294 /* UIView+DoraViewUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+DoraViewUI.h"; sourceTree = "<group>"; };
@@ -240,6 +258,9 @@
 				C6BE9DCA1FD9173B00569EC9 /* Info.plist */,
 				C6BE9DB91FD9173B00569EC9 /* Supporting Files */,
 				93F10F1D2013039C0012E14B /* DoraCommonHeader.h */,
+				C62E41BD20439FD200275D0A /* DoraLoginHeader.h */,
+				C62E41BE2043A0E200275D0A /* DoraScreenInforHeader.h */,
+				C62E41BF2043A13600275D0A /* DoraColorDefineHeader.h */,
 			);
 			path = SweetyFit;
 			sourceTree = "<group>";
@@ -461,6 +482,10 @@
 		C6BE9E031FDBA80600569EC9 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				C63EC77720428A2900C70D24 /* UIButton+DoraLoginButtonView.h */,
+				C63EC77820428A2900C70D24 /* UIButton+DoraLoginButtonView.m */,
+				C62E41BA204398CB00275D0A /* UITextField+DoraLoginInput.h */,
+				C62E41BB204398CB00275D0A /* UITextField+DoraLoginInput.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -475,6 +500,12 @@
 		C6BE9E051FDBA81400569EC9 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				C63EC77420427E7D00C70D24 /* DoraLoginViewController.h */,
+				C63EC77520427E7D00C70D24 /* DoraLoginViewController.m */,
+				C63EC77A20428F4C00C70D24 /* DoraLoginSubViewController.h */,
+				C63EC77B20428F4C00C70D24 /* DoraLoginSubViewController.m */,
+				C63EC780204292D900C70D24 /* DoraSignInViewController.h */,
+				C63EC781204292D900C70D24 /* DoraSignInViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -731,7 +762,10 @@
 				C6BA1B4D2000C3A100F163B8 /* DoraUIRecomBonus.m in Sources */,
 				C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */,
 				C6C6BD221FED3BC9001A98B2 /* DoraUIScrollViewRecomWrapper.m in Sources */,
+				C63EC782204292D900C70D24 /* DoraSignInViewController.m in Sources */,
 				C6BA1B4A2000C37A00F163B8 /* DoraUIRecomFood.m in Sources */,
+				C62E41BC204398CB00275D0A /* UITextField+DoraLoginInput.m in Sources */,
+				C63EC77920428A2900C70D24 /* UIButton+DoraLoginButtonView.m in Sources */,
 				C6BE9E0C1FDF8BAA00569EC9 /* DoraRecomViewController.m in Sources */,
 				C68BA783200E32A70092DAC4 /* DoraRecomFoodUnitView.m in Sources */,
 				C6BE9E021FDBA77200569EC9 /* DoraRootNavigationViewController.m in Sources */,
@@ -741,7 +775,9 @@
 				C65D0C7A200C7889007BF294 /* UIView+DoraViewUI.m in Sources */,
 				C6BE9DBB1FD9173B00569EC9 /* main.m in Sources */,
 				C601E2122011C50A001147DF /* DoraExericiseTableViewCellButton.m in Sources */,
+				C63EC77620427E7D00C70D24 /* DoraLoginViewController.m in Sources */,
 				C6265B902010E5AA006F5D55 /* DoraExerciseTableSectionData.m in Sources */,
+				C63EC77C20428F4C00C70D24 /* DoraLoginSubViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
