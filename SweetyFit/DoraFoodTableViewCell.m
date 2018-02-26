@@ -25,7 +25,7 @@
     _foodDetail.textColor = [UIColor colorWithRed:230/255 green:230/255 blue:230/255 alpha:.7];
     _foodDetail.font = [UIFont systemFontOfSize:13];
     
-    UIView *seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth Height:1 PositionX:0 PositionY:79];
+    UIView *seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth Height:1 PositionX:10 PositionY:79];
     
     [self addSubview:_foodImage];
     [self addSubview:_foodName];
