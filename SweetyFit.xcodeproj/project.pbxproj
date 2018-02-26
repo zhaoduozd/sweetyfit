@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		93015BF720124BBB0001FDD5 /* DoraFoodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93015BF620124BBB0001FDD5 /* DoraFoodTableViewCell.m */; };
+		9350351B20446570001331D0 /* DoraPersonalHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351620446570001331D0 /* DoraPersonalHistory.m */; };
+		9350351C20446570001331D0 /* DoraPersonalProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351820446570001331D0 /* DoraPersonalProfile.m */; };
+		9350351D20446570001331D0 /* DoraPersonalSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351920446570001331D0 /* DoraPersonalSuggestion.m */; };
 		93F10F23201309470012E14B /* DoraPersonalTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F10F22201309470012E14B /* DoraPersonalTableCell.m */; };
 		C601E2122011C50A001147DF /* DoraExericiseTableViewCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E2112011C50A001147DF /* DoraExericiseTableViewCellButton.m */; };
 		C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E21420121C24001147DF /* DoraFoodViewController.m */; };
@@ -78,6 +81,12 @@
 		4477141D17F1DC1C5560779E /* Pods-SweetyFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SweetyFit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SweetyFit/Pods-SweetyFit.debug.xcconfig"; sourceTree = "<group>"; };
 		93015BF520124B8E0001FDD5 /* DoraFoodTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodTableViewCell.h; sourceTree = "<group>"; };
 		93015BF620124BBB0001FDD5 /* DoraFoodTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodTableViewCell.m; sourceTree = "<group>"; };
+		935035152044656F001331D0 /* DoraPersonalProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoraPersonalProfile.h; sourceTree = "<group>"; };
+		9350351620446570001331D0 /* DoraPersonalHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalHistory.m; sourceTree = "<group>"; };
+		9350351720446570001331D0 /* DoraPersonalHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoraPersonalHistory.h; sourceTree = "<group>"; };
+		9350351820446570001331D0 /* DoraPersonalProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalProfile.m; sourceTree = "<group>"; };
+		9350351920446570001331D0 /* DoraPersonalSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalSuggestion.m; sourceTree = "<group>"; };
+		9350351A20446570001331D0 /* DoraPersonalSuggestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoraPersonalSuggestion.h; sourceTree = "<group>"; };
 		93F10F1D2013039C0012E14B /* DoraCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraCommonHeader.h; sourceTree = "<group>"; };
 		93F10F22201309470012E14B /* DoraPersonalTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalTableCell.m; sourceTree = "<group>"; };
 		93F10F242013095A0012E14B /* DoraPersonalTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraPersonalTableCell.h; sourceTree = "<group>"; };
@@ -380,6 +389,12 @@
 		C6BE9DF51FDBA62500569EC9 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				9350351720446570001331D0 /* DoraPersonalHistory.h */,
+				9350351620446570001331D0 /* DoraPersonalHistory.m */,
+				935035152044656F001331D0 /* DoraPersonalProfile.h */,
+				9350351820446570001331D0 /* DoraPersonalProfile.m */,
+				9350351A20446570001331D0 /* DoraPersonalSuggestion.h */,
+				9350351920446570001331D0 /* DoraPersonalSuggestion.m */,
 				93F10F242013095A0012E14B /* DoraPersonalTableCell.h */,
 				93F10F22201309470012E14B /* DoraPersonalTableCell.m */,
 			);
@@ -775,6 +790,7 @@
 				C60AA878200F344700967176 /* DoraRecomFoodContentWrapperView.m in Sources */,
 				C6265B992010E6DA006F5D55 /* DoraExerciseTableCellButtonData.m in Sources */,
 				C62E41C82043C17A00275D0A /* DoraSigninInfoViewController.m in Sources */,
+				9350351C20446570001331D0 /* DoraPersonalProfile.m in Sources */,
 				C6BE9DBE1FD9173B00569EC9 /* AppDelegate.m in Sources */,
 				C65D0C742008DD74007BF294 /* UIScrollView+DoraScrollUI.m in Sources */,
 				C6BA1B512000C79C00F163B8 /* UIImageView+ImageViewUI.m in Sources */,
@@ -785,6 +801,7 @@
 				C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */,
 				C6C6BD221FED3BC9001A98B2 /* DoraUIScrollViewRecomWrapper.m in Sources */,
 				C63EC782204292D900C70D24 /* DoraSignInViewController.m in Sources */,
+				9350351D20446570001331D0 /* DoraPersonalSuggestion.m in Sources */,
 				C6BA1B4A2000C37A00F163B8 /* DoraUIRecomFood.m in Sources */,
 				C62E41BC204398CB00275D0A /* UITextField+DoraLoginInput.m in Sources */,
 				C63EC77920428A2900C70D24 /* UIButton+DoraLoginButtonView.m in Sources */,
@@ -802,6 +819,7 @@
 				C63EC77620427E7D00C70D24 /* DoraLoginViewController.m in Sources */,
 				C6265B902010E5AA006F5D55 /* DoraExerciseTableSectionData.m in Sources */,
 				C63EC77C20428F4C00C70D24 /* DoraLoginSubViewController.m in Sources */,
+				9350351B20446570001331D0 /* DoraPersonalHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
