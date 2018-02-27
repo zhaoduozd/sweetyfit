@@ -17,6 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.personalProfile = [[DoraPersonalProfile alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, 100)];
+    
+    [self.view addSubview:self.personalProfile];
+    
+    self.personalSuggestionExercise = [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,100+5,DoraScreenWidth/2-1,300)];
+    
+    [self.view addSubview:self.personalSuggestionExercise];
+    
+    self.personalSuggestionFood= [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(DoraScreenWidth/2+1,100+5,DoraScreenWidth/2-1,300)];
+    [self.view addSubview:self.personalSuggestionFood];
+    
+    
     self.view.backgroundColor = AppDefaultBackgroundColor;
     // Do any additional setup after loading the view.
 }

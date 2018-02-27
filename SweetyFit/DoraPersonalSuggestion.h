@@ -10,8 +10,12 @@
 #define DoraPersonalSuggestion_h
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "DoraCommonHeader.h"
 
 @interface DoraPersonalSuggestion : UIView
+
+@property(strong,nonatomic) UITextView *suggestView;
+@property(strong,nonatomic) UIImageView *placeHolder;
 
 @end
 

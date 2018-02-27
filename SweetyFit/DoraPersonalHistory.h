@@ -12,6 +12,8 @@
 #import <Foundation/Foundation.h>
 @interface DoraPersonalHistory : UIView
 
+
+
 @end
 
 #endif /* DoraPersonalHistory_h */

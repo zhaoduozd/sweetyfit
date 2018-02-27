@@ -16,7 +16,8 @@
 @interface DoraPersonalViewController : UIViewController
 
 @property(nonatomic,strong) DoraPersonalProfile *personalProfile;
-@property(nonatomic,strong) DoraPersonalSuggestion *personalSuggestion;
+@property(nonatomic,strong) DoraPersonalSuggestion *personalSuggestionExercise;
+@property(nonatomic,strong) DoraPersonalSuggestion *personalSuggestionFood;
 @property(nonatomic,strong) DoraPersonalHistory *personalHistory;
 @property(nonatomic,strong) DoraPersonalTableCell *personalBodyData;
 @property(nonatomic,strong) DoraPersonalTableCell *personalSetAlert;
