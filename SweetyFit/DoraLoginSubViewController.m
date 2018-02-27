@@ -50,9 +50,9 @@
     NSString *passwordtext = _passwordField.text;
     NSString *passwordMD5 = [passwordtext MD5];
     
-    NSString *urlString = @"http://120.77.42.160:3000/account/login?username=";
+    NSString *urlString = @"http://127.0.0.1:3000/account/login?u=";
     urlString = [urlString stringByAppendingString:usernametext];
-    urlString = [urlString stringByAppendingString:@"&pwd="];
+    urlString = [urlString stringByAppendingString:@"&p="];
     urlString = [urlString stringByAppendingString:passwordMD5];
     NSURL *url = [NSURL URLWithString:urlString];
     

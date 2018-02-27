@@ -75,30 +75,26 @@
     [dict setObject:nicknameText forKey:@"nickname"];
     [dict setObject:birthDate forKey:@"birthday"];
     
-//    NSString *urlString = @"http://120.77.42.160:3000/account/signin";
-//    NSURL *url = [NSURL URLWithString:urlString];
-//
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.requestSerializer= [AFHTTPRequestSerializer new];
-//    [manager POST:url.absoluteString parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//
-//        DoraSigninInfoViewController *getInfoPage = [[DoraSigninInfoViewController alloc] init];
-//        [self presentViewController:getInfoPage animated:YES completion:^(void) {}];
-//
-//        NSLog(@"succeed results: %@", responseObject);
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            NSLog(@"yes");
-//        }
-//
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        NSLog(@"fail results: %@", error);
-//
-//    }];
+    NSString *urlString = @"http://120.0.0.1:3000/account/signin";
+    NSURL *url = [NSURL URLWithString:urlString];
 
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer= [AFHTTPRequestSerializer new];
     
-    
-    DoraSigninInfoViewController *getInfoPage = [[DoraSigninInfoViewController alloc] init];
-    [self presentViewController:getInfoPage animated:YES completion:^(void) {}];
+    [manager GET:url.absoluteString parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        DoraSigninInfoViewController *getInfoPage = [[DoraSigninInfoViewController alloc] init];
+        [self presentViewController:getInfoPage animated:YES completion:^(void) {}];
+
+        NSLog(@"succeed results: %@", responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"yes");
+        }
+
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"fail results: %@", error);
+
+    }];
 }
 
 @end

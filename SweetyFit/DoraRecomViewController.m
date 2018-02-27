@@ -121,7 +121,6 @@
 
 -(void) setFoodView {
     NSArray *foodWrapperTitles = @[@"主食（碳水化合物）", @"肉蛋类（蛋白质）", @"果蔬类（纤维素&维生素）", @"油脂类"];
-    NSMutableArray *foodWrappers;
     int foodnum = 1;
     
     for (int i = 0; i < 4; ++i) {
