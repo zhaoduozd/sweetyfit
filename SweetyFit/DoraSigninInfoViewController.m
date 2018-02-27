@@ -65,6 +65,12 @@
 @property(nonatomic, strong) NSMutableArray *howBusy;
 @property(nonatomic, strong) NSMutableArray *bodyRegion;
 
+@property(nonatomic, strong) NSMutableArray<UIButton *> *genderbtns;
+@property(nonatomic, strong) NSMutableArray<UIButton *> *trainTimesbtns;
+@property(nonatomic, strong) NSMutableArray<UIButton *> *trainPlacesbtns;
+@property(nonatomic, strong) NSMutableArray<UIButton *> *trainAimsbtns;
+@property(nonatomic, strong) NSMutableArray<UIButton *> *howBusybtns;
+@property(nonatomic, strong) NSMutableArray<UIButton *> *bodyRegionbtns;
 
 @end
 
@@ -96,6 +102,8 @@
     buttounNum = (DoraScreenWidth - 20) / 86;
     seperatew = (DoraScreenWidth - 20 - 86 * buttounNum) / buttounNum;
     
+    [self initialData];
+    
     [self.view addSubview:_wrapper];
     [self addQuestions];
     [self addBodyInfos];
@@ -107,6 +115,22 @@
     
     [submitButton addTarget:self action:@selector(Submit:) forControlEvents:UIControlEventTouchUpInside];
     [_wrapper addSubview:submitButton];
+}
+
+- (void) initialData {
+    _gender = [[NSMutableArray alloc] initWithArray:@[@"0", @"0"]];
+    _howBusy = [[NSMutableArray alloc] initWithArray:@[@"0", @"0", @"0", @"0"]];
+    _bodyRegion = [[NSMutableArray alloc] initWithArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
+    _trainPlaces = [[NSMutableArray alloc] initWithArray:@[@"0", @"0", @"0", @"0", @"0"]];
+    _trainTimes = [[NSMutableArray alloc] initWithArray:@[@"0", @"0", @"0", @"0", @"0"]];
+    _trainAims = [[NSMutableArray alloc] initWithArray:@[@"0", @"0", @"0", @"0", @"0", @"0"]];
+    
+    _genderbtns = [[NSMutableArray alloc] init];
+    _trainTimesbtns = [[NSMutableArray alloc] init];
+    _trainPlacesbtns = [[NSMutableArray alloc] init];
+    _trainAimsbtns = [[NSMutableArray alloc] init];
+    _bodyRegionbtns = [[NSMutableArray alloc] init];
+    _howBusybtns = [[NSMutableArray alloc] init];
 }
 
 - (void) addQuestions {
@@ -140,7 +164,34 @@
     
     for (int i = 0; i < len; ++i) {
         UIButton *btn = [UIButton DoraCreateGetInfoPureColorButtonWithX:10 + (seperatew + 86)*(i%buttounNum) Y:40 + (i/buttounNum)*(36) Text:options[i]];
-        btn.tag = tagtext;
+        
+        btn.tag = i;
+        
+        if ([tagtext isEqualToString:@"gender"]) {
+            [_genderbtns addObject:btn];
+            [btn addTarget:self action:@selector(genderSetting:) forControlEvents:UIControlEventTouchUpInside];
+        } else if ([tagtext isEqualToString:@"howbusy"]) {
+            [_howBusybtns addObject:btn];
+            [btn addTarget:self action:@selector(howbusySetting:) forControlEvents:UIControlEventTouchUpInside];
+        } else if ([tagtext isEqualToString:@"trainaim"]) {
+            [_trainAimsbtns addObject:btn];
+            [btn addTarget:self action:@selector(trainaimSetting:) forControlEvents:UIControlEventTouchUpInside];
+        } else if ([tagtext isEqualToString:@"traintime"]) {
+            [_trainTimesbtns addObject:btn];
+            [btn addTarget:self action:@selector(traintimeSetting:) forControlEvents:UIControlEventTouchUpInside];
+        } else if ([tagtext isEqualToString:@"trainplace"]) {
+            [_trainPlacesbtns addObject:btn];
+            
+            
+            
+            [btn addTarget:self action:@selector(trainplaceSetting:) forControlEvents:UIControlEventTouchUpInside];
+        } else if ([tagtext isEqualToString:@"bodyregion"]) {
+            [_bodyRegionbtns addObject:btn];
+            [btn addTarget:self action:@selector(bodyregionSetting:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        
+        
         [view addSubview:btn];
     }
     
@@ -213,8 +264,10 @@
     [_wrapper addSubview:bodyView];
 }
 
+#pragma mark -- Event Functions
+
 - (void) Submit:(id) sender {
-    NSMutableDictionary *dict;
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:_bodyHeight.text forKey:@"bodyHeight"];
     [dict setObject:_bodyWeight.text forKey:@"bodyWeight"];
     [dict setObject:_chestline.text forKey:@"chestline"];
@@ -227,10 +280,82 @@
     [dict setObject:_bodyRegion forKey:@"bodyRegion"];
     [dict setObject:_howBusy forKey:@"howbusy"];
     
-    
+    NSLog(@"%@", dict);
     DoraRootNavigationViewController *rootpage = [[DoraRootNavigationViewController alloc] init];
     [self presentViewController:rootpage animated:YES completion:^(void){}];
 
 }
+
+- (void)genderSetting:(id) sender {
+    UIButton *button = (UIButton *)sender;
+    NSInteger currentid = button.tag;
+    [self RadioSettingDataArray:_gender BtnArray:_genderbtns Tag:currentid];
+}
+
+- (void)howbusySetting:(id) sender {
+    UIButton *button = (UIButton *)sender;
+    NSInteger currentid = button.tag;
+    [self RadioSettingDataArray:_howBusy BtnArray:_howBusybtns Tag:currentid];
+}
+
+- (void)trainaimSetting:(id) sender {
+    UIButton *button = (UIButton *)sender;
+    NSInteger currentid = button.tag;
+    [self CheckSettingDataArray:_trainAims BtnArray:_trainAimsbtns Tag:currentid];
+}
+
+- (void)trainplaceSetting:(id) sender {
+    UIButton *button = (UIButton *)sender;
+    NSInteger currentid = button.tag;
+    [self CheckSettingDataArray:_trainPlaces BtnArray:_trainPlacesbtns Tag:currentid];
+}
+
+- (void)traintimeSetting:(id) sender {
+    UIButton *button = (UIButton *)sender;
+    NSInteger currentid = button.tag;
+    [self CheckSettingDataArray:_trainTimes BtnArray:_trainTimesbtns Tag:currentid];
+}
+
+- (void)bodyregionSetting:(id) sender {
+    UIButton *button = (UIButton *)sender;
+    NSInteger currentid = button.tag;
+    [self CheckSettingDataArray:_bodyRegion BtnArray:_bodyRegionbtns Tag:currentid];
+}
+
+- (void)RadioSettingDataArray:(NSMutableArray *) dataArray BtnArray:(NSMutableArray<UIButton *>*) btnArray Tag:(NSInteger) tag {
+    
+    NSInteger len = dataArray.count;
+  
+    for (NSInteger i = 0; i < len; ++i) {
+        dataArray[i] = @"0";
+    }
+    dataArray[tag] = @"1";
+    
+    len = btnArray.count;
+
+    for (NSInteger i = 0; i < len; ++i) {
+        [btnArray[i] setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [btnArray[i].layer setBorderColor:[UIColor grayColor].CGColor];
+        [btnArray[i] setBackgroundColor:[UIColor clearColor]];
+    }
+    [btnArray[tag] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnArray[tag].layer setBorderColor:AppDefaultColor.CGColor];
+    [btnArray[tag] setBackgroundColor:AppDefaultColor];
+}
+
+- (void)CheckSettingDataArray:(NSMutableArray *) dataArray BtnArray:(NSMutableArray<UIButton *> *) btnArray Tag:(NSInteger) tag {
+    if ([dataArray[tag] isEqualToString:@"1"]) {
+        dataArray[tag] = @"0";
+        [btnArray[tag] setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [btnArray[tag].layer setBorderColor:[UIColor grayColor].CGColor];
+        [btnArray[tag] setBackgroundColor:[UIColor clearColor]];
+    } else {
+        dataArray[tag] = @"1";
+        [btnArray[tag] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btnArray[tag].layer setBorderColor:AppDefaultColor.CGColor];
+        [btnArray[tag] setBackgroundColor:AppDefaultColor];
+    }
+}
+
 
 @end

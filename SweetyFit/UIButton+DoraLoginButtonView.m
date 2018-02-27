@@ -39,7 +39,7 @@
     [button.layer setBorderWidth:1];
     [button.layer setBorderColor:[UIColor grayColor].CGColor];
     [button.layer setCornerRadius:2];
-    [button.titleLabel setTextColor:AppDefaultColor];
+    //[button.titleLabel setTextColor:AppDefaultColor];
     
     return button;
 }
