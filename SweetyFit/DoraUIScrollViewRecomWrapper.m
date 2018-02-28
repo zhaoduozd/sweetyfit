@@ -7,6 +7,7 @@
 //
 
 #import "DoraUIScrollViewRecomWrapper.h"
+#import "DoraColorDefineHeader.h"
 
 @implementation DoraUIScrollViewRecomWrapper
 

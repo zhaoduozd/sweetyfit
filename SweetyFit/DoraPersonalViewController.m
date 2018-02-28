@@ -7,6 +7,8 @@
 //
 
 #import "DoraPersonalViewController.h"
+#import "DoraColorDefineHeader.h"
+
 
 @interface DoraPersonalViewController ()
 @property(nonatomic,strong) UIScrollView *containerView;

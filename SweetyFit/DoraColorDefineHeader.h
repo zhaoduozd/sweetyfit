@@ -27,4 +27,5 @@
 
 #define AppLoginBorderColor [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1].CGColor
 
+#define textColorWhite [UIColor whiteColor]
 #endif /* DoraColorDefineHeader_h */

@@ -50,7 +50,7 @@
     NSString *passwordtext = _passwordField.text;
     NSString *passwordMD5 = [passwordtext MD5];
     
-    NSString *urlString = @"http://127.0.0.1:3000/account/login?u=";
+    NSString *urlString = [serverurl stringByAppendingString:@"/account/login?u="];
     urlString = [urlString stringByAppendingString:usernametext];
     urlString = [urlString stringByAppendingString:@"&p="];
     urlString = [urlString stringByAppendingString:passwordMD5];
@@ -59,19 +59,23 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer= [AFHTTPRequestSerializer new];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        responseObject = (NSDictionary *)responseObject;
+        NSString *loginResult = [responseObject objectForKey:@"login"];
         
-        NSLog(@"succeed results: %@", responseObject);
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSLog(@"yes");
+        if ([loginResult isEqualToString:@"succeed"]) {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:usernametext forKey:@"uid"];
+            
+            DoraRootNavigationViewController *mainpage = [[DoraRootNavigationViewController alloc] init];
+            [self presentViewController:mainpage animated:YES completion:^ (void){}];
+        } else {
+            
         }
-        
+
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"fail results: %@", error);
-        
     }];
     
-    DoraRootNavigationViewController *mainpage = [[DoraRootNavigationViewController alloc] init];
-    [self presentViewController:mainpage animated:YES completion:^ (void){}];
-}
+    }
 
 @end

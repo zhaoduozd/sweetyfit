@@ -7,6 +7,7 @@
 //
 
 #import "DoraRecomFoodUnitView.h"
+#import "DoraColorDefineHeader.h"
 
 @implementation DoraRecomFoodUnitView
 

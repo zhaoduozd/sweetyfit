@@ -11,6 +11,7 @@
 #import "DoraExerciseViewController.h"
 #import "DoraFoodViewController.h"
 #import "DoraPersonalViewController.h"
+#import "DoraColorDefineHeader.h"
 
 @interface DoraRootNavigationViewController ()
 

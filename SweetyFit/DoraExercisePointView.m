@@ -7,6 +7,8 @@
 //
 
 #import "DoraExercisePointView.h"
+#import "DoraColorDefineHeader.h"
+
 
 @implementation DoraExercisePointView
 

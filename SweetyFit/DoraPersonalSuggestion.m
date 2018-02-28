@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DoraPersonalSuggestion.h"
+#import "DoraColorDefineHeader.h"
 #define margin 5
 
 @implementation DoraPersonalSuggestion

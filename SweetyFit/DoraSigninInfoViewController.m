@@ -134,7 +134,7 @@
 }
 
 - (void) addQuestions {
-    NSArray *genderText = @[@"优雅女神", @"绅士男神"];
+    NSArray *genderText = @[@"绅士男神", @"优雅女神"];
     NSArray *howBusyText = @[@"12小时以上", @"10～12小时", @"8～10小时", @"8小时以下"];
     NSArray *trainAimText = @[@"喜爱运动", @"保持健康", @"减脂瘦身", @"增肌强健", @"局部塑形", @"塑形紧致"];
     NSArray *trainTimeText = @[@"6～9点", @"10～13点", @"14～17点", @"18～20点", @"21点以后"];
@@ -266,26 +266,6 @@
 
 #pragma mark -- Event Functions
 
-- (void) Submit:(id) sender {
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:_bodyHeight.text forKey:@"bodyHeight"];
-    [dict setObject:_bodyWeight.text forKey:@"bodyWeight"];
-    [dict setObject:_chestline.text forKey:@"chestline"];
-    [dict setObject:_waistline.text forKey:@"waistline"];
-    [dict setObject:_hipline.text forKey:@"hipline"];
-    [dict setObject:_gender forKey:@"gender"];
-    [dict setObject:_trainAims forKey:@"trainaims"];
-    [dict setObject:_trainTimes forKey:@"traintimes"];
-    [dict setObject:_trainPlaces forKey:@"trainplaces"];
-    [dict setObject:_bodyRegion forKey:@"bodyRegion"];
-    [dict setObject:_howBusy forKey:@"howbusy"];
-    
-    NSLog(@"%@", dict);
-    DoraRootNavigationViewController *rootpage = [[DoraRootNavigationViewController alloc] init];
-    [self presentViewController:rootpage animated:YES completion:^(void){}];
-
-}
-
 - (void)genderSetting:(id) sender {
     UIButton *button = (UIButton *)sender;
     NSInteger currentid = button.tag;
@@ -355,6 +335,48 @@
         [btnArray[tag].layer setBorderColor:AppDefaultColor.CGColor];
         [btnArray[tag] setBackgroundColor:AppDefaultColor];
     }
+}
+
+- (void) Submit:(id) sender {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [dict setObject:_bodyHeight.text forKey:@"bodyHeight"];
+    [dict setObject:_bodyWeight.text forKey:@"bodyWeight"];
+    [dict setObject:_chestline.text forKey:@"chestline"];
+    [dict setObject:_waistline.text forKey:@"waistline"];
+    [dict setObject:_hipline.text forKey:@"hipline"];
+    [dict setObject:([_gender[0] isEqualToString:@"0"] ? @"1" : @"0") forKey:@"gender"];
+    
+    for (NSInteger i = 0; i < _howBusy.count; ++i) {
+        if ([_howBusy[i] isEqualToString:@"1"]) {
+            [dict setObject:[NSString stringWithFormat:@"%lu",i] forKey:@"howbusy"];
+            break;
+        }
+    }
+    
+    [dict setObject:_trainAims forKey:@"trainaims"];
+    [dict setObject:_trainTimes forKey:@"traintimes"];
+    [dict setObject:_trainPlaces forKey:@"trainplaces"];
+    [dict setObject:_bodyRegion forKey:@"bodyRegion"];
+    
+    if([defaults objectForKey:@"uid"] != nil) {
+        [dict setObject:[defaults objectForKey:@"uid"] forKey:@"uid"];
+    }
+    
+    NSString *urlString = [serverurl stringByAppendingString: @"/account/addinfo"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer= [AFHTTPRequestSerializer new];
+    
+    [manager POST:url.absoluteString parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        DoraRootNavigationViewController *rootpage = [[DoraRootNavigationViewController alloc] init];
+        [self presentViewController:rootpage animated:YES completion:^(void){}];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"fail results: %@", error);
+    }];
+    
+    
 }
 
 

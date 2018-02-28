@@ -69,31 +69,33 @@
     NSDate *birthDate = _birthday.date;
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:usernameText forKey:@"userid"];
+    [dict setObject:usernameText forKey:@"uid"];
     [dict setObject:passwordText forKey:@"pwd"];
     [dict setObject:selfIntroText forKey:@"selfIntro"];
     [dict setObject:nicknameText forKey:@"nickname"];
     [dict setObject:birthDate forKey:@"birthday"];
     
-    NSString *urlString = @"http://120.0.0.1:3000/account/signin";
+    NSString *urlString = [serverurl stringByAppendingString: @"/account/signin"];
     NSURL *url = [NSURL URLWithString:urlString];
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer= [AFHTTPRequestSerializer new];
     
-    [manager GET:url.absoluteString parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-
-        DoraSigninInfoViewController *getInfoPage = [[DoraSigninInfoViewController alloc] init];
-        [self presentViewController:getInfoPage animated:YES completion:^(void) {}];
-
-        NSLog(@"succeed results: %@", responseObject);
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSLog(@"yes");
+    [manager POST:url.absoluteString parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        responseObject = (NSDictionary *)responseObject;
+        NSString *signinResult = [responseObject objectForKey:@"signin"];
+        
+        if ([signinResult isEqualToString:@"succeed"]) {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:usernameText forKey:@"uid"];
+            
+            DoraSigninInfoViewController *nextpage = [[DoraSigninInfoViewController alloc] init];
+            [self presentViewController:nextpage animated:YES completion:^(void){}];
+        } else {
+            
         }
-
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"fail results: %@", error);
-
     }];
 }
 

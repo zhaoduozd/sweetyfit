@@ -7,6 +7,8 @@
 //
 
 #import "DoraUIRecomBonus.h"
+#import "DoraColorDefineHeader.h"
+
 
 @implementation DoraUIRecomBonus
 

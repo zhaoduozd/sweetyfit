@@ -8,6 +8,8 @@
 
 #import "UIView+DoraViewUI.h"
 #import "UIScrollView+DoraScrollUI.h"
+#import "DoraColorDefineHeader.h"
+
 
 @implementation UIView (DoraViewUI)
 +(UIView *) DoraCreateSeperateLineWithWidth:(float) width Height:(float) height PositionX:(float) x PositionY:(float) y {
