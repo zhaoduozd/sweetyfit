@@ -10,10 +10,11 @@
 #define DoraPersonalHistory_h
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "DoraCommonHeader.h"
 @interface DoraPersonalHistory : UIView
-
-
-
+@property(nonatomic,strong) UIImageView *placeholder1;
+@property(nonatomic,strong) UIImageView *placeholder2;
+@property(nonatomic,strong) UIImageView *placeholder3;
 @end
 
 #endif /* DoraPersonalHistory_h */

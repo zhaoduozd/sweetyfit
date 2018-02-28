@@ -9,25 +9,26 @@
 #import "DoraPersonalViewController.h"
 
 @interface DoraPersonalViewController ()
-
+@property(nonatomic,strong) UIScrollView *containerView;
 @end
 
 @implementation DoraPersonalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, DoraScreenHeight)];
+    [self.view addSubview:self.containerView];
     
     self.personalProfile = [[DoraPersonalProfile alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, 100)];
     
-    [self.view addSubview:self.personalProfile];
+    [self.containerView addSubview:self.personalProfile];
     
     self.personalSuggestionExercise = [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,100+5,DoraScreenWidth/2-1,300)];
     
-    [self.view addSubview:self.personalSuggestionExercise];
+    [self.containerView addSubview:self.personalSuggestionExercise];
     
     self.personalSuggestionFood= [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(DoraScreenWidth/2+1,100+5,DoraScreenWidth/2-1,300)];
-    [self.view addSubview:self.personalSuggestionFood];
-    
+    [self.containerView addSubview:self.personalSuggestionFood];
     
     self.view.backgroundColor = AppDefaultBackgroundColor;
     // Do any additional setup after loading the view.
