@@ -7,6 +7,8 @@
 //
 
 #import "UIButton+DoraButtonUI.h"
+#import "DoraColorDefineHeader.h"
+
 
 @implementation UIButton (DoraButtonUI)
 +(UIButton *) DoraCreateOrangeLineButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent {

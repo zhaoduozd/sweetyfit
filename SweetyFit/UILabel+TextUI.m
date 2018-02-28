@@ -7,6 +7,8 @@
 //
 
 #import "UILabel+TextUI.h"
+#import "DoraColorDefineHeader.h"
+
 
 @implementation UILabel (TextUI)
 +(UILabel *) DoraCreateTextBoldTitleName:(NSString *)titlename {

@@ -8,6 +8,7 @@
 
 #import "UIButton+DoraLoginButtonView.h"
 #import "DoraCommonHeader.h"
+#import "DoraColorDefineHeader.h"
 
 @implementation UIButton (DoraLoginButtonView)
 +(UIButton *) DoraCreateLoginOrangeColorButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent {
