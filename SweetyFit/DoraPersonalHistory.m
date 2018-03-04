@@ -19,7 +19,6 @@
     self = [super initWithFrame:frame];
     self.Titles = @[@"月", @"周", @"日"];
     
-    self.backgroundColor = AppDefaultBarTintColor;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     return self;

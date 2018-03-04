@@ -15,6 +15,10 @@
 @property(nonatomic,strong) UIImageView *placeholder1;
 @property(nonatomic,strong) UIImageView *placeholder2;
 @property(nonatomic,strong) UIImageView *placeholder3;
+
+@property(nonatomic,strong) UIButton *buttonMonth;
+@property(nonatomic,strong) UIButton *buttonWeek;
+@property(nonatomic,strong) UIButton *buttonDay;
 @end
 
 #endif /* DoraPersonalHistory_h */
