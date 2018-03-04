@@ -23,11 +23,11 @@
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
     
-    _window.rootViewController = [[GifViewController alloc] init];
-    
+//    _window.rootViewController = [[GifViewController alloc] init];
+//    
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];\
 //    if ([defaults objectForKey:@"uid"] != nil) {
-//        _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
+        _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
 //    } else {
 //        _window.rootViewController = [[DoraLoginViewController alloc] init];
 //    }

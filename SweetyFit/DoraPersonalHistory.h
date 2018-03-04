@@ -11,10 +11,10 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "DoraCommonHeader.h"
+#import "SweetyFit-Bridging-Header.h"
+#import "DayAxisValueFormatter.h"
 @interface DoraPersonalHistory : UIView
-@property(nonatomic,strong) UIImageView *placeholder1;
-@property(nonatomic,strong) UIImageView *placeholder2;
-@property(nonatomic,strong) UIImageView *placeholder3;
+@property (nonatomic, strong) BarChartView *barChartView;
 
 @property(nonatomic,strong) UIButton *buttonMonth;
 @property(nonatomic,strong) UIButton *buttonWeek;
