@@ -338,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				C6BD6C0D2046E76A00BC03EB /* GifViewController.h */,
-				C6BD6C0E2046E76A00BC03EB /* GifViewController.m */,
 			);
 			name = gifplayer;
 			sourceTree = "<group>";
@@ -377,6 +376,7 @@
 				C6BE9DC21FD9173B00569EC9 /* Main.storyboard */,
 				C6BE9DC51FD9173B00569EC9 /* Assets.xcassets */,
 				C6BE9DC71FD9173B00569EC9 /* LaunchScreen.storyboard */,
+				C6BE9DCA1FD9173B00569EC9 /* Info.plist */,
 				C6BE9DB91FD9173B00569EC9 /* Supporting Files */,
 				93F10F1D2013039C0012E14B /* DoraCommonHeader.h */,
 				C62E41BD20439FD200275D0A /* DoraLoginHeader.h */,
@@ -389,7 +389,6 @@
 		C6BE9DB91FD9173B00569EC9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C6BE9DCA1FD9173B00569EC9 /* Info.plist */,
 				C6BE9DBA1FD9173B00569EC9 /* main.m */,
 				C6BE9E061FDE64FF00569EC9 /* PrefixHeader.pch */,
 				9340AB9F204C102800EEFBD0 /* DoraChartsHeaderBridge.swift */,
@@ -627,6 +626,7 @@
 		C6BE9E041FDBA80E00569EC9 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				C6BD6C0E2046E76A00BC03EB /* GifViewController.m */,
 				C62E41C02043A9E900275D0A /* NSString+MD5.h */,
 				C62E41C12043A9E900275D0A /* NSString+MD5.m */,
 				C62E41C32043AD5600275D0A /* DoraLoginNetWorking.h */,
