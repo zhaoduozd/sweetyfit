@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		93015BF720124BBB0001FDD5 /* DoraFoodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93015BF620124BBB0001FDD5 /* DoraFoodTableViewCell.m */; };
-		9340AB99204C0FD400EEFBD0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9340AB96204C0FB500EEFBD0 /* Charts.framework */; };
-		9340AB9A204C0FD400EEFBD0 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9340AB96204C0FB500EEFBD0 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9340ABA0204C102800EEFBD0 /* DoraChartsHeaderBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9340AB9F204C102800EEFBD0 /* DoraChartsHeaderBridge.swift */; };
 		9340ABAF204C2CA400EEFBD0 /* DayAxisValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9340ABAD204C2CA400EEFBD0 /* DayAxisValueFormatter.m */; };
 		9350351B20446570001331D0 /* DoraPersonalHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351620446570001331D0 /* DoraPersonalHistory.m */; };
@@ -35,6 +33,7 @@
 		C63EC77920428A2900C70D24 /* UIButton+DoraLoginButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C63EC77820428A2900C70D24 /* UIButton+DoraLoginButtonView.m */; };
 		C63EC77C20428F4C00C70D24 /* DoraLoginSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63EC77B20428F4C00C70D24 /* DoraLoginSubViewController.m */; };
 		C63EC782204292D900C70D24 /* DoraSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63EC781204292D900C70D24 /* DoraSignInViewController.m */; };
+		C65158D6204FC62B0034A2D1 /* gifplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C65158D5204FC62B0034A2D1 /* gifplayer.m */; };
 		C65D0C742008DD74007BF294 /* UIScrollView+DoraScrollUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C65D0C732008DD74007BF294 /* UIScrollView+DoraScrollUI.m */; };
 		C65D0C7A200C7889007BF294 /* UIView+DoraViewUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C65D0C79200C7889007BF294 /* UIView+DoraViewUI.m */; };
 		C65D0C7D200C7F5E007BF294 /* DoraExercisePointView.m in Sources */ = {isa = PBXBuildFile; fileRef = C65D0C7C200C7F5E007BF294 /* DoraExercisePointView.m */; };
@@ -65,27 +64,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9340AB95204C0FB500EEFBD0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9340AB90204C0FB500EEFBD0 /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
-			remoteInfo = Charts;
-		};
-		9340AB97204C0FB500EEFBD0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9340AB90204C0FB500EEFBD0 /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
-			remoteInfo = ChartsTests;
-		};
-		9340AB9B204C0FD400EEFBD0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9340AB90204C0FB500EEFBD0 /* Charts.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A58A4ED274A941CA248EA921;
-			remoteInfo = Charts;
-		};
 		9340ABA6204C113400EEFBD0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9340ABA1204C113400EEFBD0 /* Charts.xcodeproj */;
@@ -123,7 +101,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9340AB9A204C0FD400EEFBD0 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,7 +112,6 @@
 		4477141D17F1DC1C5560779E /* Pods-SweetyFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SweetyFit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SweetyFit/Pods-SweetyFit.debug.xcconfig"; sourceTree = "<group>"; };
 		93015BF520124B8E0001FDD5 /* DoraFoodTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodTableViewCell.h; sourceTree = "<group>"; };
 		93015BF620124BBB0001FDD5 /* DoraFoodTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodTableViewCell.m; sourceTree = "<group>"; };
-		9340AB90204C0FB500EEFBD0 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		9340AB9E204C102800EEFBD0 /* SweetyFit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SweetyFit-Bridging-Header.h"; sourceTree = "<group>"; };
 		9340AB9F204C102800EEFBD0 /* DoraChartsHeaderBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoraChartsHeaderBridge.swift; sourceTree = "<group>"; };
 		9340ABA1204C113400EEFBD0 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Charts.xcodeproj; sourceTree = "<group>"; };
@@ -191,6 +167,8 @@
 		C63EC77B20428F4C00C70D24 /* DoraLoginSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraLoginSubViewController.m; sourceTree = "<group>"; };
 		C63EC780204292D900C70D24 /* DoraSignInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraSignInViewController.h; sourceTree = "<group>"; };
 		C63EC781204292D900C70D24 /* DoraSignInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraSignInViewController.m; sourceTree = "<group>"; };
+		C65158D4204FC62B0034A2D1 /* gifplayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gifplayer.h; sourceTree = "<group>"; };
+		C65158D5204FC62B0034A2D1 /* gifplayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gifplayer.m; sourceTree = "<group>"; };
 		C65D0C722008DD74007BF294 /* UIScrollView+DoraScrollUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DoraScrollUI.h"; sourceTree = "<group>"; };
 		C65D0C732008DD74007BF294 /* UIScrollView+DoraScrollUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DoraScrollUI.m"; sourceTree = "<group>"; };
 		C65D0C78200C7889007BF294 /* UIView+DoraViewUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+DoraViewUI.h"; sourceTree = "<group>"; };
@@ -211,7 +189,6 @@
 		C6BA1B4C2000C3A100F163B8 /* DoraUIRecomBonus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoraUIRecomBonus.m; sourceTree = "<group>"; };
 		C6BA1B4F2000C79C00F163B8 /* UIImageView+ImageViewUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageViewUI.h"; sourceTree = "<group>"; };
 		C6BA1B502000C79C00F163B8 /* UIImageView+ImageViewUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageViewUI.m"; sourceTree = "<group>"; };
-		C6BD6C0D2046E76A00BC03EB /* GifViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GifViewController.h; sourceTree = "<group>"; };
 		C6BD6C0E2046E76A00BC03EB /* GifViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GifViewController.m; sourceTree = "<group>"; };
 		C6BE9DB61FD9173B00569EC9 /* SweetyFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SweetyFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BE9DBA1FD9173B00569EC9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -251,7 +228,6 @@
 			files = (
 				C6E478932004B7D100B2C624 /* MapKit.framework in Frameworks */,
 				C6E478912004B7A600B2C624 /* ImageIO.framework in Frameworks */,
-				9340AB99204C0FD400EEFBD0 /* Charts.framework in Frameworks */,
 				C6E4788F2004B78D00B2C624 /* AVKit.framework in Frameworks */,
 				D94D7FB4FA6E90EAB64EE1FE /* Pods_SweetyFit.framework in Frameworks */,
 			);
@@ -274,15 +250,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9340AB91204C0FB500EEFBD0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9340AB96204C0FB500EEFBD0 /* Charts.framework */,
-				9340AB98204C0FB500EEFBD0 /* ChartsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		9340ABA2204C113400EEFBD0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,7 +304,8 @@
 		C6BD6C0C2046E5C400BC03EB /* gifplayer */ = {
 			isa = PBXGroup;
 			children = (
-				C6BD6C0D2046E76A00BC03EB /* GifViewController.h */,
+				C65158D4204FC62B0034A2D1 /* gifplayer.h */,
+				C65158D5204FC62B0034A2D1 /* gifplayer.m */,
 			);
 			name = gifplayer;
 			sourceTree = "<group>";
@@ -418,7 +386,6 @@
 		C6BE9DED1FDBA51500569EC9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				9340AB90204C0FB500EEFBD0 /* Charts.xcodeproj */,
 				C6BE9E051FDBA81400569EC9 /* controller */,
 				C6BE9E041FDBA80E00569EC9 /* model */,
 				C6BE9E031FDBA80600569EC9 /* view */,
@@ -707,7 +674,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9340AB9C204C0FD400EEFBD0 /* PBXTargetDependency */,
 			);
 			name = SweetyFit;
 			productName = SweetyFit;
@@ -795,10 +761,6 @@
 					ProductGroup = 9340ABA2204C113400EEFBD0 /* Products */;
 					ProjectRef = 9340ABA1204C113400EEFBD0 /* Charts.xcodeproj */;
 				},
-				{
-					ProductGroup = 9340AB91204C0FB500EEFBD0 /* Products */;
-					ProjectRef = 9340AB90204C0FB500EEFBD0 /* Charts.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -810,20 +772,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9340AB96204C0FB500EEFBD0 /* Charts.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 9340AB95204C0FB500EEFBD0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9340AB98204C0FB500EEFBD0 /* ChartsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ChartsTests.xctest;
-			remoteRef = 9340AB97204C0FB500EEFBD0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		9340ABA7204C113400EEFBD0 /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -949,6 +897,7 @@
 				C601E21820121FAB001147DF /* DoraFoodTableSectionData.m in Sources */,
 				C62E41C52043AD5600275D0A /* DoraLoginNetWorking.m in Sources */,
 				C6BA1B4D2000C3A100F163B8 /* DoraUIRecomBonus.m in Sources */,
+				C65158D6204FC62B0034A2D1 /* gifplayer.m in Sources */,
 				C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */,
 				C6C6BD221FED3BC9001A98B2 /* DoraUIScrollViewRecomWrapper.m in Sources */,
 				C63EC782204292D900C70D24 /* DoraSignInViewController.m in Sources */,
@@ -994,11 +943,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9340AB9C204C0FD400EEFBD0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Charts;
-			targetProxy = 9340AB9B204C0FD400EEFBD0 /* PBXContainerItemProxy */;
-		};
 		C6BE9DD11FD9173B00569EC9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C6BE9DB51FD9173B00569EC9 /* SweetyFit */;

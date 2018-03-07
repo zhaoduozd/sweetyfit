@@ -1,13 +1,13 @@
 //
-//  GifViewController.h
+//  gifplayer.h
 //  SweetyFit
 //
-//  Created by Dora Zhao on 28/2/2018.
+//  Created by Dora Zhao on 7/3/2018.
 //  Copyright © 2018 Duo Zhao. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface GifViewController : UIViewController
+@interface gifplayer : UIViewController
 @property(nonatomic, strong) UIImageView *imageview;
 @end
