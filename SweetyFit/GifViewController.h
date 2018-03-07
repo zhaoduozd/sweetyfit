@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface GifViewController : UIViewController
-
+@property(nonatomic, strong) UIImageView *imageview;
 @end
