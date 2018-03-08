@@ -21,9 +21,5 @@
 #define DoraScreenWidth [UIScreen mainScreen].bounds.size.width
 #define DoraScreenHeight [UIScreen mainScreen].bounds.size.height
 
-// Networking information
-
-#define DoraTimeOutIntervel 30
-#define DoraRequestUrl @"http://dorasweetyfit.com:3000"
 
 #endif /* DoraCommonHeader_h */

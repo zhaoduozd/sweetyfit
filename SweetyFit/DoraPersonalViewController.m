@@ -46,6 +46,8 @@
     
     self.view.backgroundColor = AppDefaultBackgroundColor;
     
+    self.navigationController.navigationBarHidden = YES;
+
 
     // Do any additional setup after loading the view.
 }

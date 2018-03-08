@@ -11,6 +11,7 @@
 @interface DoraExercisePointView : UIView
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UIScrollView *exercisePointTextWrapper;
+@property (nonatomic, strong) UILabel *tips;
 @property (nonatomic, strong) UIButton *speechSwitch;
 @property (nonatomic, strong) UIView *seperateLine;
 @end

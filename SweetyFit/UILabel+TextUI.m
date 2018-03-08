@@ -16,8 +16,8 @@
     
     titlelabel.text = titlename;
     titlelabel.textColor = AppDefaultFontColor;
-    titlelabel.font = [UIFont boldSystemFontOfSize:16];
-    titlelabel.frame = CGRectMake(5, 5, DoraScreenWidth, 30);
+    titlelabel.font = [UIFont boldSystemFontOfSize:18];
+    titlelabel.frame = CGRectMake(5, 5, DoraScreenWidth, 46);
     
     return titlelabel;
 }
