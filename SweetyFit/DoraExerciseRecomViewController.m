@@ -14,7 +14,10 @@
 @property(nonatomic, strong) NSMutableArray<NSMutableArray<UIImage *> *> *gifgroups;
 @property(nonatomic, copy) NSString *urlroot;
 @property(nonatomic, strong) UIView *startplaybtnwrapper;
+@property(nonatomic, strong) UIButton *playbtn;
 @property(nonatomic, strong) NSMutableArray<UIButton *> *exerciselistbtns;
+@property(nonatomic, strong) NSMutableArray<NSTimer *> *gifgrouptimers;
+@property(nonatomic, strong) NSMutableArray<NSTimer *> *giftimers;
 @end
 
 @implementation DoraExerciseRecomViewController {
@@ -71,7 +74,6 @@
     [manager POST:urlstring parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         
         [weakself SolveData:responseObject];
-        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
@@ -182,15 +184,14 @@
     _exerciselist.contentSize = CGSizeMake(exerciseListContentWidth, exerciseListHeight);
 
     for (int i = 0; i < actionnum; ++i) {
-        UIButton *btn = [UIButton DoraCreateBlackMaskButtonWithWidth:actionlistimgwidth Height:60 borderRaduis:4 titleText:[[actions objectAtIndex:i] objectForKey:@"actionname"] imageBackground:[[_gifgroups objectAtIndex:i] objectAtIndex:0]];
         float x;
-        
         if (i == 0) {
             x = 5;
         } else {
             x = (5 + actionlistimgwidth) * i + 5;
         }
-    
+        
+        UIButton *btn = [UIButton DoraCreateBlackMaskButtonWithWidth:actionlistimgwidth Height:60 borderRaduis:4 titleText:[[actions objectAtIndex:i] objectForKey:@"actionname"] imageBackground:[[_gifgroups objectAtIndex:i] objectAtIndex:0]];
         CGRect tempframe = btn.frame;
         tempframe.origin = CGPointMake(x, 5);
         btn.frame = tempframe;
@@ -213,32 +214,29 @@
     isgifpause = 0;
     hasgif = 0;
     
-    /*   Bind Event For gifplayer   */
+    _giftimers = [[NSMutableArray alloc] init];
+    _gifgrouptimers = [[NSMutableArray alloc] init];
+    
     UITapGestureRecognizer *singletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(PausePlayGif)];
     
     _gifplayer.userInteractionEnabled = YES;
     [_gifplayer addGestureRecognizer:singletap];
-    
-    /*   Intial The First Image   */
     [_gifplayer setImage:[[_gifgroups objectAtIndex:0] objectAtIndex:0]];
     
-    
-    /*   Set Start Btn   */
     _startplaybtnwrapper = [[UIView alloc] initWithFrame:_gifplayer.frame];
     
-    UIButton *startplaybtn = [[UIButton alloc] initWithFrame:CGRectMake(DoraScreenWidth/2-24, DoraScreenWidth*0.618/2-24, 48, 48)];
+    _playbtn = [[UIButton alloc] initWithFrame:CGRectMake(DoraScreenWidth/2-24, DoraScreenWidth*0.618/2-24, 48, 48)];
     
-    startplaybtn.tag = playindex;
-    [startplaybtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    [startplaybtn addTarget:self action:@selector(PlayGif:) forControlEvents:UIControlEventTouchUpInside];
+    _playbtn.tag = playindex;
+    [_playbtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [_playbtn addTarget:self action:@selector(PlayGif:) forControlEvents:UIControlEventTouchUpInside];
     [_startplaybtnwrapper setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     
-    [_startplaybtnwrapper addSubview:startplaybtn];
+    [_startplaybtnwrapper addSubview:_playbtn];
     [self.view addSubview:_startplaybtnwrapper];
 }
 
 - (void) PlayGif:(id) sender {
-    
     if (hasgif == 0) {
         [self StartPlayGif:sender];
         hasgif = 1;
@@ -251,27 +249,85 @@
     UIButton *btn = (UIButton *)sender;
     int gifid = (int)btn.tag;
     
-    playindex = gifid;
-    [_gifplayer setImage:[[_gifgroups objectAtIndex:gifid] objectAtIndex:0]];
+    _playbtn.tag = gifid;
     
-    NSNumber *durationnum = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actionduration"];
-    NSTimeInterval duration = [durationnum intValue];
+    for (NSUInteger i = 0; i < _gifgrouptimers.count; ++i) {
+        [[_gifgrouptimers objectAtIndex:i] invalidate];
+    }
     
-    NSNumber *repeatnum = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actionrepeat"];
+    for (NSUInteger i = 0; i < _giftimers.count; ++i) {
+        [[_giftimers objectAtIndex:i] invalidate];
+    }
     
-    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actiontips"];
+    [_giftimers removeAllObjects];
+    [_gifgrouptimers removeAllObjects];
     
-    _gifplayer.animationImages = [_gifgroups objectAtIndex:gifid];
-    _gifplayer.animationDuration = duration;
-    _gifplayer.animationRepeatCount = [repeatnum intValue];
+    int exerciselen = [[_exercisedata objectForKey:@"len"] intValue];
+    NSArray *actions = [[NSArray alloc] initWithArray:[_exercisedata objectForKey:@"actions"]];
     
-    _pointtips.tips.text = tips;
-    [_gifplayer startAnimating];
-    
-    NSLog(@"%d", gifid);
+    __weak DoraExerciseRecomViewController *weakself = self;
     
     _startplaybtnwrapper.hidden = YES;
+    
+    int timeinterval = 0;
+    int repeatcount = [[[actions objectAtIndex:gifid] objectForKey:@"actionrepeat"] intValue];
+    int duration = [[[actions objectAtIndex:gifid] objectForKey:@"actionduration"] intValue];
+    
+    for (int i = gifid; i < exerciselen; ++i) {
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:timeinterval
+                                                         repeats:NO
+                                                           block: ^void (NSTimer *timer){
+                                                               [weakself PlayGifWithStartIndex:i RepeatCount:repeatcount Duration:duration];
+                                                           }];
+        [_gifgrouptimers addObject:timer];
+        //[timer fire];
+        
+        timeinterval += (repeatcount * duration);
+        
+        if (i + 1 < exerciselen) {
+            repeatcount = [[[actions objectAtIndex:i+1] objectForKey:@"actionrepeat"] intValue];
+            duration = [[[actions objectAtIndex:i+1] objectForKey:@"actionduration"] intValue];
+        }
+    }
 }
+
+- (void) PlayGifWithStartIndex:(int) gifid RepeatCount:(int) repeatcount Duration:(int) duration {
+    NSLog(@"%d", gifid);
+
+    [_gifplayer setImage:[[_gifgroups objectAtIndex:gifid] objectAtIndex:0]];
+    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actiontips"];
+    _pointtips.tips.text = tips;
+    _gifplayer.animationImages = [_gifgroups objectAtIndex:gifid];
+    _gifplayer.animationDuration = duration;
+    _gifplayer.animationRepeatCount = 2;
+    
+    for (int i = 0; i < repeatcount; ++i){
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:i*duration+0.1 repeats:NO block:^void (NSTimer *timer){
+            [_gifplayer startAnimating];
+        }];
+        
+        //[timer fire];
+        [_giftimers addObject:timer];
+    }
+    
+    int exerciselen = [[_exercisedata objectForKey:@"len"] intValue];
+    
+    if (gifid == exerciselen - 1) {
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:repeatcount*duration repeats:NO block:^(NSTimer *timer){
+            playindex = 0;
+            hasgif = 0;
+            _playbtn.tag = 0;
+            
+            [_gifplayer setImage:[[_gifgroups objectAtIndex:0] objectAtIndex:0]];
+            _startplaybtnwrapper.hidden = NO;
+            _pointtips.tips.text = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:0] objectForKey:@"actiontips"];
+        }];
+        
+        [_giftimers addObject:timer];
+    }
+}
+
+
 
 - (void) PausePlayGif {
     CALayer *layer = _gifplayer.layer;

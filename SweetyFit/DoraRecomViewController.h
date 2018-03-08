@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DoraUIScrollViewRecomWrapper.h"
 #import "DoraExerciseRecomViewController.h"
+#import "DoraFoodRecomViewController.h"
 #import "DoraUIRecomExerciseData.h"
 #import "DoraUIRecomFood.h"
 #import "DoraUIRecomBonus.h"
@@ -17,7 +18,7 @@
 @property(nonatomic, strong) DoraUIScrollViewRecomWrapper *recomRootView;
 @property(nonatomic, strong) DoraExerciseRecomViewController *recomExercise;
 @property(nonatomic, strong) DoraUIRecomExerciseData *recomExerciseDataView;
-@property(nonatomic, strong) DoraUIRecomFood *recomFoodView;
+@property(nonatomic, strong) DoraFoodRecomViewController *recomFood;
 @property(nonatomic, strong) DoraUIRecomBonus *recomBonusView;
 
 

@@ -57,6 +57,7 @@
 		C6E4788F2004B78D00B2C624 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E4788E2004B78D00B2C624 /* AVKit.framework */; };
 		C6E478912004B7A600B2C624 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E478902004B7A600B2C624 /* ImageIO.framework */; };
 		C6E478932004B7D100B2C624 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E478922004B7D100B2C624 /* MapKit.framework */; };
+		C6E63F8220517B64004FBA34 /* DoraFoodRecomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E63F8120517B64004FBA34 /* DoraFoodRecomViewController.m */; };
 		C6FB2FBF1FFF688D000E194A /* UILabel+TextUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FB2FBE1FFF688D000E194A /* UILabel+TextUI.m */; };
 		D94D7FB4FA6E90EAB64EE1FE /* Pods_SweetyFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C20F9D4FDF9EC8DB2512214 /* Pods_SweetyFit.framework */; };
 /* End PBXBuildFile section */
@@ -211,6 +212,8 @@
 		C6E4788E2004B78D00B2C624 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		C6E478902004B7A600B2C624 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		C6E478922004B7D100B2C624 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C6E63F8020517B64004FBA34 /* DoraFoodRecomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodRecomViewController.h; sourceTree = "<group>"; };
+		C6E63F8120517B64004FBA34 /* DoraFoodRecomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodRecomViewController.m; sourceTree = "<group>"; };
 		C6FB2FBD1FFF688D000E194A /* UILabel+TextUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+TextUI.h"; sourceTree = "<group>"; };
 		C6FB2FBE1FFF688D000E194A /* UILabel+TextUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+TextUI.m"; sourceTree = "<group>"; };
 		DE1E02CD8D2EDC507BDF22A4 /* Pods-SweetyFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SweetyFit.release.xcconfig"; path = "Pods/Target Support Files/Pods-SweetyFit/Pods-SweetyFit.release.xcconfig"; sourceTree = "<group>"; };
@@ -558,6 +561,8 @@
 				C6BE9E0B1FDF8BAA00569EC9 /* DoraRecomViewController.m */,
 				C6B67FD4204FCEB50090CD1D /* DoraExerciseRecomViewController.h */,
 				C6B67FD5204FCEB50090CD1D /* DoraExerciseRecomViewController.m */,
+				C6E63F8020517B64004FBA34 /* DoraFoodRecomViewController.h */,
+				C6E63F8120517B64004FBA34 /* DoraFoodRecomViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -883,6 +888,7 @@
 				C6C6BD221FED3BC9001A98B2 /* DoraUIScrollViewRecomWrapper.m in Sources */,
 				C63EC782204292D900C70D24 /* DoraSignInViewController.m in Sources */,
 				9350351D20446570001331D0 /* DoraPersonalSuggestion.m in Sources */,
+				C6E63F8220517B64004FBA34 /* DoraFoodRecomViewController.m in Sources */,
 				C6BA1B4A2000C37A00F163B8 /* DoraUIRecomFood.m in Sources */,
 				C62E41BC204398CB00275D0A /* UITextField+DoraLoginInput.m in Sources */,
 				C63EC77920428A2900C70D24 /* UIButton+DoraLoginButtonView.m in Sources */,
