@@ -18,6 +18,8 @@
 @property(nonatomic, strong) NSMutableArray<UIButton *> *exerciselistbtns;
 @property(nonatomic, strong) NSMutableArray<NSTimer *> *gifgrouptimers;
 @property(nonatomic, strong) NSMutableArray<NSTimer *> *giftimers;
+@property(nonatomic, strong) NSUserDefaults *defaults;
+@property(nonatomic, strong) NSString *exerciserecordfilepath;
 @end
 
 @implementation DoraExerciseRecomViewController {
@@ -28,7 +30,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString *username = [_defaults objectForKey:@"uid"];
+    NSString *subfilepath = [NSString stringWithFormat:@"%@exerciserecord.plist", username];
+
+    
     _urlroot = @"http://127.0.0.1:3000/";
+    _defaults = [NSUserDefaults standardUserDefaults];
+    
+    _exerciserecordfilepath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)lastObject]stringByAppendingPathComponent:subfilepath];
     
     [self CreateAndAddElements];
     [self ObtainData];
@@ -292,7 +302,7 @@
 }
 
 - (void) PlayGifWithStartIndex:(int) gifid RepeatCount:(int) repeatcount Duration:(int) duration {
-    NSLog(@"%d", gifid);
+    // NSLog(@"%d", gifid);
 
     [_gifplayer setImage:[[_gifgroups objectAtIndex:gifid] objectAtIndex:0]];
     NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actiontips"];
@@ -304,9 +314,44 @@
     for (int i = 0; i < repeatcount; ++i){
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:i*duration+0.1 repeats:NO block:^void (NSTimer *timer){
             [_gifplayer startAnimating];
+            
+            /*   Modify Exercise Record   */
+            NSDictionary *exerciserecord = [[NSDictionary alloc] initWithContentsOfFile:_exerciserecordfilepath];
+            NSString *timestamp = [exerciserecord objectForKey:@"timestamp"];
+
+            NSDate *date = [NSDate date];
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            unsigned int unitFlags = NSCalendarUnitYear|NSCalendarUnitMonth|
+            NSCalendarUnitDay;
+            NSDateComponents *d = [calendar components:unitFlags fromDate:date];
+            NSString *currenttimestamp = [NSString stringWithFormat:@"%ld*%ld*%ld",[d year], [d month], [d day]];
+            double actionconsume = [[[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actionconsume"] doubleValue];
+            
+            if ([timestamp isEqualToString:currenttimestamp]) {
+                double todayconsume = [[exerciserecord objectForKey:@"exerciseconsume"] doubleValue];
+                
+                todayconsume += actionconsume;
+                [exerciserecord setValue:[NSNumber numberWithDouble:todayconsume] forKey:@"exerciseconsume"];
+                
+            } else {
+                double yesconsume = [[exerciserecord objectForKey:@"exerciseconsume"] doubleValue];
+                __weak NSDictionary *weakexerciserecord = exerciserecord;
+                
+                AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+                NSString *suburl = [NSString stringWithFormat:@"feedback/exerciserecord?uid=%@&consume=%f", [_defaults objectForKey:@"uid"], yesconsume];
+                
+                [manager GET:[_urlroot stringByAppendingString:suburl] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+                    
+                    [weakexerciserecord setValue:currenttimestamp forKey:@"timestamp"];
+                    [weakexerciserecord setValue:[NSNumber numberWithDouble:actionconsume] forKey:@"exerciseconsume"];
+                    
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    NSLog(@"%@", error);
+                }];
+            }
+            
         }];
         
-        //[timer fire];
         [_giftimers addObject:timer];
     }
     
@@ -326,8 +371,6 @@
         [_giftimers addObject:timer];
     }
 }
-
-
 
 - (void) PausePlayGif {
     CALayer *layer = _gifplayer.layer;
@@ -357,12 +400,3 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-

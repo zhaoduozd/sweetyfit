@@ -9,6 +9,7 @@
 #import "DoraRecomViewController.h"
 #import "DoraColorDefineHeader.h"
 #import <AFNetworking/AFNetworking.h>
+#import <HealthKit/HealthKit.h>
 
 @interface DoraRecomViewController ()
 @property (nonatomic, strong) UILabel *texttest;
@@ -25,17 +26,14 @@
     
     _recomRootView = [[DoraUIScrollViewRecomWrapper alloc] init];
     _recomExercise = [[DoraExerciseRecomViewController alloc] init];
-    _recomExerciseDataView = [[DoraUIRecomExerciseData alloc] init];
+    _recomExerciseData = [[DoraExerciseDataViewController alloc] init];
     _recomFood = [[DoraFoodRecomViewController alloc] init];
     _recomBonusView = [[DoraUIRecomBonus alloc] init];
     
     [self setViewsFrame];
-    [self setExerciseDataView];
-    //[self setFoodView];
-    [self setBonusView];
     
     [_recomRootView addSubview:_recomExercise.view];
-    [_recomRootView addSubview:_recomExerciseDataView];
+    [_recomRootView addSubview:_recomExerciseData.view];
     [_recomRootView addSubview:_recomFood.view];
     //[_recomRootView addSubview:_recomBonusView];
         
@@ -46,8 +44,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma Dora Function Set Views
 
 -(void) setViewsFrame {
     float titleHeight = 40;
@@ -66,18 +62,13 @@
     float bonusH = 300;
 
     _recomExercise.view.frame = CGRectMake(0, exerciseY, DoraScreenWidth, exerciseH);
-    _recomExerciseDataView.frame = CGRectMake(0, exerciseDataY, DoraScreenWidth, exerciseDataH);
+    _recomExerciseData.view.frame = CGRectMake(0, exerciseDataY, DoraScreenWidth, exerciseDataH);
     _recomFood.view.frame = CGRectMake(0, foodY, DoraScreenWidth, foodH);
     _recomBonusView.frame = CGRectMake(0, bonusY, DoraScreenWidth, bonusH);
     
     [_recomRootView setScrollBasicUI:foodY+foodH+seperateHeight*2];
 }
 
--(void) setExerciseDataView {
-    _recomExerciseDataView.totalCalorieData.text = @"1694";
-    _recomExerciseDataView.walkingRunningCalorieData.text = @"1000Kcal";
-    _recomExerciseDataView.sportCalorieData.text = @"694Kcal";
-}
 
 
 -(void) setBonusView {
