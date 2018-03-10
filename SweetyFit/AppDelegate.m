@@ -22,12 +22,14 @@
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];\
-    if ([defaults objectForKey:@"uid"] != nil) {
+//    _window.rootViewController = [[gifplayer alloc] init];
+//    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];\
+//    if ([defaults objectForKey:@"uid"] != nil) {
         _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
-    } else {
-        _window.rootViewController = [[DoraLoginViewController alloc] init];
-    }
+//    } else {
+//        _window.rootViewController = [[DoraLoginViewController alloc] init];
+//    }
     return YES;
 }
 
