@@ -7,6 +7,7 @@
 //
 
 #import "DoraExerciseRecomViewController.h"
+#import "DoraActionSettingView.h"
 
 @interface DoraExerciseRecomViewController ()
 @property(nonatomic, strong) NSDictionary *exercisedata;
@@ -20,6 +21,9 @@
 @property(nonatomic, strong) NSMutableArray<NSTimer *> *giftimers;
 @property(nonatomic, strong) NSUserDefaults *defaults;
 @property(nonatomic, strong) NSString *exerciserecordfilepath;
+@property(nonatomic, strong) NSMutableDictionary *userdemands;
+@property(nonatomic, strong) UIButton *actionsettingbtn;
+@property(nonatomic, strong) DoraActionSettingView *actionsettingview;
 @end
 
 @implementation DoraExerciseRecomViewController {
@@ -40,9 +44,11 @@
     
     _exerciserecordfilepath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)lastObject]stringByAppendingPathComponent:subfilepath];
     
+    _userdemands = [[NSMutableDictionary alloc] init];
+    [_userdemands setObject:@"YES" forKey:@"default"];
+    
     [self CreateAndAddElements];
     [self ObtainData];
-    
 }
 
 - (void) CreateAndAddElements {
@@ -57,6 +63,15 @@
     self.exerciselist.frame = CGRectMake(0, 46+DoraScreenWidth*0.618, DoraScreenWidth, 70);
     self.pointtips = [[DoraExercisePointView alloc] init];
     self.pointtips.frame = CGRectMake(0, 116+DoraScreenWidth*0.618, DoraScreenWidth, 186);
+    self.actionsettingbtn = [[UIButton alloc] init];
+    self.actionsettingbtn.frame = CGRectMake(DoraScreenWidth - 35, 15, 30, 30);
+    self.actionsettingbtn.titleLabel.text = @"运动设置";
+    [self.actionsettingbtn setBackgroundImage:[UIImage imageNamed:@"actionsetting.png"] forState:UIControlStateNormal];
+    
+    self.actionsettingview = [[DoraActionSettingView alloc] init];
+    [self.actionsettingbtn addTarget:self action:@selector(ShowSettingView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.actionsettingview.submitbtn addTarget:self action:@selector(ExerciseSetting) forControlEvents:UIControlEventTouchUpInside];
     
     self.gifgroups = [[NSMutableArray alloc] init];
     
@@ -66,13 +81,39 @@
     [self.view addSubview:_gifplayer];
     [self.view addSubview:_exerciselist];
     [self.view addSubview:_pointtips];
+    [self.view addSubview:_actionsettingbtn];
+    [self.view addSubview:_actionsettingview];
+}
 
+- (void) ShowSettingView {
+    self.actionsettingview.hidden = NO;
+}
+
+- (void) ExerciseSetting {
+    self.actionsettingview.hidden = YES;
+    [self.actionsettingview clearall];
+    if ([[self.actionsettingview.demanddata objectForKey:@"place"] isEqualToString:@""]
+        && [[self.actionsettingview.demanddata objectForKey:@"time"] isEqualToString:@""]
+        &&[[self.actionsettingview.demanddata objectForKey:@"region"] isEqualToString:@""]
+        ) {
+        return;
+    } else {
+        NSString *place = [self.actionsettingview.demanddata objectForKey:@"place"];
+        NSString *time = [self.actionsettingview.demanddata objectForKey:@"time"];
+        NSString *region = [self.actionsettingview.demanddata objectForKey:@"region"];
+        [_userdemands setObject:@"NO" forKey:@"default"];
+        [_userdemands setObject:place forKey:@"place"];
+        [_userdemands setObject:time forKey:@"time"];
+        [_userdemands setObject:region forKey:@"region"];
+        
+        [self ObtainData];
+    }
+    
 }
 
 - (void) ObtainData {
     
     __weak DoraExerciseRecomViewController *weakself = self;
-    
     
     /*   Assign URL   */
     NSString *urlstring = [_urlroot stringByAppendingString:@"recom/exercise"];
@@ -81,7 +122,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     /*   Create Connection   */
-    [manager POST:urlstring parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [manager POST:urlstring parameters:_userdemands progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         
         [weakself SolveData:responseObject];
         

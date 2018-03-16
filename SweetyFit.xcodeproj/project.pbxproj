@@ -57,6 +57,7 @@
 		C6E478912004B7A600B2C624 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E478902004B7A600B2C624 /* ImageIO.framework */; };
 		C6E478932004B7D100B2C624 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E478922004B7D100B2C624 /* MapKit.framework */; };
 		C6E63F8220517B64004FBA34 /* DoraFoodRecomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E63F8120517B64004FBA34 /* DoraFoodRecomViewController.m */; };
+		C6F2171A205B735B00BB0F60 /* DoraActionSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F21719205B735B00BB0F60 /* DoraActionSettingView.m */; };
 		C6F21DE620523734001A521B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F21DE520523734001A521B /* HealthKit.framework */; };
 		C6FB2FBF1FFF688D000E194A /* UILabel+TextUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FB2FBE1FFF688D000E194A /* UILabel+TextUI.m */; };
 		D94D7FB4FA6E90EAB64EE1FE /* Pods_SweetyFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C20F9D4FDF9EC8DB2512214 /* Pods_SweetyFit.framework */; };
@@ -212,6 +213,8 @@
 		C6E478922004B7D100B2C624 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C6E63F8020517B64004FBA34 /* DoraFoodRecomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraFoodRecomViewController.h; sourceTree = "<group>"; };
 		C6E63F8120517B64004FBA34 /* DoraFoodRecomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraFoodRecomViewController.m; sourceTree = "<group>"; };
+		C6F21718205B735B00BB0F60 /* DoraActionSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraActionSettingView.h; sourceTree = "<group>"; };
+		C6F21719205B735B00BB0F60 /* DoraActionSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraActionSettingView.m; sourceTree = "<group>"; };
 		C6F21DDC20522BE3001A521B /* SweetyFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SweetyFit.entitlements; sourceTree = "<group>"; };
 		C6F21DE520523734001A521B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		C6FB2FBD1FFF688D000E194A /* UILabel+TextUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+TextUI.h"; sourceTree = "<group>"; };
@@ -548,6 +551,8 @@
 				C6C6BD211FED3BC9001A98B2 /* DoraUIScrollViewRecomWrapper.m */,
 				C6BA1B4B2000C3A100F163B8 /* DoraUIRecomBonus.h */,
 				C6BA1B4C2000C3A100F163B8 /* DoraUIRecomBonus.m */,
+				C6F21718205B735B00BB0F60 /* DoraActionSettingView.h */,
+				C6F21719205B735B00BB0F60 /* DoraActionSettingView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				C65D0C80200CD7D0007BF294 /* UIButton+DoraButtonUI.m in Sources */,
 				C6BE9E151FDFABBA00569EC9 /* DoraPersonalViewController.m in Sources */,
 				C6265B932010E65E006F5D55 /* DoraExerciseTableCellData.m in Sources */,
+				C6F2171A205B735B00BB0F60 /* DoraActionSettingView.m in Sources */,
 				C601E21B20121FC1001147DF /* DoraFoodTableCellData.m in Sources */,
 				C65D0C7D200C7F5E007BF294 /* DoraExercisePointView.m in Sources */,
 				93015BF720124BBB0001FDD5 /* DoraFoodTableViewCell.m in Sources */,

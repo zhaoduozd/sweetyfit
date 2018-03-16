@@ -15,6 +15,6 @@
 #import "NSString+MD5.h"
 #import <AFNetworking/AFNetworking.h>
 
-#define serverurl @"http://120.77.42.160:3000"
+#define serverurl @"http://127.0.0.1:3000"
 
 #endif /* DoraLoginHeader_h */
