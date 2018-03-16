@@ -10,6 +10,7 @@
 #import "DoraPersonalHistory.h"
 #import "DoraColorDefineHeader.h"
 #define margin 5
+#define titleHeight 30
 @interface DoraPersonalHistory ()<ChartViewDelegate>
 @property(nonatomic, strong) UIButton *button_day;
 @property(nonatomic, strong) UIButton *button_week;
@@ -22,19 +23,26 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     self.status = 0;
-    self.backgroundColor = AppDefaultBarTintColor;
+    
+    self.backgroundColor = AppDefaultBackgroundColor;
+    self.title = [[UILabel alloc]initWithFrame:CGRectMake(margin, margin, frame.size.width, titleHeight)];
+    //[self.title setTextAlignment:NSTextAlignmentCenter];
+    self.title.text = @"运动历史";
+    [self.title setFont:[UIFont boldSystemFontOfSize:18]];
+    [self addSubview:self.title];
+    
     CGFloat btn_width = (self.frame.size.width-margin*2)/3;
-    self.button_day = [[UIButton alloc]initWithFrame:CGRectMake(margin, margin,btn_width,30)];
+    self.button_day = [[UIButton alloc]initWithFrame:CGRectMake(margin, margin+titleHeight,btn_width,30)];
     [self.button_day setTitle:@"日" forState:UIControlStateNormal];
     [self.button_day addTarget:self action:@selector(downButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.button_day setBackgroundColor:[UIColor grayColor]];
     
-    self.button_week = [[UIButton alloc]initWithFrame:CGRectMake(margin+btn_width, margin,btn_width,30)];
+    self.button_week = [[UIButton alloc]initWithFrame:CGRectMake(margin+btn_width, margin+titleHeight,btn_width,30)];
     [self.button_week setTitle:@"周" forState:UIControlStateNormal];
     [self.button_week addTarget:self action:@selector(downButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.button_week setBackgroundColor:[UIColor darkGrayColor]];
     
-    self.button_month = [[UIButton alloc]initWithFrame:CGRectMake(margin+btn_width*2, margin,btn_width,30)];
+    self.button_month = [[UIButton alloc]initWithFrame:CGRectMake(margin+btn_width*2, margin+titleHeight,btn_width,30)];
     [self.button_month setTitle:@"月" forState:UIControlStateNormal];
     [self.button_month addTarget:self action:@selector(downButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.button_month setBackgroundColor:[UIColor darkGrayColor]];
@@ -43,7 +51,7 @@
     [self addSubview:self.button_week];
     [self addSubview:self.button_month];
     
-    self.barChartView=[[BarChartView alloc] initWithFrame:CGRectMake(margin, margin+30+margin,self.frame.size.width-margin*2,self.frame.size.height-3*margin-30)];
+    self.barChartView=[[BarChartView alloc] initWithFrame:CGRectMake(margin, margin+30+margin+titleHeight,self.frame.size.width-margin*2,self.frame.size.height-3*margin-30-titleHeight)];
     [self setUpBarChart];
     [self addSubview:self.barChartView];
     [self setDataCount:365 range:100];
@@ -79,7 +87,7 @@
     xAxis.labelPosition = XAxisLabelPositionBottom;
     xAxis.labelFont = [UIFont systemFontOfSize:10.f];
     xAxis.drawGridLinesEnabled = NO;
-    xAxis.labelTextColor = UIColor.whiteColor;
+    xAxis.labelTextColor = UIColor.blackColor;
     xAxis.granularity = 1.0; // only intervals of 1 day
     xAxis.labelCount = 7;
     xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:self.barChartView];
@@ -87,13 +95,13 @@
     NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
     leftAxisFormatter.minimumFractionDigits = 0;
     leftAxisFormatter.maximumFractionDigits = 1;
-    leftAxisFormatter.negativeSuffix = @" H";
-    leftAxisFormatter.positiveSuffix = @" H";
+    leftAxisFormatter.negativeSuffix = @"Cal";
+    leftAxisFormatter.positiveSuffix = @"Cal";
     
     ChartYAxis *leftAxis = self.barChartView.leftAxis;
     leftAxis.labelFont = [UIFont systemFontOfSize:10.f];
     leftAxis.labelCount = 8;
-    leftAxis.labelTextColor = UIColor.whiteColor;
+    leftAxis.labelTextColor = UIColor.blackColor;
     leftAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:leftAxisFormatter];
     leftAxis.labelPosition = YAxisLabelPositionOutsideChart;
     leftAxis.spaceTop = 0.15;
@@ -129,13 +137,23 @@
     {
         set1 = (BarChartDataSet *)self.barChartView.data.dataSets[0];
         set1.values = yVals;
+        switch(self.status){
+            case 0: [set1 setColors:@[UIColor.greenColor]];break;
+            case 1: [set1 setColors:@[UIColor.brownColor]];break;
+            case 2: [set1 setColors:@[UIColor.cyanColor]];break;
+        }
         [self.barChartView.data notifyDataChanged];
         [self.barChartView notifyDataSetChanged];
     }
     else
     {
         set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
-        [set1 setColors:ChartColorTemplates.material];
+        switch(self.status){
+            case 0: [set1 setColors:@[UIColor.greenColor]];break;
+            case 1: [set1 setColors:@[UIColor.brownColor]];break;
+            case 2: [set1 setColors:@[UIColor.cyanColor]];break;
+        }
+       
         set1.drawIconsEnabled = NO;
         
         NSMutableArray *dataSets = [[NSMutableArray alloc] init];
@@ -143,7 +161,7 @@
         
         BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
         [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.whiteColor];
+        [data setValueTextColor:UIColor.blackColor];
         
         data.barWidth = 0.9f;
         

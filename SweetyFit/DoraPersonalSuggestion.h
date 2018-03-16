@@ -15,6 +15,7 @@
 @interface DoraPersonalSuggestion : UIView<ChartViewDelegate>
 
 @property(strong,nonatomic) NSArray *parties;
+@property(strong,nonatomic) UILabel *title;
 @property(strong,nonatomic) UITextView *suggestView;
 @property(strong,nonatomic) PieChartView *pieChartView;
 @property(strong,nonatomic) PieChartData *pieChartData;

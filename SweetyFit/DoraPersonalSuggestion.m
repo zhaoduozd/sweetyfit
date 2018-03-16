@@ -10,7 +10,7 @@
 #import "DoraPersonalSuggestion.h"
 #import "DoraColorDefineHeader.h"
 #define margin 5
-
+#define titleHeight 30
 @implementation DoraPersonalSuggestion
 
 -(id)init{
@@ -19,7 +19,11 @@
 
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    self.backgroundColor = AppDefaultBarTintColor;
+    self.backgroundColor = AppDefaultBackgroundColor;
+    self.title = [[UILabel alloc]initWithFrame:CGRectMake(margin, margin, frame.size.width, titleHeight)];
+    //[self.title setTextAlignment:NSTextAlignmentCenter];
+    [self.title setFont:[UIFont boldSystemFontOfSize:18]];
+    [self addSubview:self.title];
     
     self.parties = @[
                 @"Party A", @"Party B", @"Party C", @"Party D", @"Party E", @"Party F",
@@ -34,16 +38,15 @@
     [self setupPieChartView:self.pieChartView];
 
     [self addSubview:self.pieChartView];
-    self.pieChartView.frame =CGRectMake(margin,margin,self.frame.size.width-2*margin,self.frame.size.width-2*margin);
+    self.pieChartView.frame =CGRectMake(margin,margin+titleHeight,self.frame.size.width-2*margin,self.frame.size.width-2*margin);
     self.pieChartView.entryLabelFont = [UIFont systemFontOfSize:12.f];
 
     [self updateChartData];
      [self.pieChartView animateWithXAxisDuration:1.4 easingOption:ChartEasingOptionEaseOutBack];
     
     self.suggestView = [[UITextView alloc] init];
-    self.suggestView.frame = CGRectMake(margin, self.frame.size.width, self.frame.size.width-2*margin,self.frame.size.height-self.frame.size.width-margin);
-    self.suggestView.backgroundColor =AppDefaultBarTintColor;
-    self.suggestView.textColor = textColorWhite;
+    self.suggestView.frame = CGRectMake(margin, titleHeight+self.frame.size.width, self.frame.size.width-2*margin,self.frame.size.height-self.frame.size.width-margin-titleHeight);
+    self.suggestView.backgroundColor =AppDefaultBackgroundColor;
     self.suggestView.text = @"1.\n2\n3\n4\n5\n";
     
     [self addSubview: self.suggestView];
@@ -78,10 +81,10 @@
     // add a lot of colors
     
     NSMutableArray *colors = [[NSMutableArray alloc] init];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:51/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:51/255.f green:0/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:51/255.f blue:0/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:255/255.f green:255/255.f blue:0/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:255/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:0/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:0/255.f alpha:1.f]];
     
     dataSet.colors = colors;
     
@@ -94,7 +97,7 @@
     pFormatter.percentSymbol = @" %";
     [data setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:pFormatter]];
     [data setValueFont:[UIFont systemFontOfSize:12.0f]];
-    [data setValueTextColor:UIColor.whiteColor];
+    [data setValueTextColor:UIColor.blackColor];
     
     self.pieChartView.data = data;
     [self.pieChartView highlightValues:nil];
@@ -119,8 +122,8 @@
     l.enabled = NO;
     
     chartView.drawHoleEnabled = YES;
-    chartView.holeColor=AppDefaultBarTintColor;
-    chartView.backgroundColor=AppDefaultBarTintColor;
+    chartView.holeColor=AppDefaultBackgroundColor;
+    chartView.backgroundColor=AppDefaultBackgroundColor;
     chartView.rotationAngle = 0.0;
     chartView.rotationEnabled = YES;
     chartView.highlightPerTapEnabled = YES;

@@ -15,7 +15,7 @@
 #import "DayAxisValueFormatter.h"
 @interface DoraPersonalHistory : UIView
 @property (nonatomic, strong) BarChartView *barChartView;
-
+@property (nonatomic,strong) UILabel *title;
 @property(nonatomic,strong) UIButton *buttonMonth;
 @property(nonatomic,strong) UIButton *buttonWeek;
 @property(nonatomic,strong) UIButton *buttonDay;

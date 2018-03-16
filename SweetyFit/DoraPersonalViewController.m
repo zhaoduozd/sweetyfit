@@ -11,9 +11,10 @@
 
 #define signOutHeight 50
 #define ProfileHeight 100
-#define SuggestionHeight 280
-#define HistoryHeight 300
+#define SuggestionHeight 310
+#define HistoryHeight 330
 #define Margin 5
+#define segmentColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]
 
 @interface DoraPersonalViewController ()<UIScrollViewDelegate>
 @property(nonatomic,strong) UIScrollView *containerView;
@@ -28,7 +29,6 @@
     self.containerView.delegate = self;
     self.containerView.canCancelContentTouches=NO;
     self.containerView.delaysContentTouches=YES;
-    
     [self.view addSubview:self.containerView];
     
     self.personalProfile = [[DoraPersonalProfile alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, ProfileHeight)];
@@ -36,11 +36,20 @@
     [self.containerView addSubview:self.personalProfile];
     
     self.personalSuggestionExercise = [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,ProfileHeight+Margin,DoraScreenWidth/2-1,SuggestionHeight)];
-    
+    self.personalSuggestionExercise.title.text = @"运动建议";
     [self.containerView addSubview:self.personalSuggestionExercise];
     
+    UIView *segmentLine = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth/2,ProfileHeight+Margin+SuggestionHeight*0.05,1,SuggestionHeight*0.9)];
+    segmentLine.backgroundColor = segmentColor;
+    [self.containerView addSubview:segmentLine];
+    
     self.personalSuggestionFood= [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(DoraScreenWidth/2+1,ProfileHeight+Margin,DoraScreenWidth/2-1,SuggestionHeight)];
+    self.personalSuggestionFood.title.text=@"饮食建议";
     [self.containerView addSubview:self.personalSuggestionFood];
+    
+    UIView *segmentLine2 = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+1.5*Margin+SuggestionHeight,DoraScreenWidth*0.9,1)];
+    segmentLine2.backgroundColor = segmentColor;
+    [self.containerView addSubview:segmentLine2];
     
     self.personalHistory =[[DoraPersonalHistory alloc]initWithFrame:CGRectMake(0,ProfileHeight+2*Margin+SuggestionHeight,DoraScreenWidth,SuggestionHeight)];
     [self.containerView addSubview:self.personalHistory];
@@ -49,7 +58,7 @@
     
     [self.personalSignOut addTarget:self action:@selector(signOut:) forControlEvents:UIControlEventTouchUpInside];
     [self.personalSignOut setTitle:@"退出登录" forState:UIControlStateNormal];
-    [self.personalSignOut setBackgroundColor:UIColor.redColor];
+    [self.personalSignOut setBackgroundColor:AppDefaultColor];
     [self.containerView addSubview:self.personalSignOut];
     
     self.view.backgroundColor = AppDefaultBackgroundColor;
