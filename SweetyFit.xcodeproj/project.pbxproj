@@ -13,6 +13,7 @@
 		9350351B20446570001331D0 /* DoraPersonalHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351620446570001331D0 /* DoraPersonalHistory.m */; };
 		9350351C20446570001331D0 /* DoraPersonalProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351820446570001331D0 /* DoraPersonalProfile.m */; };
 		9350351D20446570001331D0 /* DoraPersonalSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351920446570001331D0 /* DoraPersonalSuggestion.m */; };
+		9392500B205D6E3800A51575 /* DoraPersonalDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9392500A205D6E3800A51575 /* DoraPersonalDataModel.m */; };
 		93F10F23201309470012E14B /* DoraPersonalTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F10F22201309470012E14B /* DoraPersonalTableCell.m */; };
 		C601E2122011C50A001147DF /* DoraExericiseTableViewCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E2112011C50A001147DF /* DoraExericiseTableViewCellButton.m */; };
 		C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E21420121C24001147DF /* DoraFoodViewController.m */; };
@@ -123,6 +124,8 @@
 		9350351820446570001331D0 /* DoraPersonalProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalProfile.m; sourceTree = "<group>"; };
 		9350351920446570001331D0 /* DoraPersonalSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalSuggestion.m; sourceTree = "<group>"; };
 		9350351A20446570001331D0 /* DoraPersonalSuggestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoraPersonalSuggestion.h; sourceTree = "<group>"; };
+		93925009205D6E1A00A51575 /* DoraPersonalDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraPersonalDataModel.h; sourceTree = "<group>"; };
+		9392500A205D6E3800A51575 /* DoraPersonalDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalDataModel.m; sourceTree = "<group>"; };
 		93F10F1D2013039C0012E14B /* DoraCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraCommonHeader.h; sourceTree = "<group>"; };
 		93F10F22201309470012E14B /* DoraPersonalTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraPersonalTableCell.m; sourceTree = "<group>"; };
 		93F10F242013095A0012E14B /* DoraPersonalTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraPersonalTableCell.h; sourceTree = "<group>"; };
@@ -445,6 +448,8 @@
 		C6BE9DF41FDBA61F00569EC9 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				9392500A205D6E3800A51575 /* DoraPersonalDataModel.m */,
+				93925009205D6E1A00A51575 /* DoraPersonalDataModel.h */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -895,6 +900,7 @@
 				C601E21820121FAB001147DF /* DoraFoodTableSectionData.m in Sources */,
 				C62E41C52043AD5600275D0A /* DoraLoginNetWorking.m in Sources */,
 				C6BA1B4D2000C3A100F163B8 /* DoraUIRecomBonus.m in Sources */,
+				9392500B205D6E3800A51575 /* DoraPersonalDataModel.m in Sources */,
 				C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */,
 				C6C6BD221FED3BC9001A98B2 /* DoraUIScrollViewRecomWrapper.m in Sources */,
 				C63EC782204292D900C70D24 /* DoraSignInViewController.m in Sources */,

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DoraPersonalHistory.h"
 #import "DoraColorDefineHeader.h"
+#import "DoraPersonalDataModel.h"
 #define margin 5
 #define titleHeight 30
 @interface DoraPersonalHistory ()<ChartViewDelegate>
@@ -54,7 +55,7 @@
     self.barChartView=[[BarChartView alloc] initWithFrame:CGRectMake(margin, margin+30+margin+titleHeight,self.frame.size.width-margin*2,self.frame.size.height-3*margin-30-titleHeight)];
     [self setUpBarChart];
     [self addSubview:self.barChartView];
-    [self setDataCount:365 range:100];
+    self.barChartView.data = [[DoraPersonalDataModel getInstance] getDayData];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     return self;
@@ -115,60 +116,6 @@
 }
 
 
-- (void)setDataCount:(int)count range:(double)range
-{
-    double start = 1.0;
-    
-    NSMutableArray *yVals = [[NSMutableArray alloc] init];
-    
-    for (int i = start; i < start + count + 1; i++)
-    {
-        double mult = (range + 1);
-        double val = (double) (arc4random_uniform(mult));
-        if (arc4random_uniform(100) < 25) {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-        } else {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-        }
-    }
-    
-    BarChartDataSet *set1 = nil;
-    if (self.barChartView.data.dataSetCount > 0)
-    {
-        set1 = (BarChartDataSet *)self.barChartView.data.dataSets[0];
-        set1.values = yVals;
-        switch(self.status){
-            case 0: [set1 setColors:@[UIColor.greenColor]];break;
-            case 1: [set1 setColors:@[UIColor.brownColor]];break;
-            case 2: [set1 setColors:@[UIColor.cyanColor]];break;
-        }
-        [self.barChartView.data notifyDataChanged];
-        [self.barChartView notifyDataSetChanged];
-    }
-    else
-    {
-        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
-        switch(self.status){
-            case 0: [set1 setColors:@[UIColor.greenColor]];break;
-            case 1: [set1 setColors:@[UIColor.brownColor]];break;
-            case 2: [set1 setColors:@[UIColor.cyanColor]];break;
-        }
-       
-        set1.drawIconsEnabled = NO;
-        
-        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-        [dataSets addObject:set1];
-        
-        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
-        [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.blackColor];
-        
-        data.barWidth = 0.9f;
-        
-        self.barChartView.data = data;
-    }
-}
-
 -(void)downButtonPressed:(UIButton *)btn{
     if([btn isEqual:self.button_day]){
         self.status = 0;
@@ -185,15 +132,15 @@
     switch (self.status) {
         case 0:
             [self.button_day setBackgroundColor:[UIColor grayColor]];
-            [self setDataCount:365 range:100];
+            self.barChartView.data = [[DoraPersonalDataModel getInstance] getDayData];
             break;
         case 1:
             [self.button_week setBackgroundColor:[UIColor grayColor]];
-            [self setDataCount:52 range:100];
+            self.barChartView.data = [[DoraPersonalDataModel getInstance] getWeekData];
             break;
         case 2:
             [self.button_month setBackgroundColor:[UIColor grayColor]];
-            [self setDataCount:12 range:100];
+            self.barChartView.data = [[DoraPersonalDataModel getInstance] getMonthData];
             break;
         default:
             break;

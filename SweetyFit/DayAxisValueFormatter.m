@@ -32,50 +32,50 @@
 - (NSString *)stringForValue:(double)value
                         axis:(ChartAxisBase *)axis
 {
-    int days = (int)value;
-    int year = [self determineYearForDays:days];
-    int month = [self determineMonthForDayOfYear:days];
-    
-    NSString *monthName = months[month % months.count];
-    NSString *yearName = [@(year) stringValue];
-    
-    if (_chart.visibleXRange > 30 * 6)
+    if (_chart.visibleXRange == 12)
     {
-        return [NSString stringWithFormat:@"%@ %@", monthName, yearName];
+        return [NSString stringWithFormat:@"%d月",(int)value];
     }
-    else
-    {
-        int dayOfMonth = [self determineDayOfMonthForDays:days month:month + 12 * (year - 2016)];
-        
-        NSString *appendix = @"th";
-        
-        switch (dayOfMonth)
-        {
-            case 1:
-                appendix = @"st";
-                break;
-            case 2:
-                appendix = @"nd";
-                break;
-            case 3:
-                appendix = @"rd";
-                break;
-            case 21:
-                appendix = @"st";
-                break;
-            case 22:
-                appendix = @"nd";
-                break;
-            case 23:
-                appendix = @"rd";
-                break;
-            case 31:
-                appendix = @"st";
-                break;
-        }
-        
-        return dayOfMonth == 0 ? @"" : [NSString stringWithFormat:@"%d%@ %@", dayOfMonth, appendix, monthName];
+    if(_chart.visibleXRange == 52){
+        return [NSString stringWithFormat:@"第%d周",(int)value];
     }
+    if(_chart.visibleXRange == 365){
+        return [NSString stringWithFormat:@"第%d天",(int)value];
+    }
+    return [NSString stringWithFormat:@"%d",(int)value];
+//    else
+//    {
+//        int dayOfMonth = [self determineDayOfMonthForDays:days month:month + 12 * (year - 2016)];
+//
+//        NSString *appendix = @"th";
+//
+//        switch (dayOfMonth)
+//        {
+//            case 1:
+//                appendix = @"st";
+//                break;
+//            case 2:
+//                appendix = @"nd";
+//                break;
+//            case 3:
+//                appendix = @"rd";
+//                break;
+//            case 21:
+//                appendix = @"st";
+//                break;
+//            case 22:
+//                appendix = @"nd";
+//                break;
+//            case 23:
+//                appendix = @"rd";
+//                break;
+//            case 31:
+//                appendix = @"st";
+//                break;
+//        }
+//
+//        return dayOfMonth == 0 ? @"" : [NSString stringWithFormat:@"%d%@ %@", dayOfMonth, appendix, monthName];
+//    }
 }
 
 - (int)daysForMonth:(int)month year:(int)year
