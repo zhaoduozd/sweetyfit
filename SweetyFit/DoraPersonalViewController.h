@@ -12,6 +12,7 @@
 #import "DoraPersonalProfile.h"
 #import "DoraPersonalSuggestion.h"
 #import "DoraPersonalTableCell.h"
+#import "DoraPersonalDataModel.h"
 
 @interface DoraPersonalViewController : UIViewController
 

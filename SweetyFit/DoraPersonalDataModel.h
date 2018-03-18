@@ -11,15 +11,26 @@
 #import "SweetyFit-Bridging-Header.h"
 @class DoraPersonalDataModel;
 static DoraPersonalDataModel *sharedModel = nil;
+
 @interface DoraPersonalDataModel : NSObject
-@property NSMutableArray *historyData;
-+(id)getInstance;
+
+@property(nonatomic,strong) NSMutableArray *historyData;
+@property(nonatomic,strong) NSMutableArray *exerciseSuggestionData;
+@property(nonatomic,strong) NSMutableArray *foodSuggestionData;
+@property(nonatomic,strong) NSString *exerciesSuggestion;
+@property(nonatomic,strong) NSString *foodSuggestion;
+
++(DoraPersonalDataModel*)getInstance;
+//for histroty data
 -(BarChartData*)getMonthData;
 -(BarChartData*)getWeekData;
 -(BarChartData*)getDayData;
 -(BarChartData*)generateHistoryRandomData:(NSInteger)range count:(NSInteger)count;
+-(void)setHistoryDataWithArray:(NSArray *)data;
+//for suggestion
+-(PieChartData*)getFoodData;
+-(PieChartData*)getExerciseData;
+-(void)setExerciseSuggestionWithArray:(NSArray *)data withString:(NSString*) str;
+-(void)setFoodSuggestionWithArray:(NSArray *)data withString:(NSString*) str;
 @end
-
-
-
 #endif /* DoraPersonalDataModel_h */

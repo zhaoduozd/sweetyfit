@@ -56,6 +56,7 @@
     [self setUpBarChart];
     [self addSubview:self.barChartView];
     self.barChartView.data = [[DoraPersonalDataModel getInstance] getDayData];
+    [self.barChartView highlightValues:nil];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     return self;

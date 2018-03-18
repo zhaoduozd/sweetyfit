@@ -37,6 +37,8 @@
     
     self.personalSuggestionExercise = [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,ProfileHeight+Margin,DoraScreenWidth/2-1,SuggestionHeight)];
     self.personalSuggestionExercise.title.text = @"运动建议";
+    [self.personalSuggestionExercise.suggestView setText: [DoraPersonalDataModel getInstance].exerciesSuggestion];
+    self.personalSuggestionExercise.pieChartView.data =[[DoraPersonalDataModel getInstance] getExerciseData];
     [self.containerView addSubview:self.personalSuggestionExercise];
     
     UIView *segmentLine = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth/2,ProfileHeight+Margin+SuggestionHeight*0.05,1,SuggestionHeight*0.9)];
@@ -45,6 +47,8 @@
     
     self.personalSuggestionFood= [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(DoraScreenWidth/2+1,ProfileHeight+Margin,DoraScreenWidth/2-1,SuggestionHeight)];
     self.personalSuggestionFood.title.text=@"饮食建议";
+    [self.personalSuggestionFood.suggestView setText: [DoraPersonalDataModel getInstance].foodSuggestion];
+    self.personalSuggestionFood.pieChartView.data =[[DoraPersonalDataModel getInstance] getFoodData];
     [self.containerView addSubview:self.personalSuggestionFood];
     
     UIView *segmentLine2 = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+1.5*Margin+SuggestionHeight,DoraScreenWidth*0.9,1)];
