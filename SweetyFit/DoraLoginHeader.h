@@ -10,11 +10,10 @@
 #define DoraLoginHeader_h
 
 // UI Category Headers
+#import "DoraCommonHeader.h"
 #import "UIButton+DoraLoginButtonView.h"
 #import "UITextField+DoraLoginInput.h"
 #import "NSString+MD5.h"
-#import <AFNetworking/AFNetworking.h>
 
-#define serverurl @"http://127.0.0.1:3000"
 
 #endif /* DoraLoginHeader_h */

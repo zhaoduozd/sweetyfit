@@ -15,11 +15,11 @@
 #import "UIScrollView+DoraScrollUI.h"
 #import "UIView+DoraViewUI.h"
 #import "UIButton+DoraButtonUI.h"
-
+#import <AFNetworking/AFNetworking.h>
 // Screen information
 
 #define DoraScreenWidth [UIScreen mainScreen].bounds.size.width
 #define DoraScreenHeight [UIScreen mainScreen].bounds.size.height
-
+#define serverurl @"http://127.0.0.1:3000"
 
 #endif /* DoraCommonHeader_h */

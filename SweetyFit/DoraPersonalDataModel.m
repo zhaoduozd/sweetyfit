@@ -15,6 +15,7 @@
     if(!sharedModel){
         sharedModel = [[DoraPersonalDataModel alloc] init];
     }
+    [sharedModel getNetworkData];
     return sharedModel;
 }
 -(BarChartData*)getMonthData{
@@ -138,7 +139,7 @@
         for(NSDictionary *dic in self.historyData){
             curDate = [dic objectForKey:@"Date"];
             accumulate+=1;
-            yVal += [[dic objectForKey:@"Calories"] floatValue];
+            yVal += [[dic objectForKey:@"Calorie"] floatValue];
             [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
             xVal+=1;
             yVal=0;
@@ -250,12 +251,12 @@
 
 -(void)setExerciseSuggestionWithArray:(NSArray *)data withString:(NSString*) str{
     self.exerciesSuggestion = str;
-    self.exerciseSuggestionData = data;
+    self.exerciseSuggestionData = [[NSMutableArray alloc] initWithArray:data];
 }
 
 -(void)setFoodSuggestionWithArray:(NSArray *)data withString:(NSString*) str{
     self.foodSuggestion = str;
-    self.foodSuggestionData = data;
+    self.foodSuggestionData = [[NSMutableArray alloc] initWithArray:data];
 }
 
 -(PieChartData*)getFoodData{
@@ -299,13 +300,11 @@
 }
 
 -(PieChartData*)getExerciseData{
-    
-    
     NSMutableArray *values = [[NSMutableArray alloc] init];
     
     for (NSDictionary *dic in self.exerciseSuggestionData)
     {
-        [values addObject:[[PieChartDataEntry alloc] initWithValue: [[dic objectForKey:@"Value"] floatValue] label:[dic objectForKey:@"Label"] icon: [UIImage imageNamed:@"icon"]]];
+        [values addObject:[[PieChartDataEntry alloc] initWithValue: [[dic objectForKey:@"Num"] floatValue] label:[dic objectForKey:@"Name"] icon: [UIImage imageNamed:@"icon"]]];
     }
     
     PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithValues:values label:@""];
@@ -339,10 +338,36 @@
     return data;
 }
 
+-(void)getNetworkData{
+    NSString *urlString = [serverurl stringByAppendingString:@"/account/personal?u="];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    urlString = [urlString stringByAppendingString:[defaults objectForKey:@"uid"]];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer= [AFHTTPRequestSerializer new];
+    [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        responseObject = (NSDictionary *)responseObject;
+        NSDictionary *fadvice = [responseObject objectForKey:@"fadvice"];
+        NSDictionary *eadvice = [responseObject objectForKey:@"eadvice"];
+        NSArray *history = [[NSArray alloc] initWithObjects:[responseObject objectForKey:@"history"],nil];
+        NSArray *fdata = [fadvice objectForKey:@"AdviceData"];
+        NSArray *edata = [eadvice objectForKey:@"AdviceData"];
+        NSString *fcontent = [fadvice objectForKey:@"AdviceContent"];
+        NSString *econtent = [fadvice objectForKey:@"AdviceContent"];
+        [self setFoodSuggestionWithArray:fdata withString:fcontent];
+        [self setExerciseSuggestionWithArray:edata withString:econtent];
+        [self setHistoryDataWithArray:history];
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"fail results: %@", error);
+    }];
+    
+}
 
 - (NSInteger)getNumberOfDaysInMonth:(NSDate*)date
 {
-    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian]; // 指定日历的算法 NSGregorianCalendar - ios 8
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay
                                    inUnit: NSCalendarUnitMonth
                                   forDate:date];

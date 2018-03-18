@@ -9,6 +9,7 @@
 #ifndef DoraPersonalDataModel_h
 #define DoraPersonalDataModel_h
 #import "SweetyFit-Bridging-Header.h"
+#import "DoraCommonHeader.h"
 @class DoraPersonalDataModel;
 static DoraPersonalDataModel *sharedModel = nil;
 
@@ -21,6 +22,8 @@ static DoraPersonalDataModel *sharedModel = nil;
 @property(nonatomic,strong) NSString *foodSuggestion;
 
 +(DoraPersonalDataModel*)getInstance;
+//network
+-(void)getNetworkData;
 //for histroty data
 -(BarChartData*)getMonthData;
 -(BarChartData*)getWeekData;
