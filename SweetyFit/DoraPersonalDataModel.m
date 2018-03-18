@@ -341,7 +341,9 @@
 -(void)getNetworkData{
     NSString *urlString = [serverurl stringByAppendingString:@"/account/personal?u="];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    urlString = [urlString stringByAppendingString:[defaults objectForKey:@"uid"]];
+    if([defaults objectForKey:@"uid"]){
+        urlString = [urlString stringByAppendingString:[defaults objectForKey:@"uid"]];
+    }
     NSURL *url = [NSURL URLWithString:urlString];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
