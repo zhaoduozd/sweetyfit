@@ -16,7 +16,6 @@
         sharedModel = [[DoraPersonalDataModel alloc] init];
         sharedModel.isLoading = YES; // 初始化
         [sharedModel getNetworkData];
-
     }
     return sharedModel;
 }
@@ -97,6 +96,9 @@
     [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:255/255.f alpha:1.f]];
     [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:0/255.f alpha:1.f]];
     [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:0/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:255/255.f green:128/255.f blue:128/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:255/255.f alpha:1.f]];
     
     dataSet.colors = colors;
     
@@ -136,6 +138,9 @@
     [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:255/255.f alpha:1.f]];
     [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:0/255.f alpha:1.f]];
     [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:0/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:255/255.f green:128/255.f blue:128/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f]];
+    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:255/255.f alpha:1.f]];
     
     dataSet.colors = colors;
     
