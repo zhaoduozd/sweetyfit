@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "DoraCommonHeader.h"
+
 @interface DoraPersonalProfile : UIView
 
 @property(nonatomic,strong) UIImageView *profileImage;

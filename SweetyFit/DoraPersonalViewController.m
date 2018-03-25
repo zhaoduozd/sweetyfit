@@ -12,7 +12,7 @@
 
 #define signOutHeight 50
 #define ProfileHeight 100
-#define SuggestionHeight 310
+#define SuggestionHeight 500
 #define HistoryHeight 330
 #define Margin 5
 #define segmentColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, DoraScreenHeight-40)];
-    self.containerView.contentSize = CGSizeMake(DoraScreenWidth, ProfileHeight+SuggestionHeight+HistoryHeight+4*Margin+signOutHeight);
+    self.containerView.contentSize = CGSizeMake(DoraScreenWidth, ProfileHeight+2*SuggestionHeight+HistoryHeight+5*Margin+signOutHeight);
     self.containerView.delegate = self;
     self.containerView.canCancelContentTouches=NO;
     self.containerView.delaysContentTouches=YES;
@@ -36,27 +36,27 @@
     
     [self.containerView addSubview:self.personalProfile];
     
-    self.personalSuggestionExercise = [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,ProfileHeight+Margin,DoraScreenWidth/2-1,SuggestionHeight)];
+    self.personalSuggestionExercise = [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,ProfileHeight+Margin,DoraScreenWidth,SuggestionHeight)];
     [DoraPersonalDataModel getInstance].exerciseDelegate = self.personalSuggestionExercise;
     [self.containerView addSubview:self.personalSuggestionExercise];
     
-    UIView *segmentLine = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth/2,ProfileHeight+Margin+SuggestionHeight*0.05,1,SuggestionHeight*0.9)];
+    UIView *segmentLine = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+1.5*Margin+SuggestionHeight,DoraScreenWidth*0.9,1)];
     segmentLine.backgroundColor = segmentColor;
     [self.containerView addSubview:segmentLine];
     
-    self.personalSuggestionFood= [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(DoraScreenWidth/2+1,ProfileHeight+Margin,DoraScreenWidth/2-1,SuggestionHeight)];
+    self.personalSuggestionFood= [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,ProfileHeight+2* Margin+SuggestionHeight,DoraScreenWidth,SuggestionHeight)];
     [DoraPersonalDataModel getInstance].foodDelegate = self.personalSuggestionFood;
     [self.containerView addSubview:self.personalSuggestionFood];
     
-    UIView *segmentLine2 = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+1.5*Margin+SuggestionHeight,DoraScreenWidth*0.9,1)];
+    UIView *segmentLine2 = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+2.5*Margin+SuggestionHeight*2,DoraScreenWidth*0.9,1)];
     segmentLine2.backgroundColor = segmentColor;
     [self.containerView addSubview:segmentLine2];
     
-    self.personalHistory =[[DoraPersonalHistory alloc]initWithFrame:CGRectMake(0,ProfileHeight+2*Margin+SuggestionHeight,DoraScreenWidth,SuggestionHeight)];
+    self.personalHistory =[[DoraPersonalHistory alloc]initWithFrame:CGRectMake(0,ProfileHeight+3*Margin+2*SuggestionHeight,DoraScreenWidth,HistoryHeight)];
     [DoraPersonalDataModel getInstance].historyDelegate = self.personalHistory;
     [self.containerView addSubview:self.personalHistory];
     
-    self.personalSignOut = [[UIButton alloc]initWithFrame:CGRectMake(Margin,ProfileHeight+2*Margin+SuggestionHeight+HistoryHeight,DoraScreenWidth-2*Margin,signOutHeight)];
+    self.personalSignOut = [[UIButton alloc]initWithFrame:CGRectMake(Margin,ProfileHeight+4*Margin+SuggestionHeight*2+HistoryHeight,DoraScreenWidth-2*Margin,signOutHeight)];
     
     [self.personalSignOut addTarget:self action:@selector(signOutClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.personalSignOut setTitle:@"退出登录" forState:UIControlStateNormal];

@@ -15,6 +15,8 @@
 #define imageSize self.frame.size.height-2*margin
 #define textWidth 100
 
+@interface DoraPersonalProfile()<DoraPersonalDataObserver>
+@end
 
 @implementation DoraPersonalProfile
 
@@ -34,16 +36,18 @@
     CGFloat userNameX = margin*2+imageSize;
     CGFloat userNameheight = 25.0f;
     self.userName = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, frame.size.height-margin*2-userNameheight*2, textWidth, userNameheight)];
-    self.userName.text = @"user name";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // [defaults removeObjectForKey:@"uid"]
+    self.userName.text = [defaults objectForKey:@"uid"];
     self.userName.textColor = textColorWhite;
     self.userName.font = [UIFont boldSystemFontOfSize:20];
     [self addSubview:self.userName];
     
-    self.userAccount = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, frame.size.height-margin-userNameheight, textWidth, userNameheight)];
-    self.userAccount.text = @"user acct";
-    self.userAccount.textColor = textColorWhite;
-    [self addSubview:self.userAccount];
-    
+//    self.userAccount = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, frame.size.height-margin-userNameheight, textWidth, userNameheight)];
+//    self.userAccount.text = @"user acct";
+//    self.userAccount.textColor = textColorWhite;
+//    [self addSubview:self.userAccount];
+//    
     CGFloat exerciseLevelMarkWidth = 40;
     CGFloat exerciseLevelMarkX = frame.size.width-margin-exerciseLevelMarkWidth;
     self.exerciseLevelMark = [[UILabel alloc] initWithFrame:CGRectMake(exerciseLevelMarkX, frame.size.height-margin-userNameheight, exerciseLevelMarkWidth, 25)];
@@ -61,4 +65,7 @@
     return self;
 }
 
+-(void)updateProfileData{
+    self.exerciseLevelMark.text = [DoraPersonalDataModel getInstance].level;
+}
 @end

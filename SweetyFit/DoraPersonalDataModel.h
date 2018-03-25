@@ -19,7 +19,9 @@ static DoraPersonalDataModel *sharedModel = nil;
 @property(nonatomic,strong) id historyDelegate;
 @property(nonatomic,strong) id foodDelegate;
 @property(nonatomic,strong) id exerciseDelegate;
+@property(nonatomic,strong) id profileDelegate;
 @property(nonatomic,assign) BOOL isLoading;
+@property(nonatomic,strong) NSString *level;
 @property(nonatomic,strong) NSMutableArray *historyData;
 @property(nonatomic,strong) NSMutableArray *exerciseSuggestionData;
 @property(nonatomic,strong) NSMutableArray *foodSuggestionData;
@@ -44,5 +46,6 @@ static DoraPersonalDataModel *sharedModel = nil;
 -(void)updateFoodPieChartData;
 -(void)updateExercisePieChartData;
 -(void)updateBarChartData;
+-(void)updateProfileData;
 @end
 #endif /* DoraPersonalDataModel_h */

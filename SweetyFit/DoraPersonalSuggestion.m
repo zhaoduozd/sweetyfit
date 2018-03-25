@@ -74,7 +74,15 @@
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
     ChartLegend *l = self.pieChartView.legend;
-    l.enabled = NO;
+    l.horizontalAlignment = ChartLegendHorizontalAlignmentRight;
+    l.verticalAlignment = ChartLegendVerticalAlignmentTop;
+    l.orientation = ChartLegendOrientationVertical;
+    l.drawInside = NO;
+    l.xEntrySpace = 14.0;
+    [l setFont:[UIFont systemFontOfSize:15]];
+    l.yEntrySpace = 0.0;
+    l.yOffset = 0.0;
+    //l.enabled = NO;
     
     chartView.drawHoleEnabled = YES;
     chartView.holeColor=AppDefaultBackgroundColor;
@@ -82,6 +90,8 @@
     chartView.rotationAngle = 0.0;
     chartView.rotationEnabled = YES;
     chartView.highlightPerTapEnabled = YES;
+    
+    
 }
 
 - (void)chartValueSelected:(ChartViewBase * __nonnull)chartView entry:(ChartDataEntry * __nonnull)entry highlight:(ChartHighlight * __nonnull)highlight
@@ -97,12 +107,14 @@
 -(void)updateFoodPieChartData{
     [self.title setText:@"饮食建议"];
     [self.suggestView setText:[DoraPersonalDataModel getInstance].foodSuggestion];
+    [self.suggestView setFont:[UIFont systemFontOfSize:16]];
     self.pieChartView.data = [[DoraPersonalDataModel getInstance] getFoodData];
 }
 
 -(void)updateExercisePieChartData{
     [self.title setText:@"运动建议"];
     [self.suggestView setText:[DoraPersonalDataModel getInstance].exerciseSuggestion];
+    [self.suggestView setFont:[UIFont systemFontOfSize:16]];
     self.pieChartView.data = [[DoraPersonalDataModel getInstance] getExerciseData];
 }
 

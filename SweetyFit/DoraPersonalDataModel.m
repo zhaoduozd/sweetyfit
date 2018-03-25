@@ -173,7 +173,8 @@
         NSDictionary *fdic = [[fadvice objectForKey:@"Data"] objectAtIndex:0];
         NSDictionary *edic = [[eadvice objectForKey:@"Data"] objectAtIndex:0];
         NSString *fcontent = [fadvice objectForKey:@"Advice"];
-        NSString *econtent = [fadvice objectForKey:@"Advice"];
+        NSString *econtent = [eadvice objectForKey:@"Advice"];
+        self.level = [json objectForKey:@"level"];
         NSMutableArray *fdata = [[NSMutableArray alloc] init];
         NSMutableArray *edata = [[NSMutableArray alloc] init];
         for(int i=0;i<[[fdic objectForKey:@"Type"] count];i++){
@@ -200,6 +201,10 @@
         
         if(self.exerciseDelegate && [self.exerciseDelegate respondsToSelector:@selector(updateExercisePieChartData)]){
             [self.exerciseDelegate updateExercisePieChartData];
+        }
+        
+        if(self.profileDelegate && [self.profileDelegate respondsToSelector:@selector(updateProfileData)]){
+            [self.profileDelegate updateProfileData];
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
