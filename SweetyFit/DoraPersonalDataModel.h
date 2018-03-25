@@ -10,6 +10,10 @@
 #define DoraPersonalDataModel_h
 #import "SweetyFit-Bridging-Header.h"
 #import "DoraCommonHeader.h"
+
+#define ChartLabelTextSize 15
+#define ChartTextSize 15
+
 @class DoraPersonalDataModel;
 @protocol DoraPersonalDataObserver;
 static DoraPersonalDataModel *sharedModel = nil;

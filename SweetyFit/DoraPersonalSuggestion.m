@@ -79,9 +79,10 @@
     l.orientation = ChartLegendOrientationVertical;
     l.drawInside = NO;
     l.xEntrySpace = 14.0;
-    [l setFont:[UIFont systemFontOfSize:15]];
+    [l setFont:[UIFont systemFontOfSize:ChartTextSize]];
     l.yEntrySpace = 0.0;
     l.yOffset = 0.0;
+    [l setTextColor:ChartColorLabelText];
     //l.enabled = NO;
     
     chartView.drawHoleEnabled = YES;

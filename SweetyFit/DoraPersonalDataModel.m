@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DoraPersonalDataModel.h"
+#import "DoraColorDefineHeader.h"
 
 @implementation DoraPersonalDataModel
 
@@ -92,13 +93,12 @@
     // add a lot of colors
     
     NSMutableArray *colors = [[NSMutableArray alloc] init];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:255/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:255/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:128/255.f blue:128/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:255/255.f alpha:1.f]];
+    [colors addObject:ChartColorSet1];
+    [colors addObject:ChartColorSet2];
+    [colors addObject:ChartColorSet3];
+    [colors addObject:ChartColorSet4];
+    [colors addObject:ChartColorSet5];
+    [colors addObject:ChartColorSet6];  
     
     dataSet.colors = colors;
     
@@ -110,8 +110,8 @@
     pFormatter.multiplier = @1.f;
     pFormatter.percentSymbol = @" %";
     [data setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:pFormatter]];
-    [data setValueFont:[UIFont systemFontOfSize:12.0f]];
-    [data setValueTextColor:UIColor.blackColor];
+    [data setValueFont:[UIFont systemFontOfSize:ChartTextSize]];
+    [data setValueTextColor:ChartColorText];
     
     return data;
 }
@@ -134,14 +134,12 @@
     // add a lot of colors
     
     NSMutableArray *colors = [[NSMutableArray alloc] init];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:255/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:255/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:128/255.f blue:128/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:255/255.f alpha:1.f]];
-    
+    [colors addObject:ChartColorSet1];
+    [colors addObject:ChartColorSet2];
+    [colors addObject:ChartColorSet3];
+    [colors addObject:ChartColorSet4];
+    [colors addObject:ChartColorSet5];
+    [colors addObject:ChartColorSet6];
     dataSet.colors = colors;
     
     PieChartData *data = [[PieChartData alloc] initWithDataSet:dataSet];
@@ -152,8 +150,8 @@
     pFormatter.multiplier = @1.f;
     pFormatter.percentSymbol = @" %";
     [data setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:pFormatter]];
-    [data setValueFont:[UIFont systemFontOfSize:12.0f]];
-    [data setValueTextColor:UIColor.blackColor];
+    [data setValueFont:[UIFont systemFontOfSize:ChartTextSize]];
+    [data setValueTextColor:ChartColorText];
     
     return data;
 }
