@@ -20,6 +20,6 @@
 
 #define DoraScreenWidth [UIScreen mainScreen].bounds.size.width
 #define DoraScreenHeight [UIScreen mainScreen].bounds.size.height
-#define serverurl @"http://127.0.0.1:3000"
+#define serverurl @"http://120.77.42.160:3000"
 
 #endif /* DoraCommonHeader_h */

@@ -11,4 +11,5 @@
 @interface DoraLoginSubViewController : UIViewController
 @property (nonatomic, strong) UITextField * usernameField;
 @property (nonatomic, strong) UITextField * passwordField;
+@property (nonatomic, strong) UILabel *loginNotice;
 @end

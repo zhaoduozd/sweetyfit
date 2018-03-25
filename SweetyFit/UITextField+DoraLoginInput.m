@@ -26,9 +26,9 @@
 +(UITextField *) DoraCreateSigninGetInfoTextFieldWithUnit:(NSString *) unit {
     UITextField *textfield = [[UITextField alloc] init];
     
-    float textfieldw = 100;
+    float textfieldw = 80;
     CGRect tempframe = textfield.frame;
-    tempframe.size = CGSizeMake(textfieldw, 36);
+    tempframe.size = CGSizeMake(textfieldw, 30);
     textfield.frame = tempframe;
     
     textfield.borderStyle = UITextBorderStyleRoundedRect;

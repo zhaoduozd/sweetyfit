@@ -14,4 +14,5 @@
 @property(nonatomic, strong) UITextField *selfIntro;
 @property(nonatomic, strong) UIDatePicker *birthday;
 @property(nonatomic, strong) UITextField *password;
+@property(nonatomic, strong) UILabel *siginNotice;
 @end

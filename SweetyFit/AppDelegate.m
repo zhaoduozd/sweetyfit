@@ -22,7 +22,8 @@
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];\
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // [defaults removeObjectForKey:@"uid"];
     if ([defaults objectForKey:@"uid"]) {
         _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
     } else {

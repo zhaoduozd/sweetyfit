@@ -8,6 +8,7 @@
 
 #import "DoraExerciseRecomViewController.h"
 #import "DoraActionSettingView.h"
+#import "NSString+MD5.h"
 
 @interface DoraExerciseRecomViewController ()
 @property(nonatomic, strong) NSDictionary *exercisedata;
@@ -35,17 +36,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _defaults = [NSUserDefaults standardUserDefaults];
+    _urlroot = @"http://120.77.42.160:3000/";
     NSString *username = [_defaults objectForKey:@"uid"];
     NSString *subfilepath = [NSString stringWithFormat:@"%@exerciserecord.plist", username];
-
-    
-    _urlroot = @"http://127.0.0.1:3000/";
-    _defaults = [NSUserDefaults standardUserDefaults];
     
     _exerciserecordfilepath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)lastObject]stringByAppendingPathComponent:subfilepath];
     
     _userdemands = [[NSMutableDictionary alloc] init];
     [_userdemands setObject:@"YES" forKey:@"default"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [_userdemands setObject:[defaults objectForKey:@"uid"] forKey:@"uid"];
     
     [self CreateAndAddElements];
     [self ObtainData];
@@ -75,6 +77,18 @@
     
     self.gifgroups = [[NSMutableArray alloc] init];
     
+    _startplaybtnwrapper = [[UIView alloc] initWithFrame:_gifplayer.frame];
+    
+    _playbtn = [[UIButton alloc] initWithFrame:CGRectMake(DoraScreenWidth/2-24, DoraScreenWidth*0.618/2-24, 48, 48)];
+    
+    _playbtn.tag = playindex;
+    [_playbtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [_playbtn addTarget:self action:@selector(PlayGif:) forControlEvents:UIControlEventTouchUpInside];
+    [_startplaybtnwrapper setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+    
+    [_startplaybtnwrapper addSubview:_playbtn];
+    
+    
     
     /*  Add Elments  */
     [self.view addSubview:moduletitle];
@@ -82,6 +96,7 @@
     [self.view addSubview:_exerciselist];
     [self.view addSubview:_pointtips];
     [self.view addSubview:_actionsettingbtn];
+    [self.view addSubview:_startplaybtnwrapper];
     [self.view addSubview:_actionsettingview];
 }
 
@@ -91,7 +106,7 @@
 
 - (void) ExerciseSetting {
     self.actionsettingview.hidden = YES;
-    [self.actionsettingview clearall];
+    //NSLog(@"%@", _actionsettingview.demanddata);
     if ([[self.actionsettingview.demanddata objectForKey:@"place"] isEqualToString:@""]
         && [[self.actionsettingview.demanddata objectForKey:@"time"] isEqualToString:@""]
         &&[[self.actionsettingview.demanddata objectForKey:@"region"] isEqualToString:@""]
@@ -108,12 +123,14 @@
         
         [self ObtainData];
     }
-    
+    [self.actionsettingview clearall];
 }
 
 - (void) ObtainData {
     
     __weak DoraExerciseRecomViewController *weakself = self;
+    
+    // NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"uid",@"Larry",@"default",@"YES", nil];
     
     /*   Assign URL   */
     NSString *urlstring = [_urlroot stringByAppendingString:@"recom/exercise"];
@@ -124,6 +141,7 @@
     /*   Create Connection   */
     [manager POST:urlstring parameters:_userdemands progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         
+        NSLog(@"%@", responseObject);
         [weakself SolveData:responseObject];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -148,10 +166,9 @@
     for (int i = 0; i < actionnum; ++i) {
         [_giffilepath addObject:urlholder];
     }
-    
     for (int i = 0; i < actionnum; ++i) {
         NSDictionary *tempdic = [actions objectAtIndex:i];
-        NSString *gifurlstring = [tempdic objectForKey:@"gifurl"];
+        NSString *gifurlstring = [tempdic objectForKey:@"gifimg"];
         NSURL *gifurl = [[NSURL alloc] initWithString:gifurlstring];
         
         [self DownLoadGifWithURL:gifurl Position:i Actionnum:actionnum];
@@ -166,16 +183,14 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+        NSString *urlstring = [NSString stringWithFormat:@"%@", url];
+        return [documentsDirectoryURL URLByAppendingPathComponent:[urlstring MD5]];
         
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        
         [weakself SetUrlPath:filePath Pos:pos Actionnum:actionnum];
-        
     }];
     [downloadTask resume];
 }
@@ -189,7 +204,7 @@
             return;
         }
     }
-    
+    NSLog(@"%@", _giffilepath);
     [self DecomposeGif:actionnum];
 }
 
@@ -201,6 +216,7 @@
         CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
         size_t count = CGImageSourceGetCount(source);
         
+        NSLog(@"%@", data);
         
         for (size_t j = 0; j < count; j++)
         {
@@ -242,7 +258,7 @@
             x = (5 + actionlistimgwidth) * i + 5;
         }
         
-        UIButton *btn = [UIButton DoraCreateBlackMaskButtonWithWidth:actionlistimgwidth Height:60 borderRaduis:4 titleText:[[actions objectAtIndex:i] objectForKey:@"actionname"] imageBackground:[[_gifgroups objectAtIndex:i] objectAtIndex:0]];
+        UIButton *btn = [UIButton DoraCreateBlackMaskButtonWithWidth:actionlistimgwidth Height:60 borderRaduis:4 titleText:[[actions objectAtIndex:i] objectForKey:@"name"] imageBackground:[[_gifgroups objectAtIndex:i] objectAtIndex:0]];
         CGRect tempframe = btn.frame;
         tempframe.origin = CGPointMake(x, 5);
         btn.frame = tempframe;
@@ -255,7 +271,7 @@
     }
     
     /*   Set Tips   */
-    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:0] objectForKey:@"actiontips"];
+    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:0] objectForKey:@"tips"];
     _pointtips.tips.text = tips;
 }
 
@@ -274,17 +290,6 @@
     [_gifplayer addGestureRecognizer:singletap];
     [_gifplayer setImage:[[_gifgroups objectAtIndex:0] objectAtIndex:0]];
     
-    _startplaybtnwrapper = [[UIView alloc] initWithFrame:_gifplayer.frame];
-    
-    _playbtn = [[UIButton alloc] initWithFrame:CGRectMake(DoraScreenWidth/2-24, DoraScreenWidth*0.618/2-24, 48, 48)];
-    
-    _playbtn.tag = playindex;
-    [_playbtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    [_playbtn addTarget:self action:@selector(PlayGif:) forControlEvents:UIControlEventTouchUpInside];
-    [_startplaybtnwrapper setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
-    
-    [_startplaybtnwrapper addSubview:_playbtn];
-    [self.view addSubview:_startplaybtnwrapper];
 }
 
 - (void) PlayGif:(id) sender {
@@ -321,8 +326,8 @@
     _startplaybtnwrapper.hidden = YES;
     
     int timeinterval = 0;
-    int repeatcount = [[[actions objectAtIndex:gifid] objectForKey:@"actionrepeat"] intValue];
-    int duration = [[[actions objectAtIndex:gifid] objectForKey:@"actionduration"] intValue];
+    int repeatcount = [[[actions objectAtIndex:gifid] objectForKey:@"group"] intValue];
+    int duration = [[[actions objectAtIndex:gifid] objectForKey:@"time"] intValue];
     
     for (int i = gifid; i < exerciselen; ++i) {
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:timeinterval
@@ -336,8 +341,8 @@
         timeinterval += (repeatcount * duration);
         
         if (i + 1 < exerciselen) {
-            repeatcount = [[[actions objectAtIndex:i+1] objectForKey:@"actionrepeat"] intValue];
-            duration = [[[actions objectAtIndex:i+1] objectForKey:@"actionduration"] intValue];
+            repeatcount = [[[actions objectAtIndex:i+1] objectForKey:@"group"] intValue];
+            duration = [[[actions objectAtIndex:i+1] objectForKey:@"time"] intValue];
         }
     }
 }
@@ -346,51 +351,18 @@
     // NSLog(@"%d", gifid);
 
     [_gifplayer setImage:[[_gifgroups objectAtIndex:gifid] objectAtIndex:0]];
-    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actiontips"];
+    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"tips"];
     _pointtips.tips.text = tips;
     _gifplayer.animationImages = [_gifgroups objectAtIndex:gifid];
     _gifplayer.animationDuration = duration;
     _gifplayer.animationRepeatCount = 2;
     
+    __weak DoraExerciseRecomViewController *weakself = self;
+    
     for (int i = 0; i < repeatcount; ++i){
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:i*duration+0.1 repeats:NO block:^void (NSTimer *timer){
             [_gifplayer startAnimating];
-            
-            /*   Modify Exercise Record   */
-            NSDictionary *exerciserecord = [[NSDictionary alloc] initWithContentsOfFile:_exerciserecordfilepath];
-            NSString *timestamp = [exerciserecord objectForKey:@"timestamp"];
-
-            NSDate *date = [NSDate date];
-            NSCalendar *calendar = [NSCalendar currentCalendar];
-            unsigned int unitFlags = NSCalendarUnitYear|NSCalendarUnitMonth|
-            NSCalendarUnitDay;
-            NSDateComponents *d = [calendar components:unitFlags fromDate:date];
-            NSString *currenttimestamp = [NSString stringWithFormat:@"%ld*%ld*%ld",[d year], [d month], [d day]];
-            double actionconsume = [[[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"actionconsume"] doubleValue];
-            
-            if ([timestamp isEqualToString:currenttimestamp]) {
-                double todayconsume = [[exerciserecord objectForKey:@"exerciseconsume"] doubleValue];
-                
-                todayconsume += actionconsume;
-                [exerciserecord setValue:[NSNumber numberWithDouble:todayconsume] forKey:@"exerciseconsume"];
-                
-            } else {
-                double yesconsume = [[exerciserecord objectForKey:@"exerciseconsume"] doubleValue];
-                __weak NSDictionary *weakexerciserecord = exerciserecord;
-                
-                AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-                NSString *suburl = [NSString stringWithFormat:@"feedback/exerciserecord?uid=%@&consume=%f", [_defaults objectForKey:@"uid"], yesconsume];
-                
-                [manager GET:[_urlroot stringByAppendingString:suburl] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-                    
-                    [weakexerciserecord setValue:currenttimestamp forKey:@"timestamp"];
-                    [weakexerciserecord setValue:[NSNumber numberWithDouble:actionconsume] forKey:@"exerciseconsume"];
-                    
-                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                    NSLog(@"%@", error);
-                }];
-            }
-            
+            [weakself RecordExerciseWith:gifid];
         }];
         
         [_giftimers addObject:timer];
@@ -411,6 +383,54 @@
         
         [_giftimers addObject:timer];
     }
+}
+
+- (void) RecordExerciseWith:(int) gifid {
+    __weak DoraExerciseRecomViewController *weakself = self;
+    
+    /*   Modify Exercise Record   */
+    NSDictionary *exerciserecord = [[NSDictionary alloc] initWithContentsOfFile:_exerciserecordfilepath];
+    NSMutableDictionary *newexerciserecord = [[NSMutableDictionary alloc] init];
+    NSString *timestamp = [exerciserecord objectForKey:@"timestamp"];
+    
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSCalendarUnitYear|NSCalendarUnitMonth|
+    NSCalendarUnitDay;
+    NSDateComponents *d = [calendar components:unitFlags fromDate:date];
+    NSString *currenttimestamp = [NSString stringWithFormat:@"%ld*%ld*%ld",[d year], [d month], [d day]];
+    double actionconsume = [[[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"calorie"] doubleValue];
+    
+    if ([timestamp isEqualToString:currenttimestamp]) {
+        double todayconsume = [[exerciserecord objectForKey:@"exerciseconsume"] doubleValue];
+        todayconsume += actionconsume;
+        
+        NSLog(@"%f, %f", todayconsume, actionconsume);
+        
+        [newexerciserecord setValue:[NSNumber numberWithDouble:todayconsume] forKey:@"exerciseconsume"];
+        [newexerciserecord setValue:currenttimestamp forKey:@"timestamp"];
+        [newexerciserecord writeToFile:_exerciserecordfilepath atomically:YES];
+    } else {
+        double yesconsume = [[exerciserecord objectForKey:@"exerciseconsume"] doubleValue];
+        
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        
+        NSString *suburl = [NSString stringWithFormat:@"feedback/exerciserecord?u=%@&c=%f", [_defaults objectForKey:@"uid"], yesconsume];
+        
+        [manager GET:[_urlroot stringByAppendingString:suburl] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+            NSLog(@"%@", responseObject);
+            [weakself WriteExerciseRecordWithStamp:currenttimestamp Calorie:actionconsume];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+    }
+}
+
+- (void) WriteExerciseRecordWithStamp:(NSString *) timestamp Calorie:(double) actionconsume {
+    NSMutableDictionary *newexerciserecord = [[NSMutableDictionary alloc] init];
+    [newexerciserecord setValue:timestamp forKey:@"timestamp"];
+    [newexerciserecord setValue:[NSNumber numberWithDouble:actionconsume] forKey:@"exerciseconsume"];
+    [newexerciserecord writeToFile:_exerciserecordfilepath atomically:YES];
 }
 
 - (void) PausePlayGif {

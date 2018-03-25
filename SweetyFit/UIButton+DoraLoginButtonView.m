@@ -30,15 +30,15 @@
 +(UIButton *) DoraCreateGetInfoPureColorButtonWithX:(float) x Y:(float) y Text:(NSString *) textContent {
     UIButton *button = [[UIButton alloc] init];
     
-    float btnh = 28;
-    float btnw = 86;
+    float btnh = 30;
+    float btnw = 100;
     
     button.frame = CGRectMake(x, y, btnw, btnh);
     button.titleLabel.font = [UIFont systemFontOfSize:14];
     [button setTitle:textContent forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [button setTitleColor:AppDefaultColor forState:UIControlStateNormal];
     [button.layer setBorderWidth:1];
-    [button.layer setBorderColor:[UIColor grayColor].CGColor];
+    [button.layer setBorderColor:AppDefaultColor.CGColor];
     [button.layer setCornerRadius:2];
     //[button.titleLabel setTextColor:AppDefaultColor];
     

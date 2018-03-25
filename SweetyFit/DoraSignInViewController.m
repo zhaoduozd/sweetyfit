@@ -28,8 +28,14 @@
 
 - (void) addFunctionElements {
     float topdis = 80;
-    UILabel *birthlabel = [UILabel DoraCreateTextTitleName:@"选择生日"];
-    birthlabel.frame = CGRectMake(0.05 * DoraScreenWidth, topdis + 62*4 + 30, 100, 20);
+    
+    self.siginNotice = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, DoraScreenWidth, 30)];
+    self.siginNotice.textColor = [UIColor redColor];
+    self.siginNotice.textAlignment = NSTextAlignmentCenter;
+    self.siginNotice.hidden = YES;
+    
+    UILabel *birthlabel = [UILabel DoraCreateTextTitleName:@"生日（为更准确地为您推荐，请填写正确的生日）"];
+    birthlabel.frame = CGRectMake(0.05 * DoraScreenWidth, topdis + 62*4 + 30, DoraScreenWidth, 20);
     _accountName = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"用户名（手机号/邮箱）" TopDis:topdis];
     _nickName = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"昵称" TopDis:topdis + 50 * 1 + 12];
     _selfIntro = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"自我介绍" TopDis:topdis + 50 * 2 + 12 * 2];
@@ -41,8 +47,6 @@
     _birthday.locale = [NSLocale localeWithLocaleIdentifier:@"zh-Hans"];
     _birthday.datePickerMode = UIDatePickerModeDate;
     [_birthday setBackgroundColor:[UIColor whiteColor]];
-    
-
     
     UIButton *signInButton = [UIButton DoraCreateLoginOrangeColorButtonWithWidth:DoraScreenWidth/2 Height:50 borderRadius:3 Text:@"注册"];
     
@@ -57,6 +61,7 @@
     [self.view addSubview:_selfIntro];
     [self.view addSubview:_birthday];
     [self.view addSubview:_password];
+    [self.view addSubview:_siginNotice];
     [self.view addSubview:signInButton];
     [self.view addSubview:birthlabel];
 }
@@ -67,6 +72,21 @@
     NSString *selfIntroText = _selfIntro.text;
     NSString *nicknameText = _nickName.text;
     NSDate *birthDate = _birthday.date;
+    
+    NSLog(@"%@", birthDate);
+    
+    if (usernameText.length < 4) {
+        self.siginNotice.text = @"用户名不能少于4个字符！";
+        self.siginNotice.hidden = NO;
+        return;
+    }
+
+    if (_password.text.length < 8) {
+        self.siginNotice.text = @"密码不能少于8个字符！";
+        self.siginNotice.hidden = NO;
+        return;
+    }
+
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:usernameText forKey:@"uid"];
