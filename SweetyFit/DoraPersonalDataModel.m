@@ -14,196 +14,11 @@
 +(DoraPersonalDataModel*)getInstance{
     if(!sharedModel){
         sharedModel = [[DoraPersonalDataModel alloc] init];
+        sharedModel.isLoading = YES; // 初始化
+        [sharedModel getNetworkData];
+
     }
-    [sharedModel getNetworkData];
     return sharedModel;
-}
--(BarChartData*)getMonthData{
-    if(self.historyData){
-        NSDate *curDate = nil;
-        NSMutableArray *yVals = [[NSMutableArray alloc] init];
-        NSInteger xVal = 1;
-        CGFloat yVal = 0;
-        NSInteger accumulate = 0;
-        NSInteger monthDays = 0;
-        BOOL start = YES;
-        
-        for(NSDictionary *dic in self.historyData){
-            curDate = [dic objectForKey:@"Date"];
-            accumulate = [self getNumberOfDaysInMonth:curDate];
-            NSCalendar *calendar = [NSCalendar currentCalendar];
-            NSUInteger unitFlags =     NSCalendarUnitYear |    NSCalendarUnitMonth |    NSCalendarUnitDay |    NSCalendarUnitHour |    NSCalendarUnitMinute |    NSCalendarUnitSecond;
-            NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:curDate];
-            
-            NSInteger month = [dateComponent month];
-            while(xVal<month && start){
-                [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
-                xVal+=1;
-                yVal=0;
-            }
-            start = NO;
-            if(monthDays == 0 ){
-                monthDays = accumulate;
-            }
-            
-            if(monthDays!=accumulate){
-                accumulate=0;
-                monthDays = accumulate;
-                [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
-                xVal+=1;
-                yVal= [[dic objectForKey:@"Calories"] floatValue];
-            }
-            else{
-                 yVal += [[dic objectForKey:@"Calories"] floatValue];
-            }
-        }
-        while(xVal<=12){
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
-            xVal+=1;
-            yVal=0;
-        }
-        BarChartDataSet *set1 = nil;
-        
-        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
-        
-        [set1 setColors:@[UIColor.cyanColor]];
-        set1.drawIconsEnabled = NO;
-        
-        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-        [dataSets addObject:set1];
-        
-        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
-        [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.blackColor];
-        
-        data.barWidth = 0.9f;
-        
-        return data;
-    }
-    else
-        return [self generateHistoryRandomData:100 count:11];
-}
-
--(BarChartData*)getWeekData{
-    if(self.historyData){
-        NSDate *curDate = nil;
-        NSMutableArray *yVals = [[NSMutableArray alloc] init];
-        NSInteger xVal = 1;
-        CGFloat yVal = 0;
-        NSInteger accumulate = 0;
-        for(NSDictionary *dic in self.historyData){
-            curDate = [dic objectForKey:@"Date"];
-            accumulate+=1;
-            yVal += [[dic objectForKey:@"Calories"] floatValue];
-            if(accumulate==7){
-                accumulate=0;
-                [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
-                xVal+=1;
-                yVal=0;
-            }
-        }
-        while(xVal<=52){
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
-            xVal+=1;
-            yVal = 0;
-        }
-        BarChartDataSet *set1 = nil;
-        
-        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
-        
-        [set1 setColors:@[UIColor.cyanColor]];
-        set1.drawIconsEnabled = NO;
-        
-        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-        [dataSets addObject:set1];
-        
-        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
-        [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.blackColor];
-        
-        data.barWidth = 0.9f;
-        
-        return data;
-    }
-    else
-        return [self generateHistoryRandomData:100 count:51];
-}
-
--(BarChartData*)getDayData{
-    if(self.historyData){
-        NSDate *curDate = nil;
-        NSMutableArray *yVals = [[NSMutableArray alloc] init];
-        NSInteger xVal = 1;
-        CGFloat yVal = 0;
-        NSInteger accumulate = 0;
-        for(NSDictionary *dic in self.historyData){
-            curDate = [dic objectForKey:@"Date"];
-            accumulate+=1;
-            yVal += [[dic objectForKey:@"Calorie"] floatValue];
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
-            xVal+=1;
-            yVal=0;
-            
-        }
-        while(xVal<=365){
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
-            xVal+=1;
-        }
-        BarChartDataSet *set1 = nil;
-        
-        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
-        
-        [set1 setColors:@[UIColor.cyanColor]];
-        set1.drawIconsEnabled = NO;
-        
-        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-        [dataSets addObject:set1];
-        
-        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
-        [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.blackColor];
-        
-        data.barWidth = 0.9f;
-        
-        return data;
-    }
-    else
-        return [self generateHistoryRandomData:100 count:364];
-}
-
--(BarChartData*)generateHistoryRandomData:(NSInteger)range count:(NSInteger)count{
-    double start = 1.0;
-    
-    NSMutableArray *yVals = [[NSMutableArray alloc] init];
-    
-    for (int i = start; i < start + count + 1; i++)
-    {
-        double mult = (range + 1);
-        double val = (double) (arc4random_uniform(mult));
-        if (arc4random_uniform(100) < 25) {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-        } else {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-        }
-    }
-    
-    BarChartDataSet *set1 = nil;
-   
-    set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
-
-    [set1 setColors:@[UIColor.cyanColor]];
-    set1.drawIconsEnabled = NO;
-    
-    NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-    [dataSets addObject:set1];
-    
-    BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
-    [data setValueFont:[UIFont systemFontOfSize:10.f]];
-    [data setValueTextColor:UIColor.blackColor];
-    
-    data.barWidth = 0.9f;
-    
-    return data;
 }
 
 -(void)setHistoryDataWithArray:(NSArray *)data{
@@ -216,7 +31,7 @@
         if(curDate){
             NSString *date = [dic objectForKey:@"Date"];
             NSDateFormatter *formatter1 = [[NSDateFormatter alloc]init];
-            [formatter1 setDateFormat:@"yyyy-MM-dd"];
+            [formatter1 setDateFormat:@"yyyyMMdd"];
             NSDate *resDate = [formatter1 dateFromString:date];
             resDate = [resDate  dateByAddingTimeInterval: interval];
             NSTimeInterval time = [resDate timeIntervalSinceDate:curDate];
@@ -231,7 +46,7 @@
                 days-=1;
             }
             
-            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:resDate,@"Date",[dic objectForKey:@"Calories"],@"Calories", nil];
+            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:resDate,@"Date",[dic objectForKey:@"Calorie"],@"Calories", nil];
             [self.historyData addObject:dictionary];
         }
         else{
@@ -239,10 +54,10 @@
             NSString *date = [dic objectForKey:@"Date"];
             
             NSDateFormatter *formatter1 = [[NSDateFormatter alloc]init];
-            [formatter1 setDateFormat:@"yyyy-MM-dd"];
+            [formatter1 setDateFormat:@"yyyyMMdd"];
             curDate = [formatter1 dateFromString:date];
             curDate = [curDate  dateByAddingTimeInterval: interval];
-            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:curDate,@"Date",[dic objectForKey:@"Calories"],@"Calories", nil];
+            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:curDate,@"Date",[dic objectForKey:@"Calorie"],@"Calories", nil];
             [self.historyData addObject:dictionary];
         }
         
@@ -250,7 +65,7 @@
 }
 
 -(void)setExerciseSuggestionWithArray:(NSArray *)data withString:(NSString*) str{
-    self.exerciesSuggestion = str;
+    self.exerciseSuggestion = str;
     self.exerciseSuggestionData = [[NSMutableArray alloc] initWithArray:data];
 }
 
@@ -265,7 +80,7 @@
     
     for (NSDictionary *dic in self.foodSuggestionData)
     {
-        [values addObject:[[PieChartDataEntry alloc] initWithValue: [[dic objectForKey:@"Value"] floatValue] label:[dic objectForKey:@"Label"] icon: [UIImage imageNamed:@"icon"]]];
+        [values addObject:[[PieChartDataEntry alloc] initWithValue: [[dic objectForKey:@"Data"] floatValue] label:[dic objectForKey:@"Type"] icon: [UIImage imageNamed:@"icon"]]];
     }
     
     PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithValues:values label:@""];
@@ -304,7 +119,7 @@
     
     for (NSDictionary *dic in self.exerciseSuggestionData)
     {
-        [values addObject:[[PieChartDataEntry alloc] initWithValue: [[dic objectForKey:@"Num"] floatValue] label:[dic objectForKey:@"Name"] icon: [UIImage imageNamed:@"icon"]]];
+        [values addObject:[[PieChartDataEntry alloc] initWithValue: [[dic objectForKey:@"Data"] floatValue] label:[dic objectForKey:@"Type"] icon: [UIImage imageNamed:@"icon"]]];
     }
     
     PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithValues:values label:@""];
@@ -339,6 +154,7 @@
 }
 
 -(void)getNetworkData{
+    sharedModel.isLoading=YES;
     NSString *urlString = [serverurl stringByAppendingString:@"/account/personal?u="];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults objectForKey:@"uid"]){
@@ -349,32 +165,51 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer= [AFHTTPRequestSerializer new];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        responseObject = (NSDictionary *)responseObject;
-        NSDictionary *fadvice = [responseObject objectForKey:@"fadvice"];
-        NSDictionary *eadvice = [responseObject objectForKey:@"eadvice"];
-        NSArray *history = [[NSArray alloc] initWithObjects:[responseObject objectForKey:@"history"],nil];
-        NSArray *fdata = [fadvice objectForKey:@"AdviceData"];
-        NSArray *edata = [eadvice objectForKey:@"AdviceData"];
-        NSString *fcontent = [fadvice objectForKey:@"AdviceContent"];
-        NSString *econtent = [fadvice objectForKey:@"AdviceContent"];
+        
+        NSDictionary *json = (NSDictionary *)responseObject;
+        NSDictionary *fadvice = [json objectForKey:@"dietAdvice"];
+        NSDictionary *eadvice = [json objectForKey:@"exerciseAdvice"];
+        NSArray *history = [[NSArray alloc] initWithObjects:[[json objectForKey:@"history"] objectAtIndex:0],nil];
+        NSDictionary *fdic = [[fadvice objectForKey:@"Data"] objectAtIndex:0];
+        NSDictionary *edic = [[eadvice objectForKey:@"Data"] objectAtIndex:0];
+        NSString *fcontent = [fadvice objectForKey:@"Advice"];
+        NSString *econtent = [fadvice objectForKey:@"Advice"];
+        NSMutableArray *fdata = [[NSMutableArray alloc] init];
+        NSMutableArray *edata = [[NSMutableArray alloc] init];
+        for(int i=0;i<[[fdic objectForKey:@"Type"] count];i++){
+            [fdata addObject:[NSDictionary dictionaryWithObjectsAndKeys:[fdic objectForKey:@"Data"][i],@"Data",[fdic objectForKey:@"Type"][i],@"Type",nil]];
+        }
+        
+        for(int i=0;i<[[edic objectForKey:@"Type"] count];i++){
+            [edata addObject:[NSDictionary dictionaryWithObjectsAndKeys:[edic objectForKey:@"Data"][i],@"Data",[edic objectForKey:@"Type"][i],@"Type",nil]];
+        }
+        
         [self setFoodSuggestionWithArray:fdata withString:fcontent];
         [self setExerciseSuggestionWithArray:edata withString:econtent];
         [self setHistoryDataWithArray:history];
+        
+        sharedModel.isLoading = NO;
+        
+        if(self.historyDelegate && [self.historyDelegate respondsToSelector:@selector(updateBarChartData)]){
+            [self.historyDelegate updateBarChartData];
+        }
+        
+        if(self.foodDelegate && [self.foodDelegate respondsToSelector:@selector(updateFoodPieChartData)]){
+            [self.foodDelegate updateFoodPieChartData];
+        }
+        
+        if(self.exerciseDelegate && [self.exerciseDelegate respondsToSelector:@selector(updateExercisePieChartData)]){
+            [self.exerciseDelegate updateExercisePieChartData];
+        }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"fail results: %@", error);
     }];
     
+    
 }
 
-- (NSInteger)getNumberOfDaysInMonth:(NSDate*)date
-{
-    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay
-                                   inUnit: NSCalendarUnitMonth
-                                  forDate:date];
-    return range.length;
-}
+
 @end
 
 

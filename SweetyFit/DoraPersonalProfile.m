@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DoraPersonalProfile.h"
 #import "DoraColorDefineHeader.h"
-
-
+#import "DoraPersonalDataModel.h"
 
 #define margin 5
 #define imageSize self.frame.size.height-2*margin

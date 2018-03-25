@@ -13,9 +13,7 @@
 #import "DoraPersonalSuggestion.h"
 #import "DoraPersonalTableCell.h"
 #import "DoraPersonalDataModel.h"
-
 @interface DoraPersonalViewController : UIViewController
-
 @property(nonatomic,strong) DoraPersonalProfile *personalProfile;
 @property(nonatomic,strong) DoraPersonalSuggestion *personalSuggestionExercise;
 @property(nonatomic,strong) DoraPersonalSuggestion *personalSuggestionFood;

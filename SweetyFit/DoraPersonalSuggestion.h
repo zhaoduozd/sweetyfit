@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import "DoraCommonHeader.h"
 #import "SweetyFit-Bridging-Header.h"
-@interface DoraPersonalSuggestion : UIView<ChartViewDelegate>
+@interface DoraPersonalSuggestion : UIView
 
 @property(strong,nonatomic) NSArray *parties;
 @property(strong,nonatomic) UILabel *title;

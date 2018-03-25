@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "DoraPersonalSuggestion.h"
 #import "DoraColorDefineHeader.h"
+#import "DoraPersonalDataModel.h"
 #define margin 5
 #define titleHeight 30
+
+@interface DoraPersonalSuggestion()<ChartViewDelegate,DoraPersonalDataObserver>
+
+@end
 @implementation DoraPersonalSuggestion
 
 -(id)init{
@@ -41,7 +46,6 @@
     self.pieChartView.frame =CGRectMake(margin,margin+titleHeight,self.frame.size.width-2*margin,self.frame.size.width-2*margin);
     self.pieChartView.entryLabelFont = [UIFont systemFontOfSize:12.f];
 
-    [self updateChartData];
      [self.pieChartView animateWithXAxisDuration:1.4 easingOption:ChartEasingOptionEaseOutBack];
     
     self.suggestView = [[UITextView alloc] init];
@@ -52,55 +56,6 @@
     [self addSubview: self.suggestView];
 
     return self;
-}
-
-- (void)updateChartData
-{
-    [self setDataCount:4 range:100.00f];
-}
-
-
-- (void)setDataCount:(int)count range:(double)range
-{
-    double mult = range;
-    
-    NSMutableArray *values = [[NSMutableArray alloc] init];
-    
-    for (int i = 0; i < count; i++)
-    {
-        [values addObject:[[PieChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + mult / 5) label:self.parties[i % self.parties.count] icon: [UIImage imageNamed:@"icon"]]];
-    }
-    
-    PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithValues:values label:@""];
-    
-    dataSet.drawIconsEnabled = NO;
-    
-    dataSet.sliceSpace = 2.0;
-    dataSet.iconsOffset = CGPointMake(0, 10);
-    
-    // add a lot of colors
-    
-    NSMutableArray *colors = [[NSMutableArray alloc] init];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:255/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:0/255.f blue:255/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:255/255.f green:0/255.f blue:0/255.f alpha:1.f]];
-    [colors addObject:[UIColor colorWithRed:0/255.f green:255/255.f blue:0/255.f alpha:1.f]];
-    
-    dataSet.colors = colors;
-    
-    PieChartData *data = [[PieChartData alloc] initWithDataSet:dataSet];
-    
-    NSNumberFormatter *pFormatter = [[NSNumberFormatter alloc] init];
-    pFormatter.numberStyle = NSNumberFormatterPercentStyle;
-    pFormatter.maximumFractionDigits = 1;
-    pFormatter.multiplier = @1.f;
-    pFormatter.percentSymbol = @" %";
-    [data setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:pFormatter]];
-    [data setValueFont:[UIFont systemFontOfSize:12.0f]];
-    [data setValueTextColor:UIColor.blackColor];
-    
-    self.pieChartView.data = data;
-    [self.pieChartView highlightValues:nil];
 }
 
 - (void)setupPieChartView:(PieChartView *)chartView
@@ -137,6 +92,18 @@
 - (void)chartValueNothingSelected:(ChartViewBase * __nonnull)chartView
 {
     NSLog(@"chartValueNothingSelected");
+}
+
+-(void)updateFoodPieChartData{
+    [self.title setText:@"饮食建议"];
+    [self.suggestView setText:[DoraPersonalDataModel getInstance].foodSuggestion];
+    self.pieChartView.data = [[DoraPersonalDataModel getInstance] getFoodData];
+}
+
+-(void)updateExercisePieChartData{
+    [self.title setText:@"运动建议"];
+    [self.suggestView setText:[DoraPersonalDataModel getInstance].exerciseSuggestion];
+    self.pieChartView.data = [[DoraPersonalDataModel getInstance] getExerciseData];
 }
 
 @end

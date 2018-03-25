@@ -12,7 +12,7 @@
 #import "DoraPersonalDataModel.h"
 #define margin 5
 #define titleHeight 30
-@interface DoraPersonalHistory ()<ChartViewDelegate>
+@interface DoraPersonalHistory ()<ChartViewDelegate,DoraPersonalDataObserver>
 @property(nonatomic, strong) UIButton *button_day;
 @property(nonatomic, strong) UIButton *button_week;
 @property(nonatomic, strong) UIButton *button_month;
@@ -55,7 +55,8 @@
     self.barChartView=[[BarChartView alloc] initWithFrame:CGRectMake(margin, margin+30+margin+titleHeight,self.frame.size.width-margin*2,self.frame.size.height-3*margin-30-titleHeight)];
     [self setUpBarChart];
     [self addSubview:self.barChartView];
-    self.barChartView.data = [[DoraPersonalDataModel getInstance] getDayData];
+
+    //self.barChartView.data = [[DoraPersonalDataModel getInstance] getDayData];
     [self.barChartView highlightValues:nil];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
@@ -130,21 +131,222 @@
     [self.button_day setBackgroundColor:[UIColor darkGrayColor]];
     [self.button_week setBackgroundColor:[UIColor darkGrayColor]];
     [self.button_month setBackgroundColor:[UIColor darkGrayColor]];
-    switch (self.status) {
-        case 0:
-            [self.button_day setBackgroundColor:[UIColor grayColor]];
-            self.barChartView.data = [[DoraPersonalDataModel getInstance] getDayData];
-            break;
-        case 1:
-            [self.button_week setBackgroundColor:[UIColor grayColor]];
-            self.barChartView.data = [[DoraPersonalDataModel getInstance] getWeekData];
-            break;
-        case 2:
-            [self.button_month setBackgroundColor:[UIColor grayColor]];
-            self.barChartView.data = [[DoraPersonalDataModel getInstance] getMonthData];
-            break;
-        default:
-            break;
+    [self updateBarChartData];
+}
+
+-(BarChartData*)getMonthData{
+    if([DoraPersonalDataModel getInstance].historyData){
+        NSDate *curDate = nil;
+        NSMutableArray *yVals = [[NSMutableArray alloc] init];
+        NSInteger xVal = 1;
+        CGFloat yVal = 0;
+        NSInteger accumulate = 0;
+        NSInteger monthDays = 0;
+        BOOL start = YES;
+        
+        for(NSDictionary *dic in [DoraPersonalDataModel getInstance].historyData){
+            curDate = [dic objectForKey:@"Date"];
+            accumulate = [self getNumberOfDaysInMonth:curDate];
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSUInteger unitFlags =     NSCalendarUnitYear |    NSCalendarUnitMonth |    NSCalendarUnitDay |    NSCalendarUnitHour |    NSCalendarUnitMinute |    NSCalendarUnitSecond;
+            NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:curDate];
+            
+            NSInteger month = [dateComponent month];
+            while(xVal<month && start){
+                [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
+                xVal+=1;
+                yVal=0;
+            }
+            start = NO;
+            if(monthDays == 0 ){
+                monthDays = accumulate;
+            }
+            
+            if(monthDays!=accumulate){
+                accumulate=0;
+                monthDays = accumulate;
+                [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
+                xVal+=1;
+                yVal= [[dic objectForKey:@"Calories"] floatValue];
+            }
+            else{
+                yVal += [[dic objectForKey:@"Calories"] floatValue];
+            }
+        }
+        while(xVal<=12){
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
+            xVal+=1;
+            yVal=0;
+        }
+        BarChartDataSet *set1 = nil;
+        
+        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
+        
+        [set1 setColors:@[UIColor.cyanColor]];
+        set1.drawIconsEnabled = NO;
+        
+        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
+        [dataSets addObject:set1];
+        
+        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
+        [data setValueFont:[UIFont systemFontOfSize:10.f]];
+        [data setValueTextColor:UIColor.blackColor];
+        
+        data.barWidth = 0.9f;
+        
+        return data;
+    }
+    return nil;
+}
+
+-(BarChartData*)getWeekData{
+    if([DoraPersonalDataModel getInstance].historyData){
+        NSDate *curDate = nil;
+        NSMutableArray *yVals = [[NSMutableArray alloc] init];
+        NSInteger xVal = 1;
+        CGFloat yVal = 0;
+        NSInteger accumulate = 0;
+        for(NSDictionary *dic in [DoraPersonalDataModel getInstance].historyData){
+            curDate = [dic objectForKey:@"Date"];
+            accumulate+=1;
+            yVal += [[dic objectForKey:@"Calories"] floatValue];
+            if(accumulate==7){
+                accumulate=0;
+                [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
+                xVal+=1;
+                yVal=0;
+            }
+        }
+        while(xVal<=52){
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
+            xVal+=1;
+            yVal = 0;
+        }
+        BarChartDataSet *set1 = nil;
+        
+        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
+        
+        [set1 setColors:@[UIColor.cyanColor]];
+        set1.drawIconsEnabled = NO;
+        
+        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
+        [dataSets addObject:set1];
+        
+        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
+        [data setValueFont:[UIFont systemFontOfSize:10.f]];
+        [data setValueTextColor:UIColor.blackColor];
+        
+        data.barWidth = 0.9f;
+        
+        return data;
+    }
+    return nil;
+}
+
+-(BarChartData*)getDayData{
+    if([DoraPersonalDataModel getInstance].historyData){
+        NSDate *curDate = nil;
+        NSMutableArray *yVals = [[NSMutableArray alloc] init];
+        NSInteger xVal = 1;
+        CGFloat yVal = 0;
+        NSInteger accumulate = 0;
+        for(NSDictionary *dic in [DoraPersonalDataModel getInstance].historyData){
+            curDate = [dic objectForKey:@"Date"];
+            accumulate+=1;
+            yVal += [[dic objectForKey:@"Calorie"] floatValue];
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
+            xVal+=1;
+            yVal=0;
+            
+        }
+        while(xVal<=365){
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
+            xVal+=1;
+        }
+        BarChartDataSet *set1 = nil;
+        
+        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
+        
+        [set1 setColors:@[UIColor.cyanColor]];
+        set1.drawIconsEnabled = NO;
+        
+        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
+        [dataSets addObject:set1];
+        
+        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
+        [data setValueFont:[UIFont systemFontOfSize:10.f]];
+        [data setValueTextColor:UIColor.blackColor];
+        
+        data.barWidth = 0.9f;
+        
+        return data;
+    }
+    return nil;
+}
+//测试用
+-(BarChartData*)generateHistoryRandomData:(NSInteger)range count:(NSInteger)count{
+    double start = 1.0;
+    
+    NSMutableArray *yVals = [[NSMutableArray alloc] init];
+    
+    for (int i = start; i < start + count + 1; i++)
+    {
+        double mult = (range + 1);
+        double val = (double) (arc4random_uniform(mult));
+        if (arc4random_uniform(100) < 25) {
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+        } else {
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
+        }
+    }
+    
+    BarChartDataSet *set1 = nil;
+    
+    set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@""];
+    
+    [set1 setColors:@[UIColor.cyanColor]];
+    set1.drawIconsEnabled = NO;
+    
+    NSMutableArray *dataSets = [[NSMutableArray alloc] init];
+    [dataSets addObject:set1];
+    
+    BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
+    [data setValueFont:[UIFont systemFontOfSize:10.f]];
+    [data setValueTextColor:UIColor.blackColor];
+    
+    data.barWidth = 0.9f;
+    
+    return data;
+}
+
+- (NSInteger)getNumberOfDaysInMonth:(NSDate*)date
+{
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay
+                                   inUnit: NSCalendarUnitMonth
+                                  forDate:date];
+    return range.length;
+}
+
+
+-(void)updateBarChartData{
+    if(![DoraPersonalDataModel getInstance].isLoading){
+        switch (self.status) {
+            case 0:
+                [self.button_day setBackgroundColor:[UIColor grayColor]];
+                self.barChartView.data = [self getDayData];
+                break;
+            case 1:
+                [self.button_week setBackgroundColor:[UIColor grayColor]];
+                self.barChartView.data = [self getWeekData];
+                break;
+            case 2:
+                [self.button_month setBackgroundColor:[UIColor grayColor]];
+                self.barChartView.data = [self getMonthData];
+                break;
+            default:
+                break;
+        }
     }
 }
 
