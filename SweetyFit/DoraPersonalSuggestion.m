@@ -54,6 +54,9 @@
     self.suggestView.backgroundColor =AppDefaultBarTintColor;
     self.suggestView.text = @"1.\n2\n3\n4\n5\n";
     [self.suggestView setTextColor:ChartColorLabelText];
+
+
+
     [self addSubview: self.suggestView];
 
     return self;
@@ -106,19 +109,35 @@
     NSLog(@"chartValueNothingSelected");
 }
 
+
 -(void)updateFoodPieChartData{
     [self.title setText:@"饮食建议"];
-    [self.suggestView setText:[DoraPersonalDataModel getInstance].foodSuggestion];
-    [self.suggestView setFont:[UIFont systemFontOfSize:16]];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 10;// 字体的行间距
+    
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    self.suggestView.attributedText = [[NSAttributedString alloc] initWithString:[DoraPersonalDataModel getInstance].foodSuggestion attributes:attributes];
+    [self.suggestView setTextColor:ChartColorLabelText];
     self.pieChartView.data = [[DoraPersonalDataModel getInstance] getFoodData];
 }
 
 -(void)updateExercisePieChartData{
     [self.title setText:@"运动建议"];
-    [self.suggestView setText:[DoraPersonalDataModel getInstance].exerciseSuggestion];
-    [self.suggestView setFont:[UIFont systemFontOfSize:16]];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 10;// 字体的行间距
+    
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    self.suggestView.attributedText = [[NSAttributedString alloc] initWithString:[DoraPersonalDataModel getInstance].exerciseSuggestion attributes:attributes];
+    [self.suggestView setTextColor:ChartColorLabelText];
     self.pieChartView.data = [[DoraPersonalDataModel getInstance] getExerciseData];
 }
+
 
 @end
 
