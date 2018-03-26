@@ -25,11 +25,12 @@
     self = [super initWithFrame:frame];
     self.status = 0;
     
-    self.backgroundColor = AppDefaultBackgroundColor;
+    self.backgroundColor = AppDefaultBarTintColor;
     self.title = [[UILabel alloc]initWithFrame:CGRectMake(margin, margin, frame.size.width, titleHeight)];
     //[self.title setTextAlignment:NSTextAlignmentCenter];
     self.title.text = @"运动历史";
-    [self.title setFont:[UIFont boldSystemFontOfSize:18]];
+    [self.title setFont:[UIFont systemFontOfSize:18]];
+    [self.title setTextColor:ChartColorLabelText];
     [self addSubview:self.title];
     
     CGFloat btn_width = (self.frame.size.width-margin*2)/3;
@@ -90,7 +91,7 @@
     xAxis.labelPosition = XAxisLabelPositionBottom;
     xAxis.labelFont = [UIFont systemFontOfSize:10.f];
     xAxis.drawGridLinesEnabled = NO;
-    xAxis.labelTextColor = UIColor.blackColor;
+    xAxis.labelTextColor = ChartColorLabelText;
     xAxis.granularity = 1.0; // only intervals of 1 day
     xAxis.labelCount = 7;
     xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:self.barChartView];
@@ -104,7 +105,7 @@
     ChartYAxis *leftAxis = self.barChartView.leftAxis;
     leftAxis.labelFont = [UIFont systemFontOfSize:10.f];
     leftAxis.labelCount = 8;
-    leftAxis.labelTextColor = UIColor.blackColor;
+    leftAxis.labelTextColor = ChartColorLabelText;
     leftAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:leftAxisFormatter];
     leftAxis.labelPosition = YAxisLabelPositionOutsideChart;
     leftAxis.spaceTop = 0.15;

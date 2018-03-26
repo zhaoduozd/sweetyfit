@@ -28,7 +28,7 @@
     self = [super initWithFrame:frame];
     self.backgroundColor = AppDefaultBarTintColor;
     
-    self.profileImage = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"placeholder"]];
+    self.profileImage = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"user"]];
     self.profileImage.frame = CGRectMake(margin, margin, imageSize, imageSize);
     
     [self addSubview:self.profileImage];

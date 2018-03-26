@@ -24,9 +24,9 @@
 
 #define ChartColorSet7 [UIColor colorWithRed:255/255.0 green:0.0/255.0 blue:255/255.0 alpha:1]
 
-#define ChartColorLabelText [UIColor colorWithRed:0/255.0 green:0.0/255.0 blue:0/255.0 alpha:1]
+#define ChartColorLabelText [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
 
-#define ChartColorText [UIColor colorWithRed:0/255.0 green:0.0/255.0 blue:0/255.0 alpha:1]
+#define ChartColorText [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
 
 #define AppDefaultColor [UIColor colorWithRed:233.0/255.0 green:98.0/255.0 blue:8.0/255.0 alpha:1]
 

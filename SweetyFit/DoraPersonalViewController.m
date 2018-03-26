@@ -15,7 +15,7 @@
 #define SuggestionHeight 500
 #define HistoryHeight 330
 #define Margin 5
-#define segmentColor [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8]
+#define segmentColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]
 
 @interface DoraPersonalViewController ()<UIScrollViewDelegate>
 @property(nonatomic,strong) UIScrollView *containerView;
@@ -36,13 +36,17 @@
     
     [self.containerView addSubview:self.personalProfile];
     
+    UIView *segmentLine0 = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+0.5*Margin,DoraScreenWidth*0.9,1)];
+    segmentLine0.backgroundColor = segmentColor;
+    [self.containerView addSubview:segmentLine0];
+    
     self.personalSuggestionExercise = [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,ProfileHeight+Margin,DoraScreenWidth,SuggestionHeight)];
     [DoraPersonalDataModel getInstance].exerciseDelegate = self.personalSuggestionExercise;
     [self.containerView addSubview:self.personalSuggestionExercise];
     
-    UIView *segmentLine = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+1.5*Margin+SuggestionHeight,DoraScreenWidth*0.9,1)];
-    segmentLine.backgroundColor = segmentColor;
-    [self.containerView addSubview:segmentLine];
+    UIView *segmentLine1 = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+1.5*Margin+SuggestionHeight,DoraScreenWidth*0.9,1)];
+    segmentLine1.backgroundColor = segmentColor;
+    [self.containerView addSubview:segmentLine1];
     
     self.personalSuggestionFood= [[DoraPersonalSuggestion alloc] initWithFrame:CGRectMake(0,ProfileHeight+2* Margin+SuggestionHeight,DoraScreenWidth,SuggestionHeight)];
     [DoraPersonalDataModel getInstance].foodDelegate = self.personalSuggestionFood;
@@ -60,10 +64,10 @@
     
     [self.personalSignOut addTarget:self action:@selector(signOutClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.personalSignOut setTitle:@"退出登录" forState:UIControlStateNormal];
-    [self.personalSignOut setBackgroundColor:AppDefaultBarTintColor];
+    [self.personalSignOut setBackgroundColor:AppDefaultColor];
     [self.containerView addSubview:self.personalSignOut];
     
-    self.view.backgroundColor = AppDefaultSubViewBackgroundColor;
+    self.view.backgroundColor = AppDefaultBarTintColor;
     
     // self.navigationController.navigationBarHidden = YES;
 

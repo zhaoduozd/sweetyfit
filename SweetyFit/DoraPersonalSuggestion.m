@@ -24,10 +24,11 @@
 
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    self.backgroundColor = AppDefaultSubViewBackgroundColor;
+    self.backgroundColor = AppDefaultBarTintColor;
     self.title = [[UILabel alloc]initWithFrame:CGRectMake(margin, margin, frame.size.width, titleHeight)];
     //[self.title setTextAlignment:NSTextAlignmentCenter];
-    [self.title setFont:[UIFont boldSystemFontOfSize:18]];
+    [self.title setFont:[UIFont systemFontOfSize:18]];
+    [self.title setTextColor:ChartColorLabelText];
     [self addSubview:self.title];
     
     self.parties = @[
@@ -50,9 +51,9 @@
     
     self.suggestView = [[UITextView alloc] init];
     self.suggestView.frame = CGRectMake(margin, titleHeight+self.frame.size.width, self.frame.size.width-2*margin,self.frame.size.height-self.frame.size.width-margin-titleHeight);
-    self.suggestView.backgroundColor =AppDefaultSubViewBackgroundColor;
+    self.suggestView.backgroundColor =AppDefaultBarTintColor;
     self.suggestView.text = @"1.\n2\n3\n4\n5\n";
-    
+    [self.suggestView setTextColor:ChartColorLabelText];
     [self addSubview: self.suggestView];
 
     return self;
@@ -86,8 +87,8 @@
     //l.enabled = NO;
     
     chartView.drawHoleEnabled = YES;
-    chartView.holeColor=AppDefaultSubViewBackgroundColor;
-    chartView.backgroundColor=AppDefaultSubViewBackgroundColor;
+    chartView.holeColor=AppDefaultBarTintColor;
+    chartView.backgroundColor=AppDefaultBarTintColor;
     chartView.rotationAngle = 0.0;
     chartView.rotationEnabled = YES;
     chartView.highlightPerTapEnabled = YES;
