@@ -15,7 +15,7 @@
 #define SuggestionHeight 500
 #define HistoryHeight 330
 #define Margin 5
-#define segmentColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]
+#define segmentColor [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8]
 
 @interface DoraPersonalViewController ()<UIScrollViewDelegate>
 @property(nonatomic,strong) UIScrollView *containerView;
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, DoraScreenHeight-40)];
-    self.containerView.contentSize = CGSizeMake(DoraScreenWidth, ProfileHeight+2*SuggestionHeight+HistoryHeight+5*Margin+signOutHeight);
+    self.containerView.contentSize = CGSizeMake(DoraScreenWidth, ProfileHeight+2*SuggestionHeight+HistoryHeight+5*Margin+signOutHeight+30);
     self.containerView.delegate = self;
     self.containerView.canCancelContentTouches=NO;
     self.containerView.delaysContentTouches=YES;
@@ -60,7 +60,7 @@
     
     [self.personalSignOut addTarget:self action:@selector(signOutClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.personalSignOut setTitle:@"退出登录" forState:UIControlStateNormal];
-    [self.personalSignOut setBackgroundColor:AppDefaultColor];
+    [self.personalSignOut setBackgroundColor:AppDefaultBarTintColor];
     [self.containerView addSubview:self.personalSignOut];
     
     self.view.backgroundColor = AppDefaultSubViewBackgroundColor;
