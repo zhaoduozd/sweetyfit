@@ -60,13 +60,13 @@
     
     self.gifplayer = [[UIImageView alloc] init];
     [self.gifplayer setBackgroundColor:[UIColor grayColor]];
-    self.gifplayer.frame = CGRectMake(0, 46, DoraScreenWidth, DoraScreenWidth*0.618);
+    self.gifplayer.frame = CGRectMake(0, 40, DoraScreenWidth, DoraScreenWidth*0.618);
     self.exerciselist = [[UIScrollView alloc] init];
     self.exerciselist.frame = CGRectMake(0, 46+DoraScreenWidth*0.618, DoraScreenWidth, 70);
     self.pointtips = [[DoraExercisePointView alloc] init];
     self.pointtips.frame = CGRectMake(0, 116+DoraScreenWidth*0.618, DoraScreenWidth, 186);
     self.actionsettingbtn = [[UIButton alloc] init];
-    self.actionsettingbtn.frame = CGRectMake(DoraScreenWidth - 35, 15, 30, 30);
+    self.actionsettingbtn.frame = CGRectMake(DoraScreenWidth - 35, 5, 30, 30);
     self.actionsettingbtn.titleLabel.text = @"运动设置";
     [self.actionsettingbtn setBackgroundImage:[UIImage imageNamed:@"actionsetting.png"] forState:UIControlStateNormal];
     
@@ -88,7 +88,7 @@
     
     [_startplaybtnwrapper addSubview:_playbtn];
     
-    
+    _pointtips.speechSwitch.hidden = YES;
     
     /*  Add Elments  */
     [self.view addSubview:moduletitle];
@@ -185,7 +185,7 @@
     
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         NSString *urlstring = [NSString stringWithFormat:@"%@", url];
         return [documentsDirectoryURL URLByAppendingPathComponent:[urlstring MD5]];
         
@@ -216,8 +216,6 @@
         CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
         size_t count = CGImageSourceGetCount(source);
         
-        NSLog(@"%@", data);
-        
         for (size_t j = 0; j < count; j++)
         {
             CGImageRef imageRef = CGImageSourceCreateImageAtIndex(source, j, NULL);
@@ -238,9 +236,6 @@
 
 - (void) ShowGifUI:(int) actionnum {
     NSArray *actions = [_exercisedata objectForKey:@"actions"];
-    
-    /*   Set Gif Player   */
-    [self InitialGifPlayer];
     
     /*   Set Exercise List   */
     float actionlistimgwidth = 80;
@@ -271,7 +266,20 @@
     }
     
     /*   Set Tips   */
-    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:0] objectForKey:@"tips"];
+    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:0] objectForKey:@"tip"];
+    [self SetTips:tips];
+    
+    /*   Set Gif Player   */
+    [self InitialGifPlayer];
+}
+
+- (void) SetTips:(NSString *) tips {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:tips];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 15; // 调整行间距
+    NSRange range = NSMakeRange(0, [tips length]);
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
+    _pointtips.tips.attributedText = attributedString;
     _pointtips.tips.text = tips;
 }
 
@@ -351,8 +359,8 @@
     // NSLog(@"%d", gifid);
 
     [_gifplayer setImage:[[_gifgroups objectAtIndex:gifid] objectAtIndex:0]];
-    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"tips"];
-    _pointtips.tips.text = tips;
+    NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"tip"];
+    [self SetTips:tips];
     _gifplayer.animationImages = [_gifgroups objectAtIndex:gifid];
     _gifplayer.animationDuration = duration;
     _gifplayer.animationRepeatCount = 2;
@@ -378,12 +386,43 @@
             
             [_gifplayer setImage:[[_gifgroups objectAtIndex:0] objectAtIndex:0]];
             _startplaybtnwrapper.hidden = NO;
-            _pointtips.tips.text = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:0] objectForKey:@"actiontips"];
+            _pointtips.tips.text = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:0] objectForKey:@"tip"];
         }];
         
         [_giftimers addObject:timer];
     }
 }
+
+- (void) PausePlayGif {
+    CALayer *layer = _gifplayer.layer;
+    
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    layer.speed = 0.0;
+    layer.timeOffset = pausedTime;
+    
+    isgifpause = 1;
+    
+    _startplaybtnwrapper.hidden = NO;
+}
+
+- (void) ResumePlayGif {
+    CALayer *layer = _gifplayer.layer;
+    
+    CFTimeInterval pausedTime = [layer timeOffset];
+    layer.speed = 1.0;
+    layer.timeOffset = 0.0;
+    layer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    layer.beginTime = timeSincePause;
+    
+    isgifpause = 0;
+    
+    _startplaybtnwrapper.hidden = YES;
+}
+
+
+
+/* exercise record */
 
 - (void) RecordExerciseWith:(int) gifid {
     __weak DoraExerciseRecomViewController *weakself = self;
@@ -433,31 +472,6 @@
     [newexerciserecord writeToFile:_exerciserecordfilepath atomically:YES];
 }
 
-- (void) PausePlayGif {
-    CALayer *layer = _gifplayer.layer;
-    
-    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    layer.speed = 0.0;
-    layer.timeOffset = pausedTime;
-    
-    isgifpause = 1;
-    
-    _startplaybtnwrapper.hidden = NO;
-}
 
-- (void) ResumePlayGif {
-    CALayer *layer = _gifplayer.layer;
-    
-    CFTimeInterval pausedTime = [layer timeOffset];
-    layer.speed = 1.0;
-    layer.timeOffset = 0.0;
-    layer.beginTime = 0.0;
-    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
-    layer.beginTime = timeSincePause;
-    
-    isgifpause = 0;
-    
-    _startplaybtnwrapper.hidden = YES;
-}
 
 @end

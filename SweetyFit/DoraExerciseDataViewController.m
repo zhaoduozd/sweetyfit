@@ -130,13 +130,13 @@
     _walkingRunningCalorieData = [[UILabel alloc] init];
     _sportCalorieData = [[UILabel alloc] init];
     
-    UILabel *modeltitle = [UILabel DoraCreateTextBoldTitleName:@"今天消耗de热量"];
+    UILabel *modeltitle = [UILabel DoraCreateTextBoldTitleName:@"今日消耗热量"];
     UILabel *totaltitle = [UILabel DoraCreateTextSmallRightTitleName:@"总消耗"];
-    UILabel *walkingtitle = [UILabel DoraCreateTextSmallRightTitleName:@"跑步 + 走路:"];
-    UILabel *sporttitle = [UILabel DoraCreateTextSmallRightTitleName:@"运动:"];
+    UILabel *walkingtitle = [UILabel DoraCreateTextSmallRightTitleName:@"跑步 & 走路"];
+    UILabel *sporttitle = [UILabel DoraCreateTextSmallRightTitleName:@"运动"];
     
     
-    UIView *sportDataWrapper = [[UIView alloc] initWithFrame:CGRectMake(-1, 36, DoraScreenWidth+2, 200)];
+    UIView *sportDataWrapper = [[UIView alloc] initWithFrame:CGRectMake(-1, 40, DoraScreenWidth+2, 200)];
     sportDataWrapper.backgroundColor = AppDefaultSubViewBackgroundColor;
     sportDataWrapper.layer.borderWidth = 1;
     sportDataWrapper.layer.borderColor = AppDefaultBorderColor.CGColor;

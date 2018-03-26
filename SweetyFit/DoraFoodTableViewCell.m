@@ -16,20 +16,30 @@
     
     _foodImage = [[UIImageView alloc] init];
     _foodName = [[UILabel alloc] init];
-    _foodDetail = [[UILabel alloc] init];
+    _foodDetail1 = [[UILabel alloc] init];
+    _foodDetail2 = [[UILabel alloc] init];
     
     _foodImage.frame = CGRectMake(10, 10, 70, 70);
     _foodName.frame = CGRectMake(90, 10, DoraScreenWidth - 100, 30);
-    _foodDetail.frame = CGRectMake(90, 40, DoraScreenWidth - 100, 30);
+    _foodDetail1.frame = CGRectMake(90, 40, (DoraScreenWidth - 100)/2, 90);
+    _foodDetail2.frame = CGRectMake(100 + (DoraScreenWidth - 100)/2, 40, (DoraScreenWidth - 100)/2, 100);
     
-    _foodDetail.textColor = [UIColor colorWithRed:230/255 green:230/255 blue:230/255 alpha:.7];
-    _foodDetail.font = [UIFont systemFontOfSize:13];
+    _foodDetail1.textColor = [UIColor colorWithRed:230/255 green:230/255 blue:230/255 alpha:.7];
+    _foodDetail1.numberOfLines = 3;
+    _foodDetail1.font = [UIFont systemFontOfSize:13];
     
-    UIView *seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth Height:1 PositionX:10 PositionY:79];
+    _foodDetail2.textColor = [UIColor colorWithRed:230/255 green:230/255 blue:230/255 alpha:.7];
+    _foodDetail2.numberOfLines = 3;
+    _foodDetail2.font = [UIFont systemFontOfSize:13];
+    
+
+    
+    UIView *seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth-20 Height:1 PositionX:10 PositionY:129];
     
     [self addSubview:_foodImage];
     [self addSubview:_foodName];
-    [self addSubview:_foodDetail];
+    [self addSubview:_foodDetail1];
+    [self addSubview:_foodDetail2];
     [self addSubview:seperateLine];
     
     return self;

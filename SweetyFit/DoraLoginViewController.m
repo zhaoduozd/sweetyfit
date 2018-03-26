@@ -28,7 +28,7 @@
 
 - (void) setViewBackground {
     // set background image
-    NSString *imageName = @"loginbg.jpg";
+    NSString *imageName = @"loginbg.png";
     UIImage *bgImage = [UIImage imageNamed:imageName];
     UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
     bgImageView.frame = CGRectMake(0, 0, DoraScreenWidth, DoraScreenHeight);

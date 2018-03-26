@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = AppDefaultBackgroundColor;
-    self.navigationController.navigationBarHidden = YES;
+    // self.navigationController.navigationBarHidden = YES;
 
     
     _recomRootView = [[DoraUIScrollViewRecomWrapper alloc] init];
@@ -56,7 +56,7 @@
     float exerciseDataH = titleHeight + 200;
     
     float foodY = exerciseDataY + exerciseDataH;
-    float foodH = titleHeight + 1080;
+    float foodH = titleHeight + 1370;
     
     float bonusY = foodY + foodH;
     float bonusH = 300;

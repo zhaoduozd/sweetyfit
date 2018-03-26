@@ -55,7 +55,7 @@
     [button.layer setCornerRadius:radius];
     
     maskLayer.frame = CGRectMake(0, 0, width, height);
-    maskLayer.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6].CGColor;
+    maskLayer.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8].CGColor;
     
     btnTitle.text = titleTextContent;
     btnTitle.font = [UIFont boldSystemFontOfSize:16.0];

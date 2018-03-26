@@ -63,9 +63,9 @@
     [self.personalSignOut setBackgroundColor:AppDefaultColor];
     [self.containerView addSubview:self.personalSignOut];
     
-    self.view.backgroundColor = AppDefaultBackgroundColor;
+    self.view.backgroundColor = AppDefaultSubViewBackgroundColor;
     
-    self.navigationController.navigationBarHidden = YES;
+    // self.navigationController.navigationBarHidden = YES;
 
 
     // Do any additional setup after loading the view.

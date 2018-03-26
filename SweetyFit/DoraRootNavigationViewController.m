@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.Titles = @[@"推荐", @"运动", @"食物", @"我"];
+    self.Titles = @[@"推荐", @"运动", @"食物", @"个人中心"];
     self.Icons = @[@"recom", @"exercise", @"food", @"personal"];
     self.ClassNames = @[@"DoraRecomViewController", @"DoraExerciseViewController", @"DoraFoodViewController", @"DoraPersonalViewController"];
 

@@ -24,7 +24,7 @@
 
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    self.backgroundColor = AppDefaultBackgroundColor;
+    self.backgroundColor = AppDefaultSubViewBackgroundColor;
     self.title = [[UILabel alloc]initWithFrame:CGRectMake(margin, margin, frame.size.width, titleHeight)];
     //[self.title setTextAlignment:NSTextAlignmentCenter];
     [self.title setFont:[UIFont boldSystemFontOfSize:18]];
@@ -50,7 +50,7 @@
     
     self.suggestView = [[UITextView alloc] init];
     self.suggestView.frame = CGRectMake(margin, titleHeight+self.frame.size.width, self.frame.size.width-2*margin,self.frame.size.height-self.frame.size.width-margin-titleHeight);
-    self.suggestView.backgroundColor =AppDefaultBackgroundColor;
+    self.suggestView.backgroundColor =AppDefaultSubViewBackgroundColor;
     self.suggestView.text = @"1.\n2\n3\n4\n5\n";
     
     [self addSubview: self.suggestView];
@@ -86,8 +86,8 @@
     //l.enabled = NO;
     
     chartView.drawHoleEnabled = YES;
-    chartView.holeColor=AppDefaultBackgroundColor;
-    chartView.backgroundColor=AppDefaultBackgroundColor;
+    chartView.holeColor=AppDefaultSubViewBackgroundColor;
+    chartView.backgroundColor=AppDefaultSubViewBackgroundColor;
     chartView.rotationAngle = 0.0;
     chartView.rotationEnabled = YES;
     chartView.highlightPerTapEnabled = YES;

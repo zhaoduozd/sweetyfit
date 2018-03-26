@@ -14,7 +14,8 @@
 @interface DoraFoodTableViewCell : UITableViewCell
 @property(strong, nonatomic) UIImageView *foodImage;
 @property(copy, nonatomic) UILabel *foodName;
-@property(copy, nonatomic) UILabel *foodDetail;
+@property(copy, nonatomic) UILabel *foodDetail1;
+@property(copy, nonatomic) UILabel *foodDetail2;
 @end
 
 

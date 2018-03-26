@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "DoraRootNavigationViewController.h"
 #import "DoraLoginViewController.h"
+#import "DoraFoodViewController.h"
 
 
 @interface AppDelegate ()
@@ -21,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
+    
+//    _window.rootViewController = [[DoraFoodViewController alloc] init];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // [defaults removeObjectForKey:@"uid"];

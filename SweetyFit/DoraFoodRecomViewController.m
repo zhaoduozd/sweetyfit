@@ -26,7 +26,7 @@
 - (void) CreateAndAddUIElements {
     UILabel *modeltitle = [UILabel DoraCreateTextBoldTitleName:@"推荐de美食"];
     
-    _foodContentWrapper = [[UIView alloc] initWithFrame:CGRectMake(-1, 40, DoraScreenWidth + 2, 1080)];
+    _foodContentWrapper = [[UIView alloc] initWithFrame:CGRectMake(-1, 40, DoraScreenWidth + 2, 1310)];
     _foodContentWrapper.backgroundColor = AppDefaultSubViewBackgroundColor;
     _foodContentWrapper.layer.borderColor = AppDefaultBorderColor.CGColor;
     _foodContentWrapper.layer.borderWidth = 1;
@@ -47,7 +47,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
-    }];}
+}];}
 
 - (void) SolveData:(id) responseOject {
     NSArray *foodWrapperTitles = @[@"主食类", @"肉类", @"蔬菜类", @"水果类", @"坚果类", @"饮品类"];
@@ -68,21 +68,21 @@
         
         DoraRecomFoodContentWrapperView *contentView = [[DoraRecomFoodContentWrapperView alloc] init];
         contentView.frame = CGRectMake(0, 5 + i*220, DoraScreenWidth, 220);
-        contentView.wrapperTitle.text = foodWrapperTitles[i++];
+        contentView.wrapperTitle.text = foodWrapperTitles[i];
         contentView.foodList.contentSize = CGSizeMake(420, 186);
 
         for (NSUInteger j = 0; j < foodlist.count; ++j) {
             NSString *foodname = [[foodlist objectAtIndex:j] objectForKey:@"name"];
             // NSString *foodamount = [[foodlist objectAtIndex:j] objectForKey:@"recomuse"];
-            NSString *foodcalorie = [[foodlist objectAtIndex:j] objectForKey:@"calorie"];
+            NSString *foodcalorie = [[[foodlist objectAtIndex:j] objectForKey:@"calorie"] stringByAppendingString:@"/100g"];
             NSString *urlstring = [[foodlist objectAtIndex:j] objectForKey:@"img"];
             NSURL *urlimg = [[NSURL alloc] initWithString:urlstring];
             DoraRecomFoodUnitView *foodunitview = [[DoraRecomFoodUnitView alloc] init];
             
             CGRect tempframe = foodunitview.frame;
-            tempframe.origin = CGPointMake(5 + j * (130 + 8), 0);
+            tempframe.origin = CGPointMake(5 + j * (117 + 8), 0);
             foodunitview.frame = tempframe;
-            //[foodunitview.foodImage sd_setImageWithURL:urlimg];
+            [foodunitview.foodImage sd_setImageWithURL:urlimg];
             foodunitview.foodName.text = foodname;
             // foodunitview.foodAmount.text = foodamount;
             foodunitview.foodCalorie.text = foodcalorie;

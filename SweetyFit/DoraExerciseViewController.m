@@ -7,6 +7,7 @@
 //
 
 #import "DoraExerciseViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 //#import "DoraSearchController.h"
 
 @interface DoraExerciseViewController ()
@@ -25,52 +26,104 @@
     btnH = btnW * 0.6;
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self createData];
-    
-    UIView *searchViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, 50)];
-    UIButton *goToSearch = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, DoraScreenWidth-10, 40)];
-    [searchViewContainer addSubview:goToSearch];
-    
-    self.tableView.tableHeaderView = searchViewContainer;
+    [self ObtainData];
 }
 
 #pragma mark - Dora Functions
 
--(void) createData {
+- (void) ObtainData {
+    __weak DoraExerciseViewController *weakself = self;
+    
+    NSString *urlstring = [serverurl stringByAppendingString:@"/ui/exercise"];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:urlstring parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        
+        [weakself SolveData:responseObject];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+    
+}
+
+-(NSString *) MapRegionName:(NSString *) name {
+    NSString *result = @"";
+    
+    if ([name isEqualToString:@"all"]) {
+        result = @"全身运动";
+    } else if ([name isEqualToString:@"neck"]) {
+        result = @"颈部舒展";
+    } else if ([name isEqualToString:@"shoulder"]) {
+        result = @"肩部训练";
+    } else if ([name isEqualToString:@"arm"]) {
+        result = @"颈手臂塑形";
+    } else if ([name isEqualToString:@"chest"]) {
+        result = @"胸部增肌";
+    } else if ([name isEqualToString:@"ventral"]) {
+        result = @"腹部塑形";
+    } else if ([name isEqualToString:@"back"]) {
+        result = @"背部强健";
+    } else if ([name isEqualToString:@"hip"]) {
+        result = @"臀部塑形";
+    } else if ([name isEqualToString:@"leg"]) {
+        result = @"腿部塑形";
+    }
+    
+    return result;
+}
+
+-(void) SolveData:(id) reponseObject {
     self.DoraExerciseTableData = [[NSMutableArray alloc] init];
+    NSArray *rawdata = [[NSArray alloc] initWithArray:(NSArray *)reponseObject];
+    NSArray *bodyResionNames = @[@"全身运动", @"颈部舒展", @"肩部训练", @"手臂塑形", @"背部强健", @"胸部增肌", @"腹部塑形", @"臀部塑形", @"腿部塑形"];
+    NSArray *bodyename = @[@"all", @"neck", @"shoulder", @"arm", @"back", @"chest", @"ventral", @"hip", @"leg"];
     
-    NSArray *bodyResionNames = @[@"腹部塑形", @"腰部力量", @"腿部塑形", @"手臂塑形", @"全身舒展"];
-    
-    // create five sections' data
-    for (int i = 0; i < 5; ++i) {
+    // create 9 sections
+    for (NSUInteger i = 0; i < [bodyResionNames count]; ++i) {
         DoraExerciseTableSectionData *sectionData = [DoraExerciseTableSectionData createSectionData];
         sectionData.sectionName = bodyResionNames[i];
         sectionData.sectionData = [[NSMutableArray alloc] init];
+        NSMutableArray *regionData = [[NSMutableArray alloc] init];
         
-        // create 12 cells' data
-        for (int j = 0; j < 6; ++j) {
+        for (NSUInteger j = 0; j < [rawdata count]; ++j) {
+            if ([[bodyename objectAtIndex:i] isEqualToString:[[rawdata objectAtIndex:j] objectForKey:@"regionname"]]) {
+                regionData = [[rawdata objectAtIndex:j] objectForKey:@"actions"];
+            }
+        }
+        
+        for (NSUInteger j = 0; j < [regionData count]; j += 2) {
+            NSDictionary *leftData = [[NSDictionary alloc] initWithDictionary:[regionData objectAtIndex:j]];
             DoraExerciseTableCellData *cellData = [DoraExerciseTableCellData createCellData];
-            
+
             cellData.leftButton = [DoraExerciseTableCellButtonData createButtonData];
             cellData.rightButton = [DoraExerciseTableCellButtonData createButtonData];
+
+            cellData.leftButton.exerciseImage = [UIImage imageNamed:@"placeholder"];
+            cellData.leftButton.exerciseName = [leftData objectForKey:@"name"];
+            cellData.leftButton.exerciseTime = [leftData objectForKey:@"time"];
+            cellData.leftButton.exerciseCalorie = [leftData objectForKey:@"calorie"];
             
-            cellData.leftButton.exerciseImage = [UIImage imageNamed:@"placeholder.JPG"];
-            cellData.leftButton.exerciseName = @"西西里卷腹1";
-            cellData.leftButton.exerciseTime = @"12'";
-            cellData.leftButton.exerciseLevel = @"S2";
-            cellData.leftButton.exerciseCalorie = @"76Kcal";
-            
-            cellData.rightButton.exerciseImage = [UIImage imageNamed:@"placeholder.JPG"];
-            cellData.rightButton.exerciseName = @"西西里卷腹2";
-            cellData.rightButton.exerciseTime = @"10'";
-            cellData.rightButton.exerciseLevel = @"S2";
-            cellData.rightButton.exerciseCalorie = @"76Kcal";
+            NSString *urlstring = [@"http://120.77.42.160:3000/resource/acionimg?aid=%@" stringByAppendingString:[leftData objectForKey:@"gifname"]];
+        
+            NSURL *urlimg = [[NSURL alloc] initWithString:urlstring];
+
+            if (j + 1 < [regionData count]) {
+                NSDictionary *rightData = [[NSDictionary alloc] initWithDictionary:[regionData objectAtIndex:j+1]];
+                cellData.rightButton.exerciseImage = [UIImage imageNamed:@"placeholder"];
+                cellData.rightButton.exerciseName = [rightData objectForKey:@"name"];
+                cellData.rightButton.exerciseTime = [rightData objectForKey:@"time"];
+                cellData.rightButton.exerciseCalorie =[rightData objectForKey:@"calorie"];
+            } else {
+                cellData.rightButton.exerciseName = @"";
+            }
             
             [sectionData.sectionData addObject:cellData];
         }
         
         [_DoraExerciseTableData addObject:sectionData];
     }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -103,11 +156,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifer = @"exerciseCell";
 
-    DoraExerciseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
+    //DoraExerciseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     
-    if (cell == nil) {
-        cell = [[DoraExerciseTableViewCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
-    }
+    //if (cell == nil) {
+    DoraExerciseTableViewCell *cell = [[DoraExerciseTableViewCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
+    //}
     
     DoraExerciseTableCellData *tempData = _DoraExerciseTableData[indexPath.section].sectionData[indexPath.row];
     DoraExerciseTableCellButtonData *leftButton = tempData.leftButton;
@@ -119,12 +172,16 @@
     cell.leftExercise.exerciseLevel.text = leftButton.exerciseLevel;
     [cell.leftExercise setBackgroundImage:leftButton.exerciseImage forState:UIControlStateNormal];
 
-    cell.rightExercise.exerciseCalorie.text = rightButton.exerciseCalorie;
-    cell.rightExercise.exerciseName.text = rightButton.exerciseName;
-    cell.rightExercise.exerciseTime.text = rightButton.exerciseTime;
-    cell.rightExercise.exerciseLevel.text = rightButton.exerciseLevel;
-    [cell.rightExercise setBackgroundImage:rightButton.exerciseImage forState:UIControlStateNormal];
-
+    if ([rightButton.exerciseName isEqualToString:@""]) {
+        cell.rightExercise.hidden = YES;
+    } else {
+        cell.rightExercise.exerciseCalorie.text = rightButton.exerciseCalorie;
+        cell.rightExercise.exerciseName.text = rightButton.exerciseName;
+        cell.rightExercise.exerciseTime.text = rightButton.exerciseTime;
+        cell.rightExercise.exerciseLevel.text = rightButton.exerciseLevel;
+        [cell.rightExercise setBackgroundImage:rightButton.exerciseImage forState:UIControlStateNormal];
+    }
+    
     return cell;
 }
 @end

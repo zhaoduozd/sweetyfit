@@ -25,7 +25,7 @@
     wrapper.frame = tempframe;
     
     UIImage *placeholderimage = [UIImage imageNamed:@"placeholder.JPG"];
-    _foodImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 130, 90)];
+    _foodImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 90)];
     [_foodImage setImage:placeholderimage];
     _foodImage.layer.cornerRadius = 4;
     _foodImage.layer.masksToBounds = YES;
@@ -52,6 +52,8 @@
     [wrapper addSubview:_foodCalorie];
     [wrapper addSubview:_foodName];
     [wrapper addSubview:_foodImage];
+    
+    [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
     
     self.layer.borderWidth = 1;
     self.layer.borderColor = AppDefaultBorderColor.CGColor;
