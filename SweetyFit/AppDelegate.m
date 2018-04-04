@@ -10,6 +10,7 @@
 #import "DoraRootNavigationViewController.h"
 #import "DoraLoginViewController.h"
 #import "DoraFoodViewController.h"
+#import "DoraExerciseViewController.h"
 
 
 @interface AppDelegate ()
@@ -23,7 +24,7 @@
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
     
-//    _window.rootViewController = [[DoraFoodViewController alloc] init];
+    //_window.rootViewController = [[DoraExerciseViewController alloc] init];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // [defaults removeObjectForKey:@"uid"];

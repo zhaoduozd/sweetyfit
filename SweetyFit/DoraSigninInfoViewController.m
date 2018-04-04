@@ -320,7 +320,7 @@
     [dict setObject:_chestline.text forKey:@"chestline"];
     [dict setObject:_waistline.text forKey:@"waistline"];
     [dict setObject:_hipline.text forKey:@"hipline"];
-    [dict setObject:([_gender[0] isEqualToString:@"0"] ? @"male" : @"female") forKey:@"gender"];
+    [dict setObject:([_gender[0] isEqualToString:@"0"] ? @"1" : @"0") forKey:@"gender"];
     
     for (NSInteger i = 0; i < _howBusy.count; ++i) {
         if ([_howBusy[i] isEqualToString:@"1"]) {

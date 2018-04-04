@@ -31,14 +31,7 @@
     [self.title setTextColor:ChartColorLabelText];
     [self addSubview:self.title];
     
-    self.parties = @[
-                @"Party A", @"Party B", @"Party C", @"Party D", @"Party E", @"Party F",
-                @"Party G", @"Party H", @"Party I", @"Party J", @"Party K", @"Party L",
-                @"Party M", @"Party N", @"Party O", @"Party P", @"Party Q", @"Party R",
-                @"Party S", @"Party T", @"Party U", @"Party V", @"Party W", @"Party X",
-                @"Party Y", @"Party Z"
-                ];
-    
+
     self.pieChartView = [[PieChartView alloc] init];
     self.pieChartView.delegate = self;
     [self setupPieChartView:self.pieChartView];
@@ -116,7 +109,7 @@
     paragraphStyle.lineSpacing = 10;// 字体的行间距
     
     NSDictionary *attributes = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                 NSFontAttributeName:[UIFont systemFontOfSize:ChartTextSize],
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
     self.suggestView.attributedText = [[NSAttributedString alloc] initWithString:[DoraPersonalDataModel getInstance].foodSuggestion attributes:attributes];
@@ -130,7 +123,7 @@
     paragraphStyle.lineSpacing = 10;// 字体的行间距
     
     NSDictionary *attributes = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                 NSFontAttributeName:[UIFont systemFontOfSize:ChartTextSize],
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
     self.suggestView.attributedText = [[NSAttributedString alloc] initWithString:[DoraPersonalDataModel getInstance].exerciseSuggestion attributes:attributes];

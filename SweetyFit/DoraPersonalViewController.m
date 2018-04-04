@@ -15,7 +15,7 @@
 #define SuggestionHeight 540
 #define HistoryHeight 330
 #define Margin 5
-#define segmentColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]
+
 
 @interface DoraPersonalViewController ()<UIScrollViewDelegate>
 @property(nonatomic,strong) UIScrollView *containerView;

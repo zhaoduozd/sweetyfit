@@ -168,11 +168,14 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer= [AFHTTPRequestSerializer new];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
+        NSLog(@"%@", responseObject);
         NSDictionary *json = (NSDictionary *)responseObject;
         NSDictionary *fadvice = [json objectForKey:@"dietAdvice"];
         NSDictionary *eadvice = [json objectForKey:@"exerciseAdvice"];
-        NSArray *history = [[NSArray alloc] initWithObjects:[[json objectForKey:@"history"] objectAtIndex:0],nil];
+        if([[json objectForKey:@"history"] count]!=0){
+            NSArray *history = [[NSArray alloc] initWithObjects:[[json objectForKey:@"history"] objectAtIndex:0],nil];
+            [self setHistoryDataWithArray:history];
+        }
         NSDictionary *fdic = [[fadvice objectForKey:@"Data"] objectAtIndex:0];
         NSDictionary *edic = [[eadvice objectForKey:@"Data"] objectAtIndex:0];
         NSString *fcontent = [fadvice objectForKey:@"Advice"];
@@ -190,7 +193,7 @@
         
         [self setFoodSuggestionWithArray:fdata withString:fcontent];
         [self setExerciseSuggestionWithArray:edata withString:econtent];
-        [self setHistoryDataWithArray:history];
+        
         
         sharedModel.isLoading = NO;
         

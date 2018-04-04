@@ -14,6 +14,9 @@
 @property(nonatomic, copy) NSString *exerciseCalorie;
 @property(nonatomic, copy) NSString *exerciseTime;
 @property(nonatomic, copy) NSString *exerciseLevel;
+@property(nonatomic, strong) NSURL *exerciseimg;
+@property(nonatomic, copy) NSString *aid;
+@property(nonatomic, copy) NSString *tip;
 
 +(instancetype) createButtonData;
 @end

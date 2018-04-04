@@ -11,8 +11,8 @@
 #import "SweetyFit-Bridging-Header.h"
 #import "DoraCommonHeader.h"
 
-#define ChartLabelTextSize 15
-#define ChartTextSize 15
+#define ChartLabelTextSize 14
+#define ChartTextSize 14
 
 @class DoraPersonalDataModel;
 @protocol DoraPersonalDataObserver;

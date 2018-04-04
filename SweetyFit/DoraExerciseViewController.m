@@ -8,6 +8,8 @@
 
 #import "DoraExerciseViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "DoraExerciseActionShowController.h"
+#import "DoraExericiseTableViewCellButton.h"
 //#import "DoraSearchController.h"
 
 @interface DoraExerciseViewController ()
@@ -103,10 +105,14 @@
             cellData.leftButton.exerciseName = [leftData objectForKey:@"name"];
             cellData.leftButton.exerciseTime = [leftData objectForKey:@"time"];
             cellData.leftButton.exerciseCalorie = [leftData objectForKey:@"calorie"];
+            cellData.leftButton.aid = [leftData objectForKey:@"gifname"];
+            cellData.leftButton.tip = [leftData objectForKey:@"tip"];
             
-            NSString *urlstring = [@"http://120.77.42.160:3000/resource/acionimg?aid=%@" stringByAppendingString:[leftData objectForKey:@"gifname"]];
+            NSString *urlstring = [NSString stringWithFormat:@"http://120.77.42.160:3000/resource/actionimg?aid=%@",[leftData objectForKey:@"gifname"]];
         
             NSURL *urlimg = [[NSURL alloc] initWithString:urlstring];
+            cellData.leftButton.exerciseimg = urlimg;
+            
 
             if (j + 1 < [regionData count]) {
                 NSDictionary *rightData = [[NSDictionary alloc] initWithDictionary:[regionData objectAtIndex:j+1]];
@@ -114,6 +120,13 @@
                 cellData.rightButton.exerciseName = [rightData objectForKey:@"name"];
                 cellData.rightButton.exerciseTime = [rightData objectForKey:@"time"];
                 cellData.rightButton.exerciseCalorie =[rightData objectForKey:@"calorie"];
+                cellData.rightButton.aid = [rightData objectForKey:@"gifname"];
+                cellData.rightButton.tip = [rightData objectForKey:@"tip"];
+                
+                NSString *urlstring = [NSString stringWithFormat:@"http://120.77.42.160:3000/resource/actionimg?aid=%@",[rightData objectForKey:@"gifname"]];
+
+                NSURL *urlimg = [[NSURL alloc] initWithString:urlstring];
+                cellData.rightButton.exerciseimg = urlimg;
             } else {
                 cellData.rightButton.exerciseName = @"";
             }
@@ -155,35 +168,50 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifer = @"exerciseCell";
-
-    //DoraExerciseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
-    
-    //if (cell == nil) {
     DoraExerciseTableViewCell *cell = [[DoraExerciseTableViewCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
-    //}
     
     DoraExerciseTableCellData *tempData = _DoraExerciseTableData[indexPath.section].sectionData[indexPath.row];
+    
+    
+
     DoraExerciseTableCellButtonData *leftButton = tempData.leftButton;
     DoraExerciseTableCellButtonData *rightButton = tempData.rightButton;
     
-    cell.leftExercise.exerciseCalorie.text = leftButton.exerciseCalorie;
-    cell.leftExercise.exerciseName.text = leftButton.exerciseName;
-    cell.leftExercise.exerciseTime.text = leftButton.exerciseTime;
-    cell.leftExercise.exerciseLevel.text = leftButton.exerciseLevel;
-    [cell.leftExercise setBackgroundImage:leftButton.exerciseImage forState:UIControlStateNormal];
-
+    cell.leftExercise.button.exerciseCalorie.text = [leftButton.exerciseCalorie stringByAppendingString:@"Kcal"];
+    cell.leftExercise.button.exerciseName.text = leftButton.exerciseName;
+    cell.leftExercise.button.exerciseTime.text = [leftButton.exerciseTime stringByAppendingString:@"秒"];
+    cell.leftExercise.button.tips = leftButton.tip;
+    cell.leftExercise.button.aid = leftButton.aid;
+    [cell.leftExercise.imageview sd_setImageWithURL:leftButton.exerciseimg];
+    
+    [cell.leftExercise.button addTarget:self action:@selector(GotoPage:) forControlEvents:UIControlEventTouchUpInside];
+    
     if ([rightButton.exerciseName isEqualToString:@""]) {
         cell.rightExercise.hidden = YES;
     } else {
-        cell.rightExercise.exerciseCalorie.text = rightButton.exerciseCalorie;
-        cell.rightExercise.exerciseName.text = rightButton.exerciseName;
-        cell.rightExercise.exerciseTime.text = rightButton.exerciseTime;
-        cell.rightExercise.exerciseLevel.text = rightButton.exerciseLevel;
-        [cell.rightExercise setBackgroundImage:rightButton.exerciseImage forState:UIControlStateNormal];
+        cell.rightExercise.button.exerciseCalorie.text = [rightButton.exerciseCalorie stringByAppendingString:@"Kcal"];
+        cell.rightExercise.button.exerciseName.text = rightButton.exerciseName;
+        cell.rightExercise.button.exerciseTime.text = [rightButton.exerciseTime stringByAppendingString:@"秒"];
+        cell.rightExercise.button.tips = rightButton.tip;
+        cell.rightExercise.button.aid = rightButton.aid;
+        [cell.rightExercise.imageview sd_setImageWithURL:rightButton.exerciseimg];
+        
+        [cell.rightExercise.button addTarget:self action:@selector(GotoPage:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return cell;
 }
+
+- (void) GotoPage:(id) sender {
+    DoraExericiseTableViewCellButton *btn = (DoraExericiseTableViewCellButton *)sender;
+    DoraExerciseActionShowController *actionpage = [[DoraExerciseActionShowController alloc] init];
+    actionpage.pagetitle = btn.exerciseName.text;
+    actionpage.aid = btn.aid;
+    actionpage.tips = btn.tips;
+    
+    [self.navigationController pushViewController:actionpage animated:YES];
+}
+
 @end
 
 

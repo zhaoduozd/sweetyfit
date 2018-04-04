@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DoraCommonHeader.h"
 #import "DoraExericiseTableViewCellButton.h"
+#import "DoraExerciseButtonWrapper.h"
 
 @interface DoraExerciseTableViewCell : UITableViewCell
-@property(strong, nonatomic) DoraExericiseTableViewCellButton *leftExercise;
-@property(strong, nonatomic) DoraExericiseTableViewCellButton *rightExercise;
+@property(strong, nonatomic) DoraExerciseButtonWrapper *leftExercise;
+@property(strong, nonatomic) DoraExerciseButtonWrapper *rightExercise;
 @end

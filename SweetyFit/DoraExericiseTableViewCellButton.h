@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "DoraCommonHeader.h"
 @interface DoraExericiseTableViewCellButton : UIButton
-@property(nonatomic, strong) UIImage *exerciseImage;
+@property(nonatomic, copy) NSString *aid;
 @property(nonatomic, strong) UILabel *exerciseName;
 @property(nonatomic, strong) UILabel *exerciseCalorie;
 @property(nonatomic, strong) UILabel *exerciseTime;
 @property(nonatomic, strong) UILabel *exerciseLevel;
+@property(nonatomic, copy) NSString *tips;
 @end

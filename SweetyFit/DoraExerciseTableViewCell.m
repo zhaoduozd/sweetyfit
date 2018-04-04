@@ -16,24 +16,13 @@
     float btnW = (DoraScreenWidth - 45) / 2;
     float btnH = btnW * 0.6;
     
-    _leftExercise = [[DoraExericiseTableViewCellButton alloc] initWithFrame:CGRectMake(15, 5, btnW, btnH)];
-    _rightExercise = [[DoraExericiseTableViewCellButton alloc] initWithFrame:CGRectMake(25 + btnW, 5, btnW, btnH)];
+    _leftExercise = [[DoraExerciseButtonWrapper alloc] initWithFrame:CGRectMake(15, 5, btnW, btnH)];
+    _rightExercise = [[DoraExerciseButtonWrapper alloc] initWithFrame:CGRectMake(25 + btnW, 5, btnW, btnH)];
     
     [self.contentView addSubview:_leftExercise];
     [self.contentView addSubview:_rightExercise];
     
     return self;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

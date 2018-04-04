@@ -88,7 +88,7 @@
     
     [_startplaybtnwrapper addSubview:_playbtn];
     
-    _pointtips.speechSwitch.hidden = YES;
+    _pointtips.speechSwitch.hidden = NO;
     
     /*  Add Elments  */
     [self.view addSubview:moduletitle];
@@ -137,6 +137,8 @@
     
     /*   Create Session Manager   */
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    NSLog(@"%@", _userdemands);
     
     /*   Create Connection   */
     [manager POST:urlstring parameters:_userdemands progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
@@ -230,7 +232,7 @@
         
         [_gifgroups addObject:gifimgs];
     }
-    
+    NSLog(@"complete decompose");
     [self ShowGifUI:actionnum];
 }
 

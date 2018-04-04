@@ -28,6 +28,8 @@
 
 #define ChartColorText [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
 
+#define segmentColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]
+
 #define AppDefaultColor [UIColor colorWithRed:233.0/255.0 green:98.0/255.0 blue:8.0/255.0 alpha:1]
 
 #define AppDefaultBackgroundColor [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1]

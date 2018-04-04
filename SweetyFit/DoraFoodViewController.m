@@ -66,7 +66,7 @@
             NSString *fiber = [[typeData objectAtIndex:j] objectForKey:@"fiber"];
             cellData.foodName = [[typeData objectAtIndex:j] objectForKey:@"name"];
             NSString *foodid = [[typeData objectAtIndex:j] objectForKey:@"id"];
-            NSString *suburl = [NSString stringWithFormat:@"/resource/foodimg?fid=%@.png",foodid];
+            NSString *suburl = [NSString stringWithFormat:@"/resource/ffoodimg?fid=%@.png",foodid];
             NSURL *fimgurl = [NSURL URLWithString:[serverurl stringByAppendingString:suburl]];
             cellData.foodImage = fimgurl;
             
