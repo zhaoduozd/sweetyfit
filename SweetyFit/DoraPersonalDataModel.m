@@ -173,7 +173,7 @@
         NSDictionary *fadvice = [json objectForKey:@"dietAdvice"];
         NSDictionary *eadvice = [json objectForKey:@"exerciseAdvice"];
         if([[json objectForKey:@"history"] count]!=0){
-            NSArray *history = [[NSArray alloc] initWithObjects:[[json objectForKey:@"history"] objectAtIndex:0],nil];
+            NSArray *history = [[NSArray alloc] initWithArray:[json objectForKey:@"history"]];
             NSLog(@"%@", history);
             [self setHistoryDataWithArray:history];
         }
