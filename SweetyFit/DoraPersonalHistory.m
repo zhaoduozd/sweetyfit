@@ -69,10 +69,11 @@
     self.barChartView.chartDescription.enabled = NO;
     
     self.barChartView.drawGridBackgroundEnabled = NO;
-    
+   
     self.barChartView.dragEnabled = NO;
     [self.barChartView setScaleEnabled:NO];
     self.barChartView.pinchZoomEnabled = NO;
+    
     
     // ChartYAxis *leftAxis = chartView.leftAxis;
     
@@ -191,7 +192,7 @@
         
         BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
         [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.blackColor];
+        [data setValueTextColor:ChartColorLabelSpeicalText];
         
         data.barWidth = 0.9f;
         
@@ -235,7 +236,7 @@
         
         BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
         [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.blackColor];
+        [data setValueTextColor:ChartColorLabelSpeicalText];
         
         data.barWidth = 0.9f;
         
@@ -254,7 +255,7 @@
         for(NSDictionary *dic in [DoraPersonalDataModel getInstance].historyData){
             curDate = [dic objectForKey:@"Date"];
             accumulate+=1;
-            yVal += [[dic objectForKey:@"Calorie"] floatValue];
+            yVal += [[dic objectForKey:@"Calories"] floatValue];
             [yVals addObject:[[BarChartDataEntry alloc] initWithX:xVal y:yVal]];
             xVal+=1;
             yVal=0;
@@ -276,7 +277,7 @@
         
         BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
         [data setValueFont:[UIFont systemFontOfSize:10.f]];
-        [data setValueTextColor:UIColor.blackColor];
+        [data setValueTextColor:ChartColorLabelSpeicalText];
         
         data.barWidth = 0.9f;
         
@@ -313,7 +314,7 @@
     
     BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
     [data setValueFont:[UIFont systemFontOfSize:10.f]];
-    [data setValueTextColor:UIColor.blackColor];
+    [data setValueTextColor:ChartColorLabelSpeicalText];
     
     data.barWidth = 0.9f;
     

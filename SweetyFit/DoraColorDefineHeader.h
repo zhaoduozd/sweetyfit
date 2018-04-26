@@ -26,6 +26,8 @@
 
 #define ChartColorLabelText [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
 
+#define ChartColorLabelSpeicalText [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0]
+
 #define ChartColorText [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
 
 #define segmentColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]

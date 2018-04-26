@@ -47,7 +47,7 @@
     self.suggestView.backgroundColor =AppDefaultBarTintColor;
     self.suggestView.text = @"1.\n2\n3\n4\n5\n";
     [self.suggestView setTextColor:ChartColorLabelText];
-
+    self.suggestView.editable = NO;
 
 
     [self addSubview: self.suggestView];
