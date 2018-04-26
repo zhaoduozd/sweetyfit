@@ -10,17 +10,17 @@
 #define DoraColorDefineHeader_h
 
 // Colors
-#define ChartColorSet1 [UIColor colorWithRed:255.0/255.0 green:0/255.0 blue:0/255.0 alpha:1]
+#define ChartColorSet1 [UIColor colorWithRed:205.0/255.0 green:0/255.0 blue:10/255.0 alpha:1]
 
-#define ChartColorSet2 [UIColor colorWithRed:0/255.0 green:255/255.0 blue:8.0/255.0 alpha:1]
+#define ChartColorSet2 [UIColor colorWithRed:20/255.0 green:18/255.0 blue:180/255.0 alpha:1]
 
-#define ChartColorSet3 [UIColor colorWithRed:0/255.0 green:0/255.0 blue:255/255.0 alpha:1]
+#define ChartColorSet3 [UIColor colorWithRed:53/255.0 green:190/255.0 blue:4/255.0 alpha:1]
 
-#define ChartColorSet4 [UIColor colorWithRed:0/255.0 green:255/255.0 blue:255/255.0 alpha:1]
+#define ChartColorSet4 [UIColor colorWithRed:20/255.0 green:172/255.0 blue:133/255.0 alpha:1]
 
-#define ChartColorSet5 [UIColor colorWithRed:255.0/255.0 green:255/255.0 blue:0/255.0 alpha:1]
+#define ChartColorSet5 [UIColor colorWithRed:180.0/255.0 green:180/255.0 blue:0/255.0 alpha:1]
 
-#define ChartColorSet6 [UIColor colorWithRed:255/255.0 green:98.0/255.0 blue:255/255.0 alpha:1]
+#define ChartColorSet6 [UIColor colorWithRed:30/255.0 green:108.0/255.0 blue:200/255.0 alpha:1]
 
 #define ChartColorSet7 [UIColor colorWithRed:255/255.0 green:0.0/255.0 blue:255/255.0 alpha:1]
 

@@ -51,7 +51,7 @@
     CGFloat exerciseLevelMarkWidth = 40;
     CGFloat exerciseLevelMarkX = frame.size.width-margin-exerciseLevelMarkWidth;
     self.exerciseLevelMark = [[UILabel alloc] initWithFrame:CGRectMake(exerciseLevelMarkX, frame.size.height-margin-userNameheight, exerciseLevelMarkWidth, 25)];
-    self.exerciseLevelMark.text = @"SSS";
+    self.exerciseLevelMark.text = @"SS";
     self.exerciseLevelMark.textColor = textColorWhite;
     [self addSubview:self.exerciseLevelMark];
     

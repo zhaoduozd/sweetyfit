@@ -18,4 +18,6 @@
 @interface DoraFoodRecomViewController : UIViewController
 @property(nonatomic, strong) UIView *foodContentWrapper;
 @property(nonatomic, strong) UILabel *mealName;
+@property(nonatomic, strong) UIImageView *dishimg;
+
 @end

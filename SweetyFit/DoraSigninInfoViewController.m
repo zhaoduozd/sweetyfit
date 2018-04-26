@@ -55,18 +55,26 @@
     
     _wrapper = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, DoraScreenHeight)];
     [_wrapper setBackgroundColor:AppDefaultBackgroundColor];
-    [_wrapper setContentSize:CGSizeMake(DoraScreenWidth, 1300)];
+    [_wrapper setContentSize:CGSizeMake(DoraScreenWidth, 1550)];
     
     UILabel *notice = [[UILabel alloc] init];
-    notice.text = @"为更准确得为您推荐运动和饮食，请您配合补充以下信息！";
-    notice.font = [UIFont systemFontOfSize:14];
+    notice.text = @"为更准确得为您推荐运动和饮食，\n请您配合补充以下信息！";
+    notice.font = [UIFont boldSystemFontOfSize:16];
+    notice.numberOfLines = 2;
     notice.textColor = AppDefaultColor;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:notice.text];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:10];//调整行间距
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [notice.text length])];
+    notice.attributedText = attributedString;
     notice.textAlignment = NSTextAlignmentCenter;
-    notice.frame = CGRectMake(0, 8, DoraScreenWidth, 30);
+    notice.frame = CGRectMake(0, 8, DoraScreenWidth, 60);
     
     [_wrapper addSubview:notice];
     
-    y = 45;
+    
+    y = 70;
     titleHeight = 40;
     buttounNum = (DoraScreenWidth - 20) / 100;
     seperatew = (DoraScreenWidth - 20 - 90 * buttounNum) / buttounNum;
@@ -75,13 +83,11 @@
     
     [self.view addSubview:_wrapper];
     [self addQuestions];
+    [self addBirthday];
     [self addBodyInfos];
     
-    UIButton *submitButton = [UIButton DoraCreateLoginOrangeColorButtonWithWidth: DoraScreenWidth/2 Height:50 borderRadius:3 Text:@"提交"];
-    CGRect tempframe = submitButton.frame;
-    tempframe.origin = CGPointMake(DoraScreenWidth/4, y+20);
-    submitButton.frame = tempframe;
-    
+    UIButton *submitButton = [UIButton DoraCreateOrangeColorButtonWithWidth:DoraScreenWidth*0.8 Height:40 borderRadius:3 Text:@"提交" X:DoraScreenWidth*0.1 Y:y+20];
+        
     [submitButton addTarget:self action:@selector(Submit:) forControlEvents:UIControlEventTouchUpInside];
     [_wrapper addSubview:submitButton];
 }
@@ -166,6 +172,19 @@
         [view addSubview:btn];
     }
     
+    [_wrapper addSubview:view];
+}
+
+- (void) addBirthday {
+    UIView *view = [UIView DoraCreateQuestionViewWithHeight:220 Y:y Title:@"选择您的生日："];
+    _birthday = [[UIDatePicker alloc] initWithFrame:CGRectMake(0,40, DoraScreenWidth,180)];
+    _birthday.locale = [NSLocale localeWithLocaleIdentifier:@"zh-Hans"];
+    _birthday.datePickerMode = UIDatePickerModeDate;
+    [_birthday setBackgroundColor:[UIColor whiteColor]];
+    
+    y += 240;
+    
+    [view addSubview:_birthday];
     [_wrapper addSubview:view];
 }
 
@@ -315,12 +334,13 @@
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     [dict setObject:_bodyHeight.text forKey:@"height"];
     [dict setObject:_bodyWeight.text forKey:@"weight"];
     [dict setObject:_chestline.text forKey:@"chestline"];
     [dict setObject:_waistline.text forKey:@"waistline"];
     [dict setObject:_hipline.text forKey:@"hipline"];
-    [dict setObject:([_gender[0] isEqualToString:@"0"] ? @"1" : @"0") forKey:@"gender"];
+    [dict setObject:([_gender[0] isEqualToString:@"0"] ? @"0" : @"1") forKey:@"gender"];
     
     for (NSInteger i = 0; i < _howBusy.count; ++i) {
         if ([_howBusy[i] isEqualToString:@"1"]) {
@@ -484,8 +504,7 @@
             [regions addObject:effectname];
         }
     }
-
-
+    
     
     [dict setObject:effects forKey:@"effects"];
     [dict setObject:times forKey:@"times"];
@@ -496,15 +515,12 @@
         [dict setObject:[defaults objectForKey:@"uid"] forKey:@"uid"];
     }
     
-    NSLog(@"%@", dict);
-    
-    NSString *urlString = [serverurl stringByAppendingString: @"/account/addinfo"];
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSString *urlString = [serverurl stringByAppendingString: @"/account/signininfo"];
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer= [AFHTTPRequestSerializer new];
 
-    [manager POST:url.absoluteString parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [manager POST:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"%@", responseObject);
         DoraRootNavigationViewController *rootpage = [[DoraRootNavigationViewController alloc] init];
         [self presentViewController:rootpage animated:YES completion:^(void){}];

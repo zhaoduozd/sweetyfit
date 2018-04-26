@@ -23,18 +23,14 @@
         _seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth - 10 Height:1 PositionX:5 PositionY:36];
         _seperateLine.backgroundColor = AppDefaultBorderColor;
         _exercisePointTextWrapper = [UIScrollView DoraCreateScrollWithHeight:150 Width:DoraScreenWidth contentWidth:DoraScreenWidth contentHeight:150 viewPositionX:0 viewPositionY:31];
-        _speechSwitch = [UIButton DoraCreateOrangeLineButtonWithWidth:140 Height:26 borderRadius:4 Text:@"开启音频讲解"];
+        _speechSwitch = [UIButton DoraCreateOrangeLineButtonWithWidth:140 Height:26 borderRadius:4 Text:@"开启音频讲解" X:DoraScreenWidth - 145 Y:5];
         _tips = [[UILabel alloc] initWithFrame:CGRectMake(5, 41, DoraScreenWidth-10, 140)];
         _tips.textColor = [UIColor whiteColor];
         [_tips setNumberOfLines:0];
         _tips.lineBreakMode =NSLineBreakByWordWrapping;
         _tips.font = [UIFont systemFontOfSize:14];
         // _tips.textAlignment = NSTextAlignmentCenter;
-        
-        CGRect tempframe = _speechSwitch.frame;
-        tempframe.origin = CGPointMake(DoraScreenWidth - 145, 5);
-        _speechSwitch.frame = tempframe;
-        
+                
         self.backgroundColor = AppDefaultBarTintColor;
         
         

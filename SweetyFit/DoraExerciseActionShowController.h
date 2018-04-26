@@ -14,4 +14,5 @@
 @property(nonatomic, copy) NSString *tips;
 @property(nonatomic, copy) NSString *aid;
 @property(nonatomic, strong) UIImageView *imageview;
+@property float duration;
 @end

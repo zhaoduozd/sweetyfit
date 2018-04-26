@@ -15,4 +15,5 @@
 @property(nonatomic, strong) UILabel *exerciseTime;
 @property(nonatomic, strong) UILabel *exerciseLevel;
 @property(nonatomic, copy) NSString *tips;
+@property float duration;
 @end

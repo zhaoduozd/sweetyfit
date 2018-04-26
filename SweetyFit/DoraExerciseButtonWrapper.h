@@ -13,4 +13,5 @@
 @interface DoraExerciseButtonWrapper : UIView
 @property(nonatomic, strong) UIImageView *imageview;
 @property(nonatomic, strong) DoraExericiseTableViewCellButton *button;
+@property float duration;
 @end

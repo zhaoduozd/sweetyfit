@@ -17,4 +17,6 @@
 @property(nonatomic, strong) UILabel *totalCalorieUnit;
 @property(nonatomic, strong) UILabel *walkingRunningCalorieData;
 @property(nonatomic, strong) UILabel *sportCalorieData;
+
+
 @end

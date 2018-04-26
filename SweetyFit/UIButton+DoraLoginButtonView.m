@@ -11,18 +11,30 @@
 #import "DoraColorDefineHeader.h"
 
 @implementation UIButton (DoraLoginButtonView)
-+(UIButton *) DoraCreateLoginOrangeColorButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent {
++(UIButton *) DoraCreateOrangeLineButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent X:(float) x Y:(float) y {
+    UIButton *button = [[UIButton alloc] init];
+    
+    button.layer.borderColor = AppDefaultColor.CGColor;
+    button.layer.borderWidth = 1;
+    [button.layer setCornerRadius:radius];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
+    [button setTitle:textContent forState:UIControlStateNormal];
+    [button setTitleColor:AppDefaultColor forState:UIControlStateNormal];
+    
+    button.frame = CGRectMake(x, y, width, height);
+    
+    return button;
+}
++(UIButton *) DoraCreateOrangeColorButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent X:(float) x Y:(float) y {
     UIButton *button = [[UIButton alloc] init];
     
     button.backgroundColor = AppDefaultColor;
-    button.titleLabel.font = [UIFont systemFontOfSize:18];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
     [button.layer setCornerRadius: radius];
     [button setTitle:textContent forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    CGRect tempframe = button.frame;
-    tempframe.size = CGSizeMake(width, height);
-    button.frame = tempframe;
+    button.frame = CGRectMake(x, y, width, height);
     
     return button;
 }

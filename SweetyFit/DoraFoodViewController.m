@@ -66,8 +66,8 @@
             NSString *fiber = [[typeData objectAtIndex:j] objectForKey:@"fiber"];
             cellData.foodName = [[typeData objectAtIndex:j] objectForKey:@"name"];
             NSString *foodid = [[typeData objectAtIndex:j] objectForKey:@"id"];
-            NSString *suburl = [NSString stringWithFormat:@"/resource/ffoodimg?fid=%@.png",foodid];
-            NSURL *fimgurl = [NSURL URLWithString:[serverurl stringByAppendingString:suburl]];
+            NSString *suburl = [NSString stringWithFormat:@"/food?name=%@.png",foodid];
+            NSURL *fimgurl = [NSURL URLWithString:[resourceurl stringByAppendingString:suburl]];
             cellData.foodImage = fimgurl;
             
             NSString *detail1 = [NSString stringWithFormat:@"卡路里：%@Kcal/100g\n碳水化物：%@g/100g\n纤维素：%@g/100g", calorie, carbohydrate, fiber];

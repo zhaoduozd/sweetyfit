@@ -12,7 +12,7 @@
 #import "NSString+MD5.h"
 
 @interface DoraExerciseActionShowController ()
-
+@property(nonatomic, strong) NSMutableArray<UIImage *> *loadinggif;
 @end
 
 @implementation DoraExerciseActionShowController
@@ -42,27 +42,32 @@
 }
 
 - (void)SetImageView {
+    
+    NSFileManager *fielM = [NSFileManager defaultManager];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"loading" ofType:@"bundle"];
+    NSArray *arrays = [fielM contentsOfDirectoryAtPath:path error:nil];
+    _loadinggif = [NSMutableArray array];
+    for (NSString *name in arrays) {
+        UIImage *image = [UIImage imageNamed:[(@"loading.bundle") stringByAppendingPathComponent:name]];
+        if (image) {
+            [_loadinggif addObject:image];
+        }
+    }
     self.imageview = [[UIImageView alloc] init];
     self.imageview.frame = CGRectMake(0, 30, DoraScreenWidth, DoraScreenWidth*0.618);
     [self.imageview setBackgroundColor:[UIColor whiteColor]];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"loading" ofType:@"gif"];
-    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@", path]];
-    UIImage *image = [UIImage sd_animatedGIFWithData:data];
-    
-    NSLog(@"%@\n%@", path, data);
-    self.imageview.image = image;
-    
+    self.imageview.animationImages = _loadinggif;
+    self.imageview.animationDuration = 4;
+    [self.imageview startAnimating];
     [self.view addSubview:_imageview];
     
     [self ObtainGif];
-    
 }
 
 - (void) ObtainGif {
     __weak DoraExerciseActionShowController *weakself = self;
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://120.77.42.160:3000/resource/gifimg?gid=%@.gif", _aid]];
+    NSURL *url =[NSURL URLWithString:[resourceurl stringByAppendingString:[NSString stringWithFormat:@"/actiongif?name=%@.gif",_aid]]];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -74,20 +79,36 @@
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         NSString *urlstring = [NSString stringWithFormat:@"%@", url];
         return [documentsDirectoryURL URLByAppendingPathComponent:[urlstring MD5]];
-        
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        //[weakself loadGifWithImageView:filePath];
+        [weakself DecomposeGif:filePath];
     }];
     [downloadTask resume];
 
 }
 
-- (void)loadGifWithImageView:(NSURL *) path {
-    //NSLog(@"loading %@", path);
-    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@", path]];
-    UIImage *image = [UIImage sd_animatedGIFWithData:data];
-    _imageview.image = image;
+- (void) DecomposeGif:(NSURL *) path {
+    NSMutableArray<UIImage *> *gifimgs = [[NSMutableArray alloc] init];
+    NSData *data = [NSData dataWithContentsOfURL:path];
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    size_t count = CGImageSourceGetCount(source);
+    
+    for (size_t j = 0; j < count; j++)
+    {
+        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(source, j, NULL);
+        UIImage * image = [UIImage imageWithCGImage:imageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+        
+        [gifimgs addObject:image];
+        
+        CGImageRelease(imageRef);
+    }
+    
+    CFRelease(source);
+    
+    [_imageview stopAnimating];
+    [_imageview setAnimationImages:gifimgs];
+    [_imageview setAnimationDuration:_duration];
     [_imageview startAnimating];
+
 }
 
 

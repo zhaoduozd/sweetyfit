@@ -168,12 +168,13 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer= [AFHTTPRequestSerializer new];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"%@", responseObject);
+        
         NSDictionary *json = (NSDictionary *)responseObject;
         NSDictionary *fadvice = [json objectForKey:@"dietAdvice"];
         NSDictionary *eadvice = [json objectForKey:@"exerciseAdvice"];
         if([[json objectForKey:@"history"] count]!=0){
             NSArray *history = [[NSArray alloc] initWithObjects:[[json objectForKey:@"history"] objectAtIndex:0],nil];
+            NSLog(@"%@", history);
             [self setHistoryDataWithArray:history];
         }
         NSDictionary *fdic = [[fadvice objectForKey:@"Data"] objectAtIndex:0];
@@ -184,7 +185,8 @@
         NSMutableArray *fdata = [[NSMutableArray alloc] init];
         NSMutableArray *edata = [[NSMutableArray alloc] init];
         for(int i=0;i<[[fdic objectForKey:@"Type"] count];i++){
-            [fdata addObject:[NSDictionary dictionaryWithObjectsAndKeys:[fdic objectForKey:@"Data"][i],@"Data",[fdic objectForKey:@"Type"][i],@"Type",nil]];
+            NSDictionary *tempdict = [NSDictionary dictionaryWithObjectsAndKeys:[fdic objectForKey:@"Data"][i],@"Data",[fdic objectForKey:@"Type"][i],@"Type",nil];
+            [fdata addObject:tempdict];
         }
         
         for(int i=0;i<[[edic objectForKey:@"Type"] count];i++){

@@ -12,8 +12,8 @@
 @implementation UITextField (DoraLoginInput)
 +(UITextField *) DoraCreateLoginInputFieldWithPlaceHolder:(NSString *) placeholder TopDis:(float) topdis {
     float fieldWidth = 0.9 * DoraScreenWidth;
-    float fieldHeight = 50;
-    float leftMargin = 0.05 * DoraScreenWidth;
+    float fieldHeight = 40;
+    float leftMargin = 0 * DoraScreenWidth;
     
     UITextField *textfield = [[UITextField alloc] initWithFrame:CGRectMake(leftMargin, topdis, fieldWidth, fieldHeight)];
     

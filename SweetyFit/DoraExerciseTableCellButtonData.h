@@ -17,6 +17,7 @@
 @property(nonatomic, strong) NSURL *exerciseimg;
 @property(nonatomic, copy) NSString *aid;
 @property(nonatomic, copy) NSString *tip;
+@property float duration;
 
 +(instancetype) createButtonData;
 @end

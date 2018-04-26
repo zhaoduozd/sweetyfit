@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DoraCommonHeader.h"
 @interface UIButton (DoraButtonUI)
-+(UIButton *) DoraCreateOrangeLineButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent;
-+(UIButton *) DoraCreateOrangeColorButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent;
++(UIButton *)DoraCreateOrangeLineButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent X:(float) x Y:(float) y;
++(UIButton *) DoraCreateOrangeColorButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent X:(float) x Y:(float) y;
 +(UIButton *) DoraCreateBlackMaskBigButtonWithWidth:(float) width Height:(float) height borderRaduis:(float) radius titleText:(NSString *) titleTextContent detailTextTime:(NSString *)detailTime detailTextCalorie:(NSString *)calorie imageBackground:(UIImage *)image;
 +(UIButton *) DoraCreateBlackMaskButtonWithWidth:(float) width Height:(float) height borderRaduis:(float) radius titleText:(NSString *) titleTextContent imageBackground:(UIImage *)image;
 @end

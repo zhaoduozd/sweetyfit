@@ -72,13 +72,9 @@
     [self addSubview:q2];
     [self addSubview:q3];
     
-    tenminites = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"10分钟"];
-    fiftyminites = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"15分钟"];
-    twentyminites = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"20分钟"];
-    
-    tenminites.frame = CGRectMake(20, 70, 100, 40);
-    fiftyminites.frame = CGRectMake(130, 70, 100, 40);
-    twentyminites.frame = CGRectMake(240, 70, 100, 40);
+    tenminites = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"10分钟" X:20 Y:70];
+    fiftyminites = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"15分钟" X:130 Y:70];
+    twentyminites = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"20分钟" X:240 Y:70];
     
     [tenminites addTarget:self action:@selector(tenbtnevent) forControlEvents:UIControlEventTouchUpInside];
     [fiftyminites addTarget:self action:@selector(fiftybtnevent) forControlEvents:UIControlEventTouchUpInside];
@@ -88,15 +84,10 @@
     [self addSubview:fiftyminites];
     [self addSubview:twentyminites];
     
-    homeplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"家"];
-    officeplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"办公室"];
-    gymplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"健身房"];
-    outsideplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"户外"];
-    
-    homeplace.frame = CGRectMake(20, 170, 100, 40);
-    officeplace.frame = CGRectMake(130, 170, 100, 40);
-    gymplace.frame = CGRectMake(20, 220, 100, 40);
-    outsideplace.frame = CGRectMake(130, 220, 100, 40);
+    homeplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"家" X:20 Y:170];
+    officeplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"办公室" X:130 Y:170];
+    gymplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"健身房" X:20 Y:220];
+    outsideplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"户外" X:130 Y:220];
     
     [homeplace addTarget:self action:@selector(homebtnevent) forControlEvents:UIControlEventTouchUpInside];
     [officeplace addTarget:self action:@selector(officebtnevent) forControlEvents:UIControlEventTouchUpInside];
@@ -108,22 +99,18 @@
     [self addSubview:gymplace];
     [self addSubview:outsideplace];
     
-    neck = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"颈部"];
-    shoulder = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"肩部"];
-    arm = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"手臂"];
-    chest = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"胸部"];
-    back = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"背部"];
-    hip = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"臀部"];
-    ventral = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"腹部"];
-    leg = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"腿部"];
-    all = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"综合热身"];
+    neck = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"颈部" X:240 Y:370];
+    shoulder = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"肩部" X:20 Y:420];
+    arm = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"手臂" X:130 Y:420];
+    chest = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"胸部" X:20 Y:320];
+    back = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"背部" X:130 Y:320];
+    hip = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"臀部" X:240 Y:320];
+    ventral = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"腹部" X:20 Y:370];
+    leg = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"腿部" X:130 Y:370];
+    all = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"综合热身" X:240 Y:420];
     
-    neck.frame = CGRectMake(240, 370, 100, 40);
-    shoulder.frame = CGRectMake(20, 420, 100, 40);
-    arm.frame = CGRectMake(130, 420, 100, 40);
-    chest.frame = CGRectMake(20, 320, 100, 40);
-    back.frame = CGRectMake(130, 320, 100, 40);
-    hip.frame = CGRectMake(240, 320, 100, 40);
+
+
     ventral.frame = CGRectMake(20, 370, 100, 40);
     leg.frame = CGRectMake(130, 370, 100, 40);
     all.frame = CGRectMake(240, 420, 100, 40);
@@ -148,8 +135,7 @@
     [self addSubview:leg];
     [self addSubview:all];
     
-    self.submitbtn = [UIButton DoraCreateOrangeColorButtonWithWidth:260 Height:40 borderRadius:4 Text:@"确认"];
-    self.submitbtn.frame = CGRectMake((DoraScreenWidth-260)/2, 500, 260, 40);
+    self.submitbtn = [UIButton DoraCreateOrangeColorButtonWithWidth:260 Height:40 borderRadius:4 Text:@"确认" X:(DoraScreenWidth-260)/2 Y:500];
     [self addSubview:self.submitbtn];
 }
 

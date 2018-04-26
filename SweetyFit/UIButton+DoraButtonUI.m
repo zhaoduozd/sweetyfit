@@ -11,7 +11,7 @@
 
 
 @implementation UIButton (DoraButtonUI)
-+(UIButton *) DoraCreateOrangeLineButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent {
++(UIButton *) DoraCreateOrangeLineButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent X:(float) x Y:(float) y {
     UIButton *button = [[UIButton alloc] init];
     
     button.layer.borderColor = AppDefaultColor.CGColor;
@@ -20,14 +20,12 @@
     button.titleLabel.font = [UIFont systemFontOfSize:16];
     [button setTitle:textContent forState:UIControlStateNormal];
     [button setTitleColor:AppDefaultColor forState:UIControlStateNormal];
-    
-    CGRect tempframe = button.frame;
-    tempframe.size = CGSizeMake(width, height);
-    button.frame = tempframe;
+
+    button.frame = CGRectMake(x, y, width, height);
 
     return button;
 }
-+(UIButton *) DoraCreateOrangeColorButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent {
++(UIButton *) DoraCreateOrangeColorButtonWithWidth:(float) width Height:(float) height borderRadius:(float) radius Text:(NSString *) textContent X:(float) x Y:(float) y {
     UIButton *button = [[UIButton alloc] init];
     
     button.backgroundColor = AppDefaultColor;
@@ -36,9 +34,7 @@
     [button setTitle:textContent forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    CGRect tempframe = button.frame;
-    tempframe.size = CGSizeMake(width, height);
-    button.frame = tempframe;
+    button.frame = CGRectMake(x, y, width, height);
 
     return button;
 }
@@ -83,13 +79,14 @@
 
 +(UIButton *) DoraCreateBlackMaskButtonWithWidth:(float) width Height:(float) height borderRaduis:(float) radius titleText:(NSString *) titleTextContent imageBackground:(UIImage *)image {
     UIButton *button = [[UIButton alloc] init];
-    UILabel *btntitle = [[UILabel alloc] init];
+    
     CALayer *maskLayer = [[CALayer alloc] init];
     
     [button setBackgroundImage:image forState:UIControlStateNormal];
     [button.layer setMasksToBounds:YES];
     [button.layer setCornerRadius:radius];
     
+    UILabel *btntitle = [[UILabel alloc] init];
     btntitle.text = titleTextContent;
     btntitle.textColor = [UIColor whiteColor];
     btntitle.textAlignment = NSTextAlignmentCenter;

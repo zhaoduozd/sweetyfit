@@ -41,6 +41,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:urlstring parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         
+        //NSLog(@"%@", responseObject);
         [weakself SolveData:responseObject];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -81,7 +82,6 @@
     NSArray *bodyResionNames = @[@"全身运动", @"颈部舒展", @"肩部训练", @"手臂塑形", @"背部强健", @"胸部增肌", @"腹部塑形", @"臀部塑形", @"腿部塑形"];
     NSArray *bodyename = @[@"all", @"neck", @"shoulder", @"arm", @"back", @"chest", @"ventral", @"hip", @"leg"];
     
-    // create 9 sections
     for (NSUInteger i = 0; i < [bodyResionNames count]; ++i) {
         DoraExerciseTableSectionData *sectionData = [DoraExerciseTableSectionData createSectionData];
         sectionData.sectionName = bodyResionNames[i];
@@ -108,11 +108,10 @@
             cellData.leftButton.aid = [leftData objectForKey:@"gifname"];
             cellData.leftButton.tip = [leftData objectForKey:@"tip"];
             
-            NSString *urlstring = [NSString stringWithFormat:@"http://120.77.42.160:3000/resource/actionimg?aid=%@",[leftData objectForKey:@"gifname"]];
+            NSString *urlstring =[resourceurl stringByAppendingString:[NSString stringWithFormat:@"/action?name=%@.png",[leftData objectForKey:@"gifname"]]];
         
             NSURL *urlimg = [[NSURL alloc] initWithString:urlstring];
             cellData.leftButton.exerciseimg = urlimg;
-            
 
             if (j + 1 < [regionData count]) {
                 NSDictionary *rightData = [[NSDictionary alloc] initWithDictionary:[regionData objectAtIndex:j+1]];
@@ -123,7 +122,10 @@
                 cellData.rightButton.aid = [rightData objectForKey:@"gifname"];
                 cellData.rightButton.tip = [rightData objectForKey:@"tip"];
                 
-                NSString *urlstring = [NSString stringWithFormat:@"http://120.77.42.160:3000/resource/actionimg?aid=%@",[rightData objectForKey:@"gifname"]];
+                
+                NSString *urlstring =[resourceurl stringByAppendingString:[NSString stringWithFormat:@"/action?name=%@.png",[rightData objectForKey:@"gifname"]]];
+                
+                
 
                 NSURL *urlimg = [[NSURL alloc] initWithString:urlstring];
                 cellData.rightButton.exerciseimg = urlimg;
@@ -161,10 +163,6 @@
     return _DoraExerciseTableData[section].sectionName;
 }
 
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//
-//}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifer = @"exerciseCell";
@@ -182,6 +180,7 @@
     cell.leftExercise.button.exerciseTime.text = [leftButton.exerciseTime stringByAppendingString:@"秒"];
     cell.leftExercise.button.tips = leftButton.tip;
     cell.leftExercise.button.aid = leftButton.aid;
+    
     [cell.leftExercise.imageview sd_setImageWithURL:leftButton.exerciseimg];
     
     [cell.leftExercise.button addTarget:self action:@selector(GotoPage:) forControlEvents:UIControlEventTouchUpInside];
@@ -208,6 +207,7 @@
     actionpage.pagetitle = btn.exerciseName.text;
     actionpage.aid = btn.aid;
     actionpage.tips = btn.tips;
+    actionpage.duration = [btn.exerciseTime.text floatValue];
     
     [self.navigationController pushViewController:actionpage animated:YES];
 }
