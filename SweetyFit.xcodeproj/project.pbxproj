@@ -14,7 +14,6 @@
 		9350351D20446570001331D0 /* DoraPersonalSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9350351920446570001331D0 /* DoraPersonalSuggestion.m */; };
 		9392500B205D6E3800A51575 /* DoraPersonalDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9392500A205D6E3800A51575 /* DoraPersonalDataModel.m */; };
 		93D492EC208AF42300BD5F2B /* DoraBridgingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D492EB208AF42300BD5F2B /* DoraBridgingHeader.swift */; };
-		93D492ED208AF44300BD5F2B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D492E7208AF3F300BD5F2B /* Charts.framework */; };
 		93F10F23201309470012E14B /* DoraPersonalTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F10F22201309470012E14B /* DoraPersonalTableCell.m */; };
 		C601E2122011C50A001147DF /* DoraExericiseTableViewCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E2112011C50A001147DF /* DoraExericiseTableViewCellButton.m */; };
 		C601E21520121C24001147DF /* DoraFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E21420121C24001147DF /* DoraFoodViewController.m */; };
@@ -22,6 +21,8 @@
 		C601E21B20121FC1001147DF /* DoraFoodTableCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = C601E21A20121FC1001147DF /* DoraFoodTableCellData.m */; };
 		C60AA878200F344700967176 /* DoraRecomFoodContentWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = C60AA877200F344700967176 /* DoraRecomFoodContentWrapperView.m */; };
 		C60AA87B200F776800967176 /* DoraExerciseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C60AA87A200F776800967176 /* DoraExerciseViewController.m */; };
+		C61DFD6B2091B043001EABC3 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D492E7208AF3F300BD5F2B /* Charts.framework */; };
+		C61DFD6C2091B043001EABC3 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93D492E7208AF3F300BD5F2B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6265B8D2010AC40006F5D55 /* DoraExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6265B8C2010AC40006F5D55 /* DoraExerciseTableViewCell.m */; };
 		C6265B902010E5AA006F5D55 /* DoraExerciseTableSectionData.m in Sources */ = {isa = PBXBuildFile; fileRef = C6265B8F2010E5AA006F5D55 /* DoraExerciseTableSectionData.m */; };
 		C6265B932010E65E006F5D55 /* DoraExerciseTableCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = C6265B922010E65E006F5D55 /* DoraExerciseTableCellData.m */; };
@@ -86,6 +87,13 @@
 			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
 			remoteInfo = ChartsTests;
 		};
+		C61DFD6D2091B043001EABC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93D492E1208AF3F300BD5F2B /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A58A4ED274A941CA248EA921;
+			remoteInfo = Charts;
+		};
 		C6BE9DD01FD9173B00569EC9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C6BE9DAE1FD9173A00569EC9 /* Project object */;
@@ -103,12 +111,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9340AB9D204C0FD400EEFBD0 /* Embed Frameworks */ = {
+		C61DFD6F2091B044001EABC3 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C61DFD6C2091B043001EABC3 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +157,8 @@
 		C60AA877200F344700967176 /* DoraRecomFoodContentWrapperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraRecomFoodContentWrapperView.m; sourceTree = "<group>"; };
 		C60AA879200F776800967176 /* DoraExerciseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraExerciseViewController.h; sourceTree = "<group>"; };
 		C60AA87A200F776800967176 /* DoraExerciseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraExerciseViewController.m; sourceTree = "<group>"; };
+		C61DFD5F2091AF6E001EABC3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C61DFD632091AF75001EABC3 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6265B8B2010AC40006F5D55 /* DoraExerciseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraExerciseTableViewCell.h; sourceTree = "<group>"; };
 		C6265B8C2010AC40006F5D55 /* DoraExerciseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoraExerciseTableViewCell.m; sourceTree = "<group>"; };
 		C6265B8E2010E5AA006F5D55 /* DoraExerciseTableSectionData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoraExerciseTableSectionData.h; sourceTree = "<group>"; };
@@ -247,10 +258,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93D492ED208AF44300BD5F2B /* Charts.framework in Frameworks */,
 				C6E478932004B7D100B2C624 /* MapKit.framework in Frameworks */,
 				C6E478912004B7A600B2C624 /* ImageIO.framework in Frameworks */,
 				C6E4788F2004B78D00B2C624 /* AVKit.framework in Frameworks */,
+				C61DFD6B2091B043001EABC3 /* Charts.framework in Frameworks */,
 				D94D7FB4FA6E90EAB64EE1FE /* Pods_SweetyFit.framework in Frameworks */,
 				C6F21DE620523734001A521B /* HealthKit.framework in Frameworks */,
 			);
@@ -647,6 +658,8 @@
 		C6E4788D2004B78D00B2C624 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C61DFD632091AF75001EABC3 /* SDWebImage.framework */,
+				C61DFD5F2091AF6E001EABC3 /* AFNetworking.framework */,
 				C6F21DE520523734001A521B /* HealthKit.framework */,
 				C6E478922004B7D100B2C624 /* MapKit.framework */,
 				C6E478902004B7A600B2C624 /* ImageIO.framework */,
@@ -697,11 +710,12 @@
 				C6BE9DB41FD9173B00569EC9 /* Resources */,
 				ED04512EEBED3A2A6F2888A9 /* [CP] Embed Pods Frameworks */,
 				635AF61534318C11AF3B0F06 /* [CP] Copy Pods Resources */,
-				9340AB9D204C0FD400EEFBD0 /* Embed Frameworks */,
+				C61DFD6F2091B044001EABC3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C61DFD6E2091B043001EABC3 /* PBXTargetDependency */,
 			);
 			name = SweetyFit;
 			productName = SweetyFit;
@@ -982,6 +996,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C61DFD6E2091B043001EABC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = C61DFD6D2091B043001EABC3 /* PBXContainerItemProxy */;
+		};
 		C6BE9DD11FD9173B00569EC9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C6BE9DB51FD9173B00569EC9 /* SweetyFit */;

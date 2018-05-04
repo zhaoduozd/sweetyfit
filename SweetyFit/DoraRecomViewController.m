@@ -26,14 +26,11 @@
     
     _recomRootView = [[DoraUIScrollViewRecomWrapper alloc] init];
     _recomExercise = [[DoraExerciseRecomViewController alloc] init];
-    //_recomExerciseData = [[DoraExerciseDataViewController alloc] init];
     _recomFood = [[DoraFoodRecomViewController alloc] init];
-    //_recomBonusView = [[DoraUIRecomBonus alloc] init];
     
     [_recomRootView addSubview:_recomExercise.view];
-    //[_recomRootView addSubview:_recomExerciseData.view];
     [_recomRootView addSubview:_recomFood.view];
-    //[_recomRootView addSubview:_recomBonusView];
+    
     
     [self setViewsFrame];
     [self.view addSubview:_recomRootView];
@@ -61,7 +58,6 @@
     _recomFood.view.frame = CGRectMake(0, foodY, DoraScreenWidth, foodH);
     _recomBonusView.frame = CGRectMake(0, bonusY, DoraScreenWidth, bonusH);
     
-    //NSLog(@"set page height");
     [_recomRootView setScrollBasicUI:foodY+foodH+seperateHeight*2];
 }
 

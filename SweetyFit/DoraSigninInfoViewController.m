@@ -55,7 +55,7 @@
     
     _wrapper = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, DoraScreenHeight)];
     [_wrapper setBackgroundColor:AppDefaultBackgroundColor];
-    [_wrapper setContentSize:CGSizeMake(DoraScreenWidth, 1550)];
+    [_wrapper setContentSize:CGSizeMake(DoraScreenWidth, 1850)];
     
     UILabel *notice = [[UILabel alloc] init];
     notice.text = @"为更准确得为您推荐运动和饮食，\n请您配合补充以下信息！";

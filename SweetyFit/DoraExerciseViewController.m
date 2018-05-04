@@ -53,24 +53,25 @@
 -(NSString *) MapRegionName:(NSString *) name {
     NSString *result = @"";
     
-    if ([name isEqualToString:@"all"]) {
-        result = @"全身运动";
-    } else if ([name isEqualToString:@"neck"]) {
-        result = @"颈部舒展";
-    } else if ([name isEqualToString:@"shoulder"]) {
+    
+    if ([name isEqualToString:@"arm"]) {
+        result = @"手臂塑形";
+    } if ([name isEqualToString:@"shoulder"]) {
         result = @"肩部训练";
-    } else if ([name isEqualToString:@"arm"]) {
-        result = @"颈手臂塑形";
+    } else if ([name isEqualToString:@"leg"]) {
+        result = @"腿部塑形";
+    } else if ([name isEqualToString:@"back"]) {
+        result = @"背部强健";
     } else if ([name isEqualToString:@"chest"]) {
         result = @"胸部增肌";
     } else if ([name isEqualToString:@"ventral"]) {
         result = @"腹部塑形";
-    } else if ([name isEqualToString:@"back"]) {
-        result = @"背部强健";
     } else if ([name isEqualToString:@"hip"]) {
         result = @"臀部塑形";
-    } else if ([name isEqualToString:@"leg"]) {
-        result = @"腿部塑形";
+    } else if ([name isEqualToString:@"all"]) {
+        result = @"全身运动";
+    } else if ([name isEqualToString:@"neck"]) {
+        result = @"颈部舒展";
     }
     
     return result;
@@ -79,8 +80,8 @@
 -(void) SolveData:(id) reponseObject {
     self.DoraExerciseTableData = [[NSMutableArray alloc] init];
     NSArray *rawdata = [[NSArray alloc] initWithArray:(NSArray *)reponseObject];
-    NSArray *bodyResionNames = @[@"全身运动", @"颈部舒展", @"肩部训练", @"手臂塑形", @"背部强健", @"胸部增肌", @"腹部塑形", @"臀部塑形", @"腿部塑形"];
-    NSArray *bodyename = @[@"all", @"neck", @"shoulder", @"arm", @"back", @"chest", @"ventral", @"hip", @"leg"];
+    NSArray *bodyResionNames = @[@"腿部塑形", @"手臂塑形", @"背部强健", @"肩部训练", @"胸部增肌", @"腹部塑形", @"臀部塑形",@"全身运动", @"颈部舒展"];
+    NSArray *bodyename = @[@"leg", @"arm", @"back", @"shoulder", @"chest", @"ventral", @"hip", @"all", @"neck"];
     
     for (NSUInteger i = 0; i < [bodyResionNames count]; ++i) {
         DoraExerciseTableSectionData *sectionData = [DoraExerciseTableSectionData createSectionData];

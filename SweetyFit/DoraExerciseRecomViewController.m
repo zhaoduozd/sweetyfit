@@ -162,7 +162,7 @@
     
     [manager POST:urlstring parameters:_userdemands progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         
-        //NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         [weakself SolveData:responseObject];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -190,7 +190,12 @@
     float exerciseListContentWidth = 5.0 + (actionlistimgwidth + 5) * actionnum;
     _exerciselist.contentSize = CGSizeMake(exerciseListContentWidth, exerciseListHeight);
     
+    for(UIView *subview in [_exerciselist subviews]) {
+        [subview removeFromSuperview];
+    }
+    
     for (NSUInteger i = 0; i < actionnum; ++i) {
+         //NSLog(@"for  %lu", actionnum);
         float x;
         if (i == 0) {
             x = 5;
@@ -340,6 +345,7 @@
                                                            block: ^void (NSTimer *timer){
                                                                _playbtn.tag = i;
                                                                [weakself PlayGifWithStartIndex:i RepeatCount:repeatcount Duration:duration];
+                                                               [weakself RecordExerciseWith:i];
                                                            }];
         [_gifgrouptimers addObject:timer];
         
@@ -357,6 +363,10 @@
     [self SetTips:tips];
     
     
+    if ([[_gifgroups objectAtIndex:gifid] count] == 0) {
+        return;
+    }
+    
     [_gifplayer setImage:[[_gifgroups objectAtIndex:gifid] objectAtIndex:0]];
     _gifplayer.animationImages = [_gifgroups objectAtIndex:gifid];
     _gifplayer.animationDuration = duration;
@@ -365,7 +375,6 @@
     for (int i = 0; i < repeatcount; ++i){
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:i*duration repeats:NO block:^void (NSTimer *timer){
             [_gifplayer startAnimating];
-            [weakself RecordExerciseWith:gifid];
         }];
         
         [_giftimers addObject:timer];
@@ -436,6 +445,14 @@
         [_userdemands setObject:region forKey:@"region"];
         
         [self ObtainData];
+        [self StopPlayGif];
+        _startplaybtnwrapper.hidden = YES;
+        _gifplayer.userInteractionEnabled = NO;
+        [_gifplayer setAnimationImages:_loadinggif];
+        [_gifplayer startAnimating];
+        _gifgroups = [[NSMutableArray alloc] init];
+        
+        
     }
 }
 

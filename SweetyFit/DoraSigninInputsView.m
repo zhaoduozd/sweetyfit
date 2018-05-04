@@ -14,7 +14,7 @@
 
 -(instancetype) init {
     self = [super init];
-    self.frame = CGRectMake(DoraScreenWidth*0.05, 100, DoraScreenWidth*0.9, 150);
+    self.frame = CGRectMake(DoraScreenWidth*0.05, 100, DoraScreenWidth*0.9, 450);
     self.loginNotice = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 40)];
     self.loginNotice.textAlignment = NSTextAlignmentCenter;
     self.loginNotice.textColor = [UIColor redColor];
