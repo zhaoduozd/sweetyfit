@@ -16,7 +16,7 @@
     if(!sharedModel){
         sharedModel = [[DoraPersonalDataModel alloc] init];
         sharedModel.isLoading = YES; // 初始化
-        [sharedModel getNetworkData];
+        //[sharedModel getNetworkData];
     }
     return sharedModel;
 }
