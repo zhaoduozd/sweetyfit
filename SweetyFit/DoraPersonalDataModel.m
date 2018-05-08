@@ -177,13 +177,20 @@
         if([[json objectForKey:@"history"] count]!=0){
             NSArray *history = [[NSArray alloc] initWithArray:[json objectForKey:@"history"]];
             NSLog(@"%@", history);
-            [self setHistoryDataWithArray:history];
+            if(history)
+                [self setHistoryDataWithArray:history];
+            else
+                [self setHistoryDataWithArray:@[]];
         }
         NSDictionary *fdic = [[fadvice objectForKey:@"Data"] objectAtIndex:0];
         NSDictionary *edic = [[eadvice objectForKey:@"Data"] objectAtIndex:0];
         NSString *fcontent = [fadvice objectForKey:@"Advice"];
         NSString *econtent = [eadvice objectForKey:@"Advice"];
-        self.level = [json objectForKey:@"level"];
+        if([json objectForKey:@"level"])
+            self.level = [json objectForKey:@"level"];
+        else
+            self.level = @"";
+        
         NSMutableArray *fdata = [[NSMutableArray alloc] init];
         NSMutableArray *edata = [[NSMutableArray alloc] init];
         for(int i=0;i<[[fdic objectForKey:@"Type"] count];i++){
@@ -194,9 +201,14 @@
         for(int i=0;i<[[edic objectForKey:@"Type"] count];i++){
             [edata addObject:[NSDictionary dictionaryWithObjectsAndKeys:[edic objectForKey:@"Data"][i],@"Data",[edic objectForKey:@"Type"][i],@"Type",nil]];
         }
-        
-        [self setFoodSuggestionWithArray:fdata withString:fcontent];
-        [self setExerciseSuggestionWithArray:edata withString:econtent];
+        if(fdata&&fcontent)
+            [self setFoodSuggestionWithArray:fdata withString:fcontent];
+        else
+            [self setFoodSuggestionWithArray:@[] withString:@""];
+        if(edata&&econtent)
+            [self setExerciseSuggestionWithArray:edata withString:econtent];
+        else
+            [self setExerciseSuggestionWithArray:@[] withString:@""];
         
         
         sharedModel.isLoading = NO;
