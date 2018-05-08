@@ -30,6 +30,8 @@
     
     [_recomRootView addSubview:_recomExercise.view];
     [_recomRootView addSubview:_recomFood.view];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     
     
     [self setViewsFrame];

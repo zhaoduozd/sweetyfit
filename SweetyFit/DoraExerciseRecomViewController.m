@@ -15,6 +15,7 @@
 
 @interface DoraExerciseRecomViewController ()
 @property(nonatomic, copy) NSString *uid;
+@property(nonatomic, copy) NSString *feedback;
 @property(nonatomic, strong) NSMutableDictionary *userdemands;
 
 @property(nonatomic, strong) NSDictionary *exercisedata;
@@ -355,8 +356,8 @@
 
 - (void) PlayGifWithStartIndex:(int) gifid RepeatCount:(int) repeatcount Duration:(float) duration {
     // NSLog(@"%d", gifid);
-    
-    __weak DoraExerciseRecomViewController *weakself = self;
+//
+    //__weak DoraExerciseRecomViewController *weakself = self;
     int exerciselen = [[_exercisedata objectForKey:@"len"] intValue];
 
     NSString *tips = [[[_exercisedata objectForKey:@"actions"] objectAtIndex:gifid] objectForKey:@"tip"];
@@ -458,6 +459,18 @@
 
 - (void) ExerciseRating {
     self.actionratingview.hidden = YES;
+    if ([self.actionratingview.feedback isEqualToString:@""]) {
+        return;
+    } else {
+        NSString *urlstring = [serverurl stringByAppendingString:[@"/feedback/exercise?" stringByAppendingString:_uid]];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        
+        [manager GET:urlstring parameters:_userdemands progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+    }
 }
 
 

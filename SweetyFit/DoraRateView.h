@@ -10,5 +10,6 @@
 
 @interface DoraRateView : UIView
 @property(nonatomic, strong) UIButton *submitbtn;
+@property(nonatomic, strong) NSString *feedback;
 -(void) cleartime;
 @end

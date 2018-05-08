@@ -8,9 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DoraRootNavigationViewController.h"
-#import "DoraLoginViewController.h"
-#import "DoraFoodViewController.h"
-#import "DoraExerciseViewController.h"
+#import "DoraAccountViewController.h"
 
 #import "DoraSigninInfoViewController.h"
 
@@ -26,14 +24,11 @@
     _window = [[UIWindow alloc] init];
     _window.frame = [UIScreen mainScreen].bounds;
     
-//    _window.rootViewController = [[DoraSigninInfoViewController alloc] init];
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    // [defaults removeObjectForKey:@"uid"];
     if ([defaults objectForKey:@"uid"]) {
         _window.rootViewController = [[DoraRootNavigationViewController alloc] init];
     } else {
-        _window.rootViewController = [[DoraLoginViewController alloc] init];
+        _window.rootViewController = [[DoraAccountViewController alloc] init];
     }
     return YES;
 }

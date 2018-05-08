@@ -8,7 +8,8 @@
 
 #import "DoraPersonalViewController.h"
 #import "DoraColorDefineHeader.h"
-#import "DoraLoginViewController.h"
+#import "DoraAccountViewController.h"
+
 
 #define signOutHeight 50
 #define ProfileHeight 100
@@ -33,7 +34,7 @@
     [self.view addSubview:self.containerView];
     
     self.personalProfile = [[DoraPersonalProfile alloc] initWithFrame:CGRectMake(0, 0, DoraScreenWidth, ProfileHeight)];
-    
+    [DoraPersonalDataModel getInstance].profileDelegate = self.personalProfile;
     [self.containerView addSubview:self.personalProfile];
     
     UIView *segmentLine0 = [[UIView alloc] initWithFrame:CGRectMake(DoraScreenWidth*0.05,ProfileHeight+0.5*Margin,DoraScreenWidth*0.9,1)];
@@ -87,7 +88,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:@"uid"];
     
-    [self presentViewController:[[DoraLoginViewController alloc] init]  animated:YES completion:^ (void){}];
+    [self presentViewController:[[DoraAccountViewController alloc] init]  animated:YES completion:^ (void){}];
     
 }
 

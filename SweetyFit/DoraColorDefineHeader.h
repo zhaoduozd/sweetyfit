@@ -34,6 +34,8 @@
 
 #define AppDefaultColor [UIColor colorWithRed:233.0/255.0 green:98.0/255.0 blue:8.0/255.0 alpha:1]
 
+#define AppDisableDefaultColor [UIColor colorWithRed:233.0/255.0 green:98.0/255.0 blue:8.0/255.0 alpha:0.6]
+
 #define AppDefaultBackgroundColor [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1]
 
 #define AppDefaultBorderColor [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1]

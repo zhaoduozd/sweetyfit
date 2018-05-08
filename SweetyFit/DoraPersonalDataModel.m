@@ -165,6 +165,8 @@
     }
     NSURL *url = [NSURL URLWithString:urlString];
     
+    NSLog(@"personal data require start");
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer= [AFHTTPRequestSerializer new];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {

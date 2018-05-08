@@ -42,6 +42,8 @@
     [self addSubview:yes];
     [self addSubview:high];
     
+    _feedback = @"";
+    
     self.submitbtn = [UIButton DoraCreateOrangeColorButtonWithWidth:260 Height:40 borderRadius:4 Text:@"确认" X:(DoraScreenWidth-260)/2 Y:200];
     [self addSubview:self.submitbtn];
     
@@ -53,18 +55,23 @@
     [self cleartime];
     [low setBackgroundColor:AppDefaultColor];
     [low setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _feedback = @"0";
 }
 
 -(void) fiftybtnevent {
     [self cleartime];
     [yes setBackgroundColor:AppDefaultColor];
     [yes setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _feedback = @"1";
+
 }
 
 -(void) twentybtnevent {
     [self cleartime];
     [high setBackgroundColor:AppDefaultColor];
     [high setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _feedback = @"2";
+
 }
 
 - (void) cleartime {
