@@ -75,7 +75,7 @@
     } else if (pwd.length < 6) {
         [self setSigninNotice:@"密码不少于6位"];
         return result;
-    } else if ([self isValidateEmail:email] == NO) {
+    } else if ([self isValidateEmail:email] == NO || [email isEqualToString: @""]) {
         [self setSigninNotice:@"邮箱格式不正确！"];
         return result;
     } else if ([pwd isEqualToString:cpwd] == NO) {
