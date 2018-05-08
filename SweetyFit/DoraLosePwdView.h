@@ -14,7 +14,6 @@
 @property(nonatomic, strong) UIButton *goLoginBtn;
 @property(nonatomic, strong) UIButton *sendBtn;
 @property(nonatomic, strong) UIButton *resendBtn;
-@property(nonatomic, copy) NSString *tempPwd;
 
 
 -(void) showLogin;

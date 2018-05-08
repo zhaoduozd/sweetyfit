@@ -96,6 +96,10 @@
     
     NSDictionary *data = [_signinView getInputData];
     
+    if ([data isEqual:nil]) {
+        return;
+    }
+    
     NSString *urlString = [serverurl stringByAppendingString: @"/account/signin"];
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -119,10 +123,13 @@
 }
 
 - (void) Login {
+    NSDictionary *data = [[NSDictionary alloc] initWithDictionary:[_loginView getInputData]];
+    if (data == nil) {
+        return;
+    }
+    
     __weak DoraAccountViewController *weakself = self;
     
-    
-    NSDictionary *data = [[NSDictionary alloc] initWithDictionary:[_loginView getInputData]];
     NSString *urlString = [serverurl stringByAppendingString:@"/account/login/"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -146,11 +153,15 @@
 }
 
 - (void) ChangePwd {
+    NSDictionary *data = [[NSDictionary alloc] initWithDictionary:[_pwdView getInputData]];
+    
+    if (data == nil) {
+        return;
+    }
+    
     [_pwdView.submitBtn setTitle:@"加载中，请稍后……" forState:UIControlStateDisabled];
     _pwdView.submitBtn.enabled = NO;
     [_pwdView.submitBtn setBackgroundColor:AppDisableDefaultColor];
-    
-    NSDictionary *data = [[NSDictionary alloc] initWithDictionary:[_pwdView getInputData]];
     
     NSString *urlString = [serverurl stringByAppendingString:@"/account/login/"];
     

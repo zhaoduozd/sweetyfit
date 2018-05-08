@@ -11,6 +11,7 @@
 #import "UITextField+DoraLoginInput.h"
 #import <AFNetworking/AFNetworking.h>
 #import "DoraColorDefineHeader.h"
+#import "NSString+MD5.h"
 
 @implementation DoraLosePwdView {
     UILabel *emailTitleLabel;
@@ -37,10 +38,10 @@
     [self initialUserNameCollection];
     [self initialEmailCollection];
     [self initialMainPage];
-    [self bindEvents];
     [self hideMainPage];
     [self hideEmailCollection];
     [self showUserNameCollection];
+    [self bindEvents];
     return self;
 }
 
@@ -129,6 +130,8 @@
 }
 
 -(void) showUserNameCollection {
+    self.notice.hidden = YES;
+    
     userName.hidden = NO;
     userConfirmBtn.hidden = NO;
     
@@ -136,6 +139,8 @@
 }
 
 -(void) showEmailCollection {
+    self.notice.hidden = YES;
+    
     emailCollectLabel.hidden = NO;
     emailLabel.hidden = NO;
     reserveEmail.hidden = NO;
@@ -145,6 +150,8 @@
 }
 
 -(void) showMainPage {
+    self.notice.hidden = YES;
+    
     emailTitleLabel.hidden = NO;
     emailLabel.hidden = NO;
     tempPwd.hidden = NO;
@@ -201,8 +208,22 @@
 }
 
 -(NSDictionary *) getInputData {
-    NSDictionary *data;
+    NSString *tpwd = tempPwd.text;
+    NSString *npwd = newPwd.text;
+    NSString *cpwd = confirmPwd.text;
     
+    if ([tpwd isEqualToString:@""]) {
+        [self setSigninNotice:@"验证码不正确！"];
+        return nil;
+    } else if (npwd.length < 6) {
+        [self setSigninNotice:@"密码不少于6位！"];
+        return nil;
+    } else if ([npwd isEqualToString:cpwd] == NO) {
+        [self setSigninNotice:@"确认密码与密码不符！"];
+        return nil;
+    }
+    
+    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:uid, @"uid", [npwd MD5], @"pwd", tpwd, @"tpwd", nil];
     return data;
 }
 
@@ -216,19 +237,18 @@
 /*  Network Requirements  */
 
 -(void) userConfirm {
-    [self hideUserNameCollection];
-    [self hideMainPage];
-    [self showEmailCollection];
     
     uid = userName.text;
 
-    __weak DoraLosePwdView *weakself = self;
-    
     if (uid.length < 4) {
         [self setSigninNotice:@"用户名不正确！"];
         return;
     }
-    
+
+    __weak DoraLosePwdView *weakself = self;
+    userConfirmBtn.enabled = NO;
+    [userConfirmBtn setBackgroundColor:AppDisableDefaultColor];
+
     NSString *urlString = [[serverurl stringByAppendingString:@"/losepwd/getemail?u="] stringByAppendingString:uid];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -245,6 +265,8 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"fail results: %@", error);
         [self setSigninNotice:@"网络繁忙，请稍后再试！"];
+        userConfirmBtn.enabled = YES;
+        [userConfirmBtn setBackgroundColor:AppDefaultColor];
     }];
 
 }

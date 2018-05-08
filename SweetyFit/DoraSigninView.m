@@ -10,6 +10,7 @@
 #import "UITextField+DoraLoginInput.h"
 #import "UILabel+TextUI.h"
 #import "UIButton+DoraButtonUI.h"
+#import "NSString+MD5.h"
 
 @implementation DoraSigninView {
     UILabel *signinNotice;
@@ -52,9 +53,38 @@
     [self addSubview:_loginLabelBtn];
 }
 
+-(BOOL)isValidateEmail:(NSString *)email {
+    
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+    
+    return [emailTest evaluateWithObject:email];
+}
+
 -(NSDictionary *) getInputData {
-    NSDictionary *result;
-    return result;
+    NSString *uid = usernameField.text;
+    NSString *pwd = passwordField.text;
+    NSString *cpwd = confirmField.text;
+    NSString *email = emailField.text;
+    
+    if (uid.length < 4) {
+        [self setSigninNotice:@"用户名不少于4位！"];
+        return nil;
+    } else if (pwd.length < 6) {
+        [self setSigninNotice:@"密码不少于6位"];
+        return nil;
+    } else if ([self isValidateEmail:email] == NO) {
+        [self setSigninNotice:@"邮箱格式不正确！"];
+        return nil;
+    } else if ([pwd isEqualToString:cpwd] == NO) {
+        [self setSigninNotice:@"确认密码输入不正确！"];
+        return nil;
+    }
+    
+    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:uid, @"uid", [pwd MD5], @"pwd", email, @"email", nil];
+    
+    return data;
 }
 
 

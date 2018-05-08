@@ -61,7 +61,8 @@
     NSString *pwd = passwordField.text;
     
     if (userid.length < 4 || pwd.length < 6) {
-        [self setSigninNotice:@"用户名或密码错误！"];
+        [self setSigninNotice:@"用户名或密码不正确！"];
+        return nil;
     }
     NSDictionary *result = [[NSDictionary alloc] initWithObjectsAndKeys:userid, @"uid", [pwd MD5], @"pwd", nil];
     return result;
