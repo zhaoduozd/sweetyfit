@@ -42,8 +42,10 @@
     [self hideEmailCollection];
     [self showUserNameCollection];
     [self bindEvents];
+     
     return self;
 }
+
 
 -(void) initialUserNameCollection {
     userName = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"请输入用户名" TopDis:120];
@@ -81,13 +83,15 @@
     _sendBtn = [UIButton DoraCreateOrangeColorButtonWithWidth:200 Height:40 borderRadius:2 Text:@"发送验证码" X:self.frame.size.width/2-100 Y:260];
     
     tempPwd = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"请输入验证码" TopDis:210];
-    newPwd = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"新密码（大小写字母以及数字不少于6位）" TopDis:260];
+    newPwd = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"密码：合法字符为a~z,A~Z,0~9,长度不少于6位" TopDis:260];
     confirmPwd = [UITextField DoraCreateLoginInputFieldWithPlaceHolder:@"确认密码" TopDis:310];
     
+    [newPwd setSecureTextEntry:YES];
+    [confirmPwd setSecureTextEntry:YES];
     
     _submitBtn =  [UIButton DoraCreateOrangeColorButtonWithWidth:self.frame.size.width Height:40 borderRadius:3 Text:@"提交" X:0 Y:370];
     
-    signinLabel = [UILabel DoraCreateTextSmallCenterTitleName:@"验证码错误!"];
+    signinLabel = [UILabel DoraCreateTextSmallCenterTitleName:@"修改密码失败!"];
     signinLabel.frame = CGRectMake(0, 430, self.frame.size.width, 30);
     signinLabel.textColor = [UIColor redColor];
     signinLabel.textAlignment = NSTextAlignmentCenter;
@@ -124,10 +128,7 @@
 }
 
 
-
--(void) setEmailText:(NSString *) emailText {
-    emailLabel.text = emailText;
-}
+/* Pages Conversion */
 
 -(void) showUserNameCollection {
     self.notice.hidden = YES;
@@ -207,23 +208,35 @@
     _goLoginBtn.hidden = YES;
 }
 
+
+/* Data Solve */
+
 -(NSDictionary *) getInputData {
     NSString *tpwd = tempPwd.text;
     NSString *npwd = newPwd.text;
     NSString *cpwd = confirmPwd.text;
+    NSDictionary *result = [[NSDictionary alloc] initWithObjectsAndKeys:@"false", @"input", nil];
     
     if ([tpwd isEqualToString:@""]) {
+        NSLog(@"temp ");
         [self setSigninNotice:@"验证码不正确！"];
-        return nil;
+        return result;
     } else if (npwd.length < 6) {
+        NSLog(@"npwd ");
         [self setSigninNotice:@"密码不少于6位！"];
-        return nil;
+        return result;
     } else if ([npwd isEqualToString:cpwd] == NO) {
+        NSLog(@"npwd  cpwd ");
         [self setSigninNotice:@"确认密码与密码不符！"];
-        return nil;
+        return result;
+    } else if ([tpwd isEqualToString:_verificationCode] == NO) {
+        NSLog(@"verify ");
+        [self setSigninNotice:@"验证码不正确！"];
+        [self showSignin];
+        return result;
     }
     
-    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:uid, @"uid", [npwd MD5], @"pwd", tpwd, @"tpwd", nil];
+    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:@"true", @"input", uid, @"uid", [npwd MD5], @"pwd", nil];
     return data;
 }
 
@@ -231,6 +244,10 @@
     NSString *tempEmail = [[[emailText substringToIndex:1] stringByAppendingString:@"****"] stringByAppendingString:[emailText substringFromIndex:5]];
     email = emailText;
     emailLabel.text = tempEmail;
+}
+
+-(void) setVerificationCode:(NSString *) code {
+    _verificationCode = code;
 }
 
 
@@ -257,6 +274,11 @@
     [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         responseObject = (NSDictionary *)responseObject;
         
+        if ([[responseObject objectForKey:@"email"] isEqualToString:@""]) {
+            [self setSigninNotice:@"用户名不正确！"];
+            return;
+        }
+        
         [weakself setEmail:[responseObject objectForKey:@"email"]];
         [weakself hideUserNameCollection];
         [weakself hideMainPage];
@@ -274,6 +296,8 @@
 -(void) emailConfirm {
     __weak DoraLosePwdView *weakself = self;
     
+    self.notice.hidden = YES;
+    
     if ([reserveEmail.text isEqualToString:email]) {
         emailConfirmBtn.enabled = NO;
         [emailConfirmBtn setBackgroundColor:AppDisableDefaultColor];
@@ -285,14 +309,29 @@
         manager.requestSerializer= [AFHTTPRequestSerializer new];
         [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             
-            [weakself showMainPage];
+            responseObject = (NSDictionary *) responseObject;
+            
+            if ([[responseObject objectForKey:@"status"] isEqualToString:@"failed"]) {
+                [self setSigninNotice:@"邮件发送不成功，请检查邮箱设置，或稍后再试！"];
+                emailConfirmBtn.enabled = YES;
+                [emailConfirmBtn setBackgroundColor:AppDefaultColor];
+                
+                [self showSignin];
+                
+                return;
+            }
+            
+            [weakself setVerificationCode:[responseObject objectForKey:@"tpwd"]];
             [weakself hideEmailCollection];
             [weakself hideUserNameCollection];
+            [weakself showMainPage];
+
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             NSLog(@"fail results: %@", error);
             [self setSigninNotice:@"网络繁忙，请稍后再试！"];
             emailConfirmBtn.enabled = YES;
+            [emailConfirmBtn setBackgroundColor:AppDefaultColor];
         }];
     } else {
         [self setSigninNotice:@"您输入的邮箱不正确！"];

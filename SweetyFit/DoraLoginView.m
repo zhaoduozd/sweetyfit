@@ -62,9 +62,10 @@
     
     if (userid.length < 4 || pwd.length < 6) {
         [self setSigninNotice:@"用户名或密码不正确！"];
-        return nil;
+        NSDictionary *result = [[NSDictionary alloc] initWithObjectsAndKeys:@"false", @"input", nil];
+        return result;
     }
-    NSDictionary *result = [[NSDictionary alloc] initWithObjectsAndKeys:userid, @"uid", [pwd MD5], @"pwd", nil];
+    NSDictionary *result = [[NSDictionary alloc] initWithObjectsAndKeys:@"true", @"input", userid, @"uid", [pwd MD5], @"pwd", nil];
     return result;
 }
 

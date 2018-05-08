@@ -19,6 +19,7 @@
     
     [textfield setPlaceholder:placeholder];
     [textfield setBorderStyle:UITextBorderStyleRoundedRect];
+    textfield.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     return textfield;
 }

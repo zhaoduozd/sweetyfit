@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"%f", DoraScreenWidth);
     self.view.backgroundColor = AppDefaultBackgroundColor;
     // self.navigationController.navigationBarHidden = YES;
 

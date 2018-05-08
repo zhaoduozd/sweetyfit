@@ -14,10 +14,12 @@
 @property(nonatomic, strong) UIButton *goLoginBtn;
 @property(nonatomic, strong) UIButton *sendBtn;
 @property(nonatomic, strong) UIButton *resendBtn;
+@property(nonatomic, copy) NSString *verificationCode;
 
 
 -(void) showLogin;
 -(void) showSignin;
 -(void) hideLoginSignin;
+-(void) showUserNameCollection;
 -(NSDictionary *) getInputData;
 @end

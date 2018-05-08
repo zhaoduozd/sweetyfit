@@ -67,22 +67,23 @@
     NSString *pwd = passwordField.text;
     NSString *cpwd = confirmField.text;
     NSString *email = emailField.text;
+    NSDictionary *result = [[NSDictionary alloc] initWithObjectsAndKeys:@"false", @"input", nil];
     
     if (uid.length < 4) {
         [self setSigninNotice:@"用户名不少于4位！"];
-        return nil;
+        return result;
     } else if (pwd.length < 6) {
         [self setSigninNotice:@"密码不少于6位"];
-        return nil;
+        return result;
     } else if ([self isValidateEmail:email] == NO) {
         [self setSigninNotice:@"邮箱格式不正确！"];
-        return nil;
+        return result;
     } else if ([pwd isEqualToString:cpwd] == NO) {
         [self setSigninNotice:@"确认密码输入不正确！"];
-        return nil;
+        return result;
     }
     
-    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:uid, @"uid", [pwd MD5], @"pwd", email, @"email", nil];
+    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:@"true", @"input", uid, @"uid", [pwd MD5], @"pwd", email, @"email", nil];
     
     return data;
 }

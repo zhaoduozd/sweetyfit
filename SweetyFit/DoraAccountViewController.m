@@ -86,19 +86,17 @@
     _pwdView.hidden = NO;
     _loginView.hidden = YES;
     _signinView.hidden = YES;
-}
-
-- (void) ExitAccount {
     
+    [_pwdView showUserNameCollection];
 }
 
 - (void) SignIn {
     
     NSDictionary *data = [_signinView getInputData];
-    
-    if ([data isEqual:nil]) {
+    if ([[data objectForKey:@"input"] isEqualToString:@"false"]) {
         return;
     }
+    __weak DoraAccountViewController *weakself = self;
     
     NSString *urlString = [serverurl stringByAppendingString: @"/account/signin"];
 
@@ -106,16 +104,18 @@
     manager.requestSerializer= [AFHTTPRequestSerializer new];
     
     [manager POST:urlString parameters:data progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         responseObject = (NSDictionary *)responseObject;
         NSString *signinResult = [responseObject objectForKey:@"signin"];
         if ([signinResult isEqualToString:@"succeed"]) {
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:[data objectForKey:@"uid"] forKey:@"uid"];
             DoraSigninInfoViewController *nextpage = [[DoraSigninInfoViewController alloc] init];
-            [self presentViewController:nextpage animated:YES completion:^(void){}];
+            [weakself presentViewController:nextpage animated:YES completion:^(void){}];
         } else {
             [_signinView setSigninNotice:@"用户名已存在"];
         }
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"fail results: %@", error);
         [_signinView setSigninNotice:@"网络繁忙，请稍后再试！"];
@@ -124,7 +124,7 @@
 
 - (void) Login {
     NSDictionary *data = [[NSDictionary alloc] initWithDictionary:[_loginView getInputData]];
-    if (data == nil) {
+    if ([[data objectForKey:@"input"] isEqualToString:@"false"]) {
         return;
     }
     
@@ -139,7 +139,7 @@
     [manager POST:urlString parameters:data progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         responseObject = (NSDictionary *)responseObject;
         NSString *loginResult = [responseObject objectForKey:@"login"];
-        NSLog(@"%@", loginResult);
+
         if ([loginResult isEqualToString:@"succeed"]) {
             [weakself SetLoginStatus:[data objectForKey:@"uid"]];
         } else {
@@ -154,8 +154,7 @@
 
 - (void) ChangePwd {
     NSDictionary *data = [[NSDictionary alloc] initWithDictionary:[_pwdView getInputData]];
-    
-    if (data == nil) {
+    if ([[data objectForKey:@"input"] isEqualToString:@"false"]) {
         return;
     }
     
@@ -163,7 +162,9 @@
     _pwdView.submitBtn.enabled = NO;
     [_pwdView.submitBtn setBackgroundColor:AppDisableDefaultColor];
     
-    NSString *urlString = [serverurl stringByAppendingString:@"/account/login/"];
+    _pwdView.notice.hidden = YES;
+    
+    NSString *urlString = [serverurl stringByAppendingString:@"/account/changepwd/"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -171,13 +172,11 @@
     [manager POST:urlString parameters:data progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         responseObject = (NSDictionary *)responseObject;
-        if ([[responseObject objectForKey:@"status"] isEqualToString:@"succesful"]) {
+        if ([[responseObject objectForKey:@"status"] isEqualToString:@"successful"]) {
             [_pwdView.submitBtn setTitle:@"提交" forState:UIControlStateDisabled];
             [_pwdView showLogin];
         } else {
-            if ([[responseObject objectForKey:@"temppwd"] isEqualToString:@"false"]) {
-                [_pwdView setSigninNotice:@"临时密码不正确！"];
-            }
+            [_pwdView setSigninNotice:@"网络繁忙， 请稍后再试！"];
             [_pwdView.submitBtn setTitle:@"提交" forState:UIControlStateDisabled];
             _pwdView.submitBtn.enabled = YES;
             [_pwdView.submitBtn setBackgroundColor:AppDefaultColor];

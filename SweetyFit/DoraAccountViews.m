@@ -26,7 +26,16 @@
     
     [self addSubview:_pagetitle];
     [self addSubview:_notice];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap.cancelsTouchesInView = NO;
+    [self addGestureRecognizer:tap];
+    
     return self;
+}
+
+-(void)viewTapped:(UITapGestureRecognizer*)tap {
+    [self endEditing:YES];
 }
 
 -(void) setPageTitle:(NSString *)pagetitleText {
