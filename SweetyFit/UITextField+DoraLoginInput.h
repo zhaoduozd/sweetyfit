@@ -10,5 +10,5 @@
 
 @interface UITextField (DoraLoginInput)
 +(UITextField *) DoraCreateLoginInputFieldWithPlaceHolder:(NSString *) placeholder TopDis:(float) topdis;
-+(UITextField *) DoraCreateSigninGetInfoTextFieldWithUnit:(NSString *) unit;
++(UITextField *) DoraCreateSigninGetInfoTextFieldWithUnit:(NSString *) unit Frame:(CGRect) frame;
 @end

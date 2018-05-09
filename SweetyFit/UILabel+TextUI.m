@@ -66,4 +66,21 @@
     return titlelabel;
 }
 
++(UILabel *) DoraCreateMultilinesUILabel:(NSString *) text LineNum:(NSUInteger) linenum FontSize:(NSUInteger) fontsize LineSpace:(NSUInteger) linespace TextColor:(UIColor *) textcolor {
+    UILabel *label = [[UILabel alloc] init];
+    label.text = text;
+    label.font = [UIFont systemFontOfSize:fontsize];
+    label.numberOfLines = linenum;
+    label.textColor = textcolor;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:label.text];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:10];//调整行间距
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [label.text length])];
+    label.attributedText = attributedString;
+    label.textAlignment = NSTextAlignmentCenter;
+    
+    return label;
+}
+
 @end

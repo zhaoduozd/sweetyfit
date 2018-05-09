@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraSigninInfoViewController : UIViewController
-@property(nonatomic, strong) UIDatePicker *birthday;
+
 @end

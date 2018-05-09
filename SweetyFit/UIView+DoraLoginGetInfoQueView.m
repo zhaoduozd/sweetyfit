@@ -21,6 +21,7 @@
     UILabel *titleLabel = [UILabel DoraCreateTextTitleName:title];
     titleLabel.frame = CGRectMake(10, 5, DoraScreenWidth - 20, 30);
     titleLabel.textColor = AppDefaultFontColor;
+    titleLabel.font = [UIFont systemFontOfSize:14];
     
     [view addSubview:titleLabel];
     return view;

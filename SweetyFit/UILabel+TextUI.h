@@ -14,4 +14,5 @@
 +(UILabel *) DoraCreateTextSmallRightTitleName:(NSString *)titlename;
 +(UILabel *) DoraCreateTextSmallLeftTitleName:(NSString *)titlename;
 +(UILabel *) DoraCreateTextSmallCenterTitleName:(NSString *)titlename;
++(UILabel *) DoraCreateMultilinesUILabel:(NSString *) text LineNum:(NSUInteger) linenum FontSize:(NSUInteger) fontsize LineSpace:(NSUInteger) linespace TextColor:(UIColor *) textcolor;
 @end

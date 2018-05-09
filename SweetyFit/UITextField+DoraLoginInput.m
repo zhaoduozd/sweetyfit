@@ -24,13 +24,10 @@
     return textfield;
 }
 
-+(UITextField *) DoraCreateSigninGetInfoTextFieldWithUnit:(NSString *) unit {
++(UITextField *) DoraCreateSigninGetInfoTextFieldWithUnit:(NSString *) unit Frame:(CGRect) frame{
     UITextField *textfield = [[UITextField alloc] init];
     
-    float textfieldw = 80;
-    CGRect tempframe = textfield.frame;
-    tempframe.size = CGSizeMake(textfieldw, 30);
-    textfield.frame = tempframe;
+    textfield.frame = frame;
     
     textfield.borderStyle = UITextBorderStyleRoundedRect;
     
