@@ -19,7 +19,7 @@
     _foodDetail1 = [[UILabel alloc] init];
     _foodDetail2 = [[UILabel alloc] init];
     
-    _foodImage.frame = CGRectMake(10, 10, 70, 70);
+    _foodImage.frame = CGRectMake(10, 30, 70, 70);
     _foodName.frame = CGRectMake(90, 10, DoraScreenWidth - 100, 30);
     _foodDetail1.frame = CGRectMake(90, 40, (DoraScreenWidth - 100)/2, 90);
     _foodDetail2.frame = CGRectMake(100 + (DoraScreenWidth - 100)/2, 40, (DoraScreenWidth - 100)/2, 100);
@@ -32,6 +32,9 @@
     _foodDetail2.numberOfLines = 3;
     _foodDetail2.font = [UIFont systemFontOfSize:13];
     
+    
+    [_foodImage.layer setCornerRadius:2];
+    _foodImage.layer.masksToBounds = YES;
 
     
     UIView *seperateLine = [UIView DoraCreateSeperateLineWithWidth:DoraScreenWidth-20 Height:1 PositionX:10 PositionY:129];

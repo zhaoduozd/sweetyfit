@@ -45,6 +45,9 @@
 
 @property(nonatomic, strong) UIButton *actionratingbtn;
 @property(nonatomic, strong) DoraRateView *actionratingview;
+
+@property(nonatomic, strong) AFHTTPSessionManager *manager;
+@property(nonatomic, strong) NSMutableArray <NSURLSessionTask *> *taskgroup;
 @end
 
 @implementation DoraExerciseRecomViewController
@@ -82,6 +85,9 @@
             [_loadinggif addObject:image];
         }
     }
+    
+    _manager = [AFHTTPSessionManager manager];
+    _taskgroup = [[NSMutableArray alloc] init];
 }
 
 - (void) CreateUIElements {
@@ -158,10 +164,22 @@
     
     __weak DoraExerciseRecomViewController *weakself = self;
     
-    NSString *urlstring = [serverurl stringByAppendingString:@"/recom/exercise"];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    for (NSUInteger i = 0; i < _taskgroup.count; ++i) {
+        [[_taskgroup objectAtIndex:i] cancel];
+    }
     
-    [manager POST:urlstring parameters:_userdemands progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    for (NSUInteger i = 0; i < _giftimers.count; ++i) {
+        [[_giftimers objectAtIndex:i] invalidate];
+    }
+    
+    for (NSUInteger i = 0; i < _gifgrouptimers.count; ++i) {
+        [[_gifgrouptimers objectAtIndex:i] invalidate];
+    }
+    
+    NSString *urlstring = [serverurl stringByAppendingString:@"/recom/exercise"];
+
+    
+    NSURLSessionDataTask *task = [_manager POST:urlstring parameters:_userdemands progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         
         NSLog(@"%@", responseObject);
         [weakself SolveData:responseObject];
@@ -169,6 +187,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+    
+    [_taskgroup addObject:task];
 }
 
 - (void) SolveData:(id) responsedata {
@@ -247,11 +267,11 @@
     
     __weak DoraExerciseRecomViewController *weakself = self;
     
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    //NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    //AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+    NSURLSessionDownloadTask *downloadTask = [_manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         NSString *urlstring = [NSString stringWithFormat:@"%@", url];
@@ -261,6 +281,8 @@
         [weakself SetUrlPath:filePath Pos:pos Actionnum:actionnum];
     }];
     [downloadTask resume];
+    
+    [_taskgroup addObject:downloadTask];
 }
 
 - (void) SetUrlPath:(NSURL *) filePath Pos:(int) pos Actionnum:(int) actionnum{

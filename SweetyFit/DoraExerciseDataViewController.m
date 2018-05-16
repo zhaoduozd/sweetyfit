@@ -118,8 +118,8 @@
     total += exercise;
     
     _totalCalorieData.text = [NSString stringWithFormat:@"%.0f", total];
-    _walkingRunningCalorieData.text = [NSString stringWithFormat:@"%.1f Kcal", walkingrunning];
-    _sportCalorieData.text = [NSString stringWithFormat:@"%.1f Kcal", exercise];
+    _walkingRunningCalorieData.text = [NSString stringWithFormat:@"%.1f Cal", walkingrunning];
+    _sportCalorieData.text = [NSString stringWithFormat:@"%.1f Cal", exercise];
 }
 
 - (void) SetViewUI {
@@ -151,7 +151,7 @@
     
     _totalCalorieUnit.font = [UIFont systemFontOfSize:30];
     _totalCalorieUnit.frame = CGRectMake(300, 50, 100, 45);
-    _totalCalorieUnit.text = @"Kcal";
+    _totalCalorieUnit.text = @"Cal";
     _totalCalorieUnit.textColor = [UIColor grayColor];
     
     _walkingRunningCalorieData.font = [UIFont systemFontOfSize:16];

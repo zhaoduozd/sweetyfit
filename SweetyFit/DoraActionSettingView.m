@@ -86,17 +86,14 @@
     
     homeplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"家" X:20 Y:170];
     officeplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"办公室" X:130 Y:170];
-    gymplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"健身房" X:20 Y:220];
-    outsideplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"户外" X:130 Y:220];
+    outsideplace = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"户外" X:240 Y:170];
     
     [homeplace addTarget:self action:@selector(homebtnevent) forControlEvents:UIControlEventTouchUpInside];
     [officeplace addTarget:self action:@selector(officebtnevent) forControlEvents:UIControlEventTouchUpInside];
-    [gymplace addTarget:self action:@selector(gymbtnevent) forControlEvents:UIControlEventTouchUpInside];
     [outsideplace addTarget:self action:@selector(outsidebtnevent) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:homeplace];
     [self addSubview:officeplace];
-    [self addSubview:gymplace];
     [self addSubview:outsideplace];
     
     neck = [UIButton DoraCreateOrangeLineButtonWithWidth:100 Height:40 borderRadius:4 Text:@"颈部" X:240 Y:370];
